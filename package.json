@@ -1,0 +1,30 @@
+{
+  "name": "vue-admin-template",
+  "version": "4.4.0",
+  "description": "A vue admin template with Element UI & axios & iconfont & permission control & lint",
+  "author": "Pan <panfree23@gmail.com>",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fortawesome/vue-fontawesome": "^3.0.8",
+    "autoprefixer": "^10.4.19",
+    "axios": "^1.7.2",
+    "boxicons": "^2.1.4",
+    "element-plus": "^2.7.6",
+    "nprogress": "^0.2.0",
+    "path-to-regexp": "^7.0.0",
+    "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
+    "vue": "^3.4.29",
+    "vue-axios": "^3.5.2",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@vicons/fa": "^0.12.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "vite": "^5.3.1"
+  }
+}
