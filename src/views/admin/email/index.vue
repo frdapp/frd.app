@@ -21,9 +21,8 @@
         <HBox  style="  margin-top:10px;padding:0px;">
                     <Input
                         @keyup.enter.native="searchPage(1)"
-                        v-model="query.title"
+                        v-model="query.query"
                         type="text"
-                        placeholder="标题/ID"
                         style="width:300px;"
                         />
 
@@ -41,9 +40,7 @@
                             >
                         <Column prop="id" label="ID" sortable="custom" width="100">
                                 <template #default="scope">
-                                <router-link target="_blank" :to="'/article/view?id='+scope.item.id" style="color:#606266">
                                         {{scope.item.id}}
-                                </router-link>
                                 </template>
                         </Column>
                         <Column prop="username" label="Username" > </Column>
@@ -51,10 +48,6 @@
                         <Column prop="created_at" label="创建时间" width="200"> </Column>
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">
-
-                                    <RouterLink :to="'/admin/post/view?id='+scope.item.id" target="_blank">
-                                            查看
-                                    </RouterLink>
 
                                 <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
                                 <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
@@ -80,13 +73,10 @@ export default {
             },
             query:{
                 page:1,
-                page_count:10,
-                title:'',
+                page_size:10,
+                query:"",
                 order:"desc",
                 order_by:"id",
-                permission:'',
-                tags:[],
-                tag_string:'',
             },
             pagination:{
                 item_total:0,
@@ -100,18 +90,12 @@ export default {
             this.searchPage(1);
     },
     methods:{
-        openViewDialog:function(item_id){
-            this.$router.push({ path: '/admin/blog/view', query: {"id":item_id }} ) ;
-            return
-        },
-
     openEditDialog:function(item_id){
-            this.$router.push({ path: "/admin/post/update", query: {  "id":item_id}} ) ;
+            this.$router.push({ path: "/admin/email/update", query: {  "id":item_id}} ) ;
 
             return ;
     },
     openDeleteDialog:async function(id,title){
-            let url="/api/admin/post/delete?id="+id
             var result = await this.$confirm("Delete It ?")
             if(result)
             {

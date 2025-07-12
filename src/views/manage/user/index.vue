@@ -52,8 +52,7 @@
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">
 
-                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
-                                <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
+                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >查看</a>
                                 </template>
                         </Column>
                     </Table>

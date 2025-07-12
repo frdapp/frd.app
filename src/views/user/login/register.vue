@@ -1,5 +1,6 @@
 <script setup>
 import  VBox from '@/components/VBox.vue'
+import  HBox from '@/components/HBox.vue'
 import  Input from '@/components/Input.vue'
 import  Button from '@/components/Button.vue'
 
@@ -21,23 +22,32 @@ const userStore = useUserStore()
               <label class="form-control-label" for="username">Username</label>
         </div>
         <div>
-              <Input v-model="form.username" type="text" class="form-control" style="width:100%" required />
+              <Input v-model="form.username" type="text" class="form-control" style="width:100%" required autocomplete="off"/>
         </div>
         <div>
               <label class="form-control-label" for="password">Password</label>
         </div>
         <div>
-              <Input id="password-field" v-model="form.password" type="password" class="form-control" style="width:100%" required />
-              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+          <HBox>
+              <Input id="password-field" v-model="form.password" type="password" class="form-control" style="width:100%" required autocomplete="off"/>
+                  <!--
+              <i class="material-icons" style="position:relative;right:30px;top:5px"> visibility</i>
+                  -->
+          </HBox>
+
         </div>
         <div>
-		              <label class="form-control-placeholder" for="password">Confirm Password</label>
+		              <label class="form-control-label" for="password">Confirm Password</label>
         </div>
         <div>
+          <HBox>
 		              <input id="password-field" v-model="form.confirm_password" type="password" class="form-control" style="width:100%" required>
-		              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                  <!--
+                  <i class="material-icons" style="position:relative;right:30px;top:5px"> visibility</i>
+                  -->
+          </HBox>
         </div>
-        <div>
+        <div style="margin-top:10px">
               <Button  @click="register" class="btn-primary btn-block">Register</Button>
         </div>
         <div>

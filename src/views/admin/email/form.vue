@@ -14,7 +14,11 @@
                 <label class="form-control-label">Username</label>
                 </td>
                 <td>
-                <Input class="right_column" v-model="form.username" placeholder="test@test.com"   style="width:250px" />
+                    <HBox>
+                        <Input  v-model="form.username"   /> 
+                        <Select v-model="form.domain" :options="domains">
+                        </Select>
+                    </HBox>
                 </td>
             </tr>
             <tr>
@@ -40,34 +44,45 @@
 
 <script>
     export default {
-        mounted:function(){
-
-            var url="/api/admin/email/get"
-
-
+        mounted:async function(){
             var item_id=this.$route.query.id;
             var self=this;
 
             if(item_id)
             {
-                this.mode="update"
-                this.$api.get(url,{params:{"id":item_id}}).then(function(r){
-                    self.form=r.data
-                    self.form.tag_string=self.form.tags.join(",")
-                });
+                this.mode = "update"
+                var response = await this.$api.admin_email_get(item_id);
+                this.form = response;
             }
         },
         data: function(){
             return {
                 mode:"create",
+                domains:[
+                ],
                 form:{
                     id:0,
                     username:"",
+                    domain:"",
                     password:'',
                 },
             }
         },
+        created:async function(){
+            var response=await this.$api.admin_domain_list({"page_size":9999});
+            for(var index in response.items)
+            {
+                var domain=response.items[index]["domain"]
 
+                this.domains.push({
+                    "label":domain,
+                    "value":domain,
+                })
+            }
+
+            console.log(this.domains)
+
+        },
         methods:{
             submit:async function(back){
                         if(this.form.id)
@@ -109,12 +124,8 @@
 </script>
 
 <style scoped>
-                .form-control-label{
-                    width:100px;
-                }
+        .form-control-label{
+            width:100px;
+        }
 
-                .right_column{
-                    flex:1;
-                    max-width:700px;
-                }
 </style>

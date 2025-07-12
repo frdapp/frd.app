@@ -68,49 +68,12 @@
     </VBox>
 
 
-
-<!--
-        <el-dialog title="文章" v-model="dialogFormVisible">
-          <Form ref='addform' :form_data="form_data" @dialog_cancel='dialogFormVisible=false' @dialog_success="dialogFormVisible=false; search()"></Form>
-        </el-dialog>
-
-        <el-dialog title=""  v-model="dialogViewFormVisible">
-          <FormView ref='viewform' :form_data="form_data" />
-        </el-dialog>
-
-        <el-dialog title="文章" v-model="dialogEditFormVisible">
-          <Form ref='editform' :form_data="form_data" @dialog_cancel='dialogEditFormVisible=false' @dialog_success="dialogEditFormVisible=false; search()"></Form>
-        </el-dialog>
-        -->
-
 </template>
 
 <script>
 export default {
     data: function(){
         return {
-            dialogFormVisible:false,
-            dialogEditFormVisible:false,
-            dialogViewFormVisible:false,
-
-            permissions:[
-                {
-                "value":"",
-                "label":"全部",
-            },
-                {
-                "value":"SHARE",
-                "label":"分享",
-            },
-                {
-                "value":"PUBLIC",
-                "label":"公开",
-            },
-                {
-                "value":"PRIVATE",
-                "label":"私有",
-            }
-        ],
 
             form_data:{
                 title:'',
@@ -121,9 +84,6 @@ export default {
                 title:'',
                 order:"desc",
                 order_by:"id",
-                permission:'',
-                tags:[],
-                tag_string:'',
             },
             pagination:{
                 item_total:3,
@@ -143,16 +103,15 @@ export default {
         },
 
     openEditDialog:function(item_id){
-            this.$router.push({ path: "/admin/post/update", query: {  "id":item_id}} ) ;
+            this.$router.push({ path: "/admin/ticket/update", query: {  "id":item_id}} ) ;
 
             return ;
     },
     openDeleteDialog:async function(id,title){
-            let url="/api/admin/post/delete?id="+id
             var result = await this.$confirm("Delete It ?")
             if(result)
             {
-                var response=await this.$api.admin_post_delete({"id":id})
+                var response=await this.$api.admin_ticket_delete({"id":id})
                 if(response != false)
                 {
                     this.search()
@@ -162,7 +121,7 @@ export default {
 
     openAddDialog:function(){
        this.$router.push({
-           path: "/admin/domain/create",
+           path: "/admin/ticket/create",
            query: {  }
        }) ;
        return ;
@@ -197,27 +156,8 @@ export default {
 
             var self=this;
 
-            if(!this.query.tag_string)
-            {
-                this.query.tags=[];
-            }
-            else
-            {
-                this.query.tags=[]
 
-                var arr=this.query.tag_string.split(",")
-                console.log(arr)
-                for(var k in arr)
-                {
-                    let tag=arr[k].trim()
-                    if(tag)
-                    {
-                        this.query.tags.push(tag)
-                    }
-                }
-            }
-
-            var response=await this.$api.admin_post_list(this.query)
+            var response=await this.$api.admin_ticket_list(this.query)
             this.items=response.items;
             this.pagination=response.pagination;
         },

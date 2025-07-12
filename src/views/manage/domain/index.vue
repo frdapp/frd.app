@@ -23,7 +23,7 @@
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.title"
                         type="text"
-                        placeholder="标题/ID"
+                        placeholder="Domain/ID"
                         style="width:300px;"
                         />
 
@@ -47,6 +47,12 @@
                                 </router-link>
                                 </template>
                         </Column>
+                        <Column prop="username" label="Username" > 
+                            <template #default="scope">
+                                Username
+
+                            </template>
+                        </Column>
                         <Column prop="domain" label="Domain" > </Column>
                         <Column prop="description" sortable="custom" label="Description" width="100"> </Column>
                         <Column prop="alias" sortable="custom" label="Description" width="100"> </Column>
@@ -54,8 +60,7 @@
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">
 
-                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
-                                <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
+                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >查看</a>
                                 </template>
                         </Column>
                     </Table>

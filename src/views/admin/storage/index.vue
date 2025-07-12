@@ -95,38 +95,6 @@ export default {
             this.searchPage(1);
     },
     methods:{
-        openViewDialog:function(item_id){
-            this.$router.push({ path: '/admin/blog/view', query: {"id":item_id }} ) ;
-            return
-        },
-
-    openEditDialog:function(item_id){
-            this.$router.push({ path: "/admin/post/update", query: {  "id":item_id}} ) ;
-
-            return ;
-    },
-    openDeleteDialog:async function(id,title){
-            let url="/api/admin/post/delete?id="+id
-            var result = await this.$confirm("Delete It ?")
-            if(result)
-            {
-                var response=await this.$api.admin_post_delete({"id":id})
-                if(response != false)
-                {
-                    this.search()
-                }
-            }
-    },
-
-    openAddDialog:function(){
-       this.$router.push({
-           path: "/admin/domain/create",
-           query: {  }
-       }) ;
-       return ;
-    },
-
-
         searchSort:function(event){
 
             this.query.order_by=event.prop
@@ -155,27 +123,7 @@ export default {
 
             var self=this;
 
-            if(!this.query.tag_string)
-            {
-                this.query.tags=[];
-            }
-            else
-            {
-                this.query.tags=[]
-
-                var arr=this.query.tag_string.split(",")
-                console.log(arr)
-                for(var k in arr)
-                {
-                    let tag=arr[k].trim()
-                    if(tag)
-                    {
-                        this.query.tags.push(tag)
-                    }
-                }
-            }
-
-            var response=await this.$api.admin_post_list(this.query)
+            var response=await this.$api.admin_storage_list(this.query)
             this.items=response.items;
             this.pagination=response.pagination;
         },

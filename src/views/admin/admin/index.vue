@@ -99,7 +99,7 @@ export default {
         },
 
         search: async function () {
-            var response = await this.$api.admin_admin_list(this.query)
+            var response = await this.$api.admin_user_list(this.query)
             console.log(response)
             this.items = response.items;
             this.pagination = response.pagination;

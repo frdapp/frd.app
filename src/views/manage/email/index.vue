@@ -60,8 +60,6 @@
                                             查看
                                     </RouterLink>
 
-                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
-                                <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
                                 </template>
                         </Column>
                     </Table>
@@ -74,48 +72,14 @@
 
 
 
-<!--
-        <el-dialog title="文章" v-model="dialogFormVisible">
-          <Form ref='addform' :form_data="form_data" @dialog_cancel='dialogFormVisible=false' @dialog_success="dialogFormVisible=false; search()"></Form>
-        </el-dialog>
-
-        <el-dialog title=""  v-model="dialogViewFormVisible">
-          <FormView ref='viewform' :form_data="form_data" />
-        </el-dialog>
-
-        <el-dialog title="文章" v-model="dialogEditFormVisible">
-          <Form ref='editform' :form_data="form_data" @dialog_cancel='dialogEditFormVisible=false' @dialog_success="dialogEditFormVisible=false; search()"></Form>
-        </el-dialog>
-        -->
-
 </template>
 
 <script>
 export default {
     data: function(){
         return {
-            dialogFormVisible:false,
-            dialogEditFormVisible:false,
-            dialogViewFormVisible:false,
 
-            permissions:[
-                {
-                "value":"",
-                "label":"全部",
-            },
-                {
-                "value":"SHARE",
-                "label":"分享",
-            },
-                {
-                "value":"PUBLIC",
-                "label":"公开",
-            },
-                {
-                "value":"PRIVATE",
-                "label":"私有",
-            }
-        ],
+
 
             form_data:{
                 title:'',
@@ -126,9 +90,7 @@ export default {
                 title:'',
                 order:"desc",
                 order_by:"id",
-                permission:'',
-                tags:[],
-                tag_string:'',
+
             },
             pagination:{
                 item_total:3,

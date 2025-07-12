@@ -28,9 +28,8 @@ const userStore = useUserStore()
         </div>
         <div>
               <Input id="password-field" v-model="form.password" type="password" class="form-control" style="width:100%" required />
-              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
         </div>
-        <div>
+        <div style="margin-top:10px">
               <Button  @click="login" class="btn-primary btn-block">Login</Button>
         </div>
         <div>
@@ -64,7 +63,7 @@ import { useUserStore } from '@/store/modules/user'
                         if(response == false ) return false;
 
                         userStore.adminSet(response)
-                        this.$router.push({"path":"/"});
+                        this.$router.push({"path":"/manage/dashboard"});
 
                     }
                 }

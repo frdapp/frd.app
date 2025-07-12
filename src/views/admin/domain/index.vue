@@ -21,7 +21,7 @@
         <HBox  style="  margin-top:10px;padding:0px;">
                     <Input 
                         @keyup.enter.native="searchPage(1)"
-                        v-model="query.title" 
+                        v-model="query.domain" 
                         type="text" 
                         placeholder="标题/ID" 
                         style="width:300px;"
@@ -41,9 +41,7 @@
                     >
                 <Column prop="id" label="ID" sortable="custom" width="100"> 
                         <template #default="scope">
-                        <router-link target="_blank" :to="'/article/view?id='+scope.item.id" style="color:#606266">
                                 {{scope.item.id}}
-                        </router-link>
                         </template>
                 </Column>
                 <Column prop="domain" label="Domain" > </Column>
@@ -76,7 +74,7 @@ export default {
             query:{
                 page:1,
                 page_count:10,
-                title:'',
+                domain:'',
                 order:"desc",
                 order_by:"id",
             },

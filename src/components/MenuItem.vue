@@ -46,6 +46,11 @@
             set_active:function(value){
                 this.localActive=value
             },
+        },
+        watch: {
+            current_path:function(){
+                this.localActive= this.current_path == this.path  ?  true : false
+            }
         }
 
     };

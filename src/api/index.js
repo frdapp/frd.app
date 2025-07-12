@@ -29,8 +29,21 @@ Api.interceptors.request.use(config=>{
     const userStore = useUserStore()
     var token=userStore.user.token;
 
+    var admin_token=userStore.admin.token;
 
-    config.headers['Authentication'] = token;
+    //admin and user can not login together
+    if (admin_token) 
+    {
+        config.headers['Authentication'] = admin_token;
+    }
+    else if (token) {
+        config.headers['Authentication'] = token;
+    }
+    else
+    {
+        config.headers['Authentication'] = "";
+    }
+
 
     return config;
 });
@@ -117,12 +130,6 @@ Api.admin_me_update_password=async function(params)
 Api.admin_me_update_email=async function(params)
 {
     var response = await this.post("/api/admin/me/update_email", params);
-    return fetch_data(response)
-}
-
-Api.admin_admin_list=async function(params)
-{
-    var response=await this.post("/api/admin/user/list",params);
     return fetch_data(response)
 }
 

@@ -33,24 +33,37 @@ import { useRoute } from 'vue-router'
         <MenuItem class="menu-item" path="/manage/log" :current_path="current_path">
             Log
         </MenuItem>
-        <MenuItem class="menu-item" path="/logout">
+        <a class="menu-item"  @click="logout()" style="color:#ff0000">
                 Logout
-        </MenuItem>
+        </a>
     </div>
 
 
 </template>
 <script>
 export default {
+
   data() {
     return {
-      currant_path:"",
+      current_path: this.$route.path, // 初始化为当前路由的路径
     };
   },
-  created: function(){
-    const route = useRoute()
-    this.current_path=route.path
+  methods:{
+    logout:async function(){
+        var response=await this.$api.admin_login_logout();
+
+        const userStore = useUserStore()
+        userStore.clear()
+
+        this.$router.push({ path: "/", query: {  }} ) ;
+
+    },
   },
+  watch: {
+    '$route'(to, from) {
+      this.current_path = to.path;
+    }
+  }
 };
 </script>
 
