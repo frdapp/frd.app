@@ -4,14 +4,14 @@
   &:not(.has-validation) {
     > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu),
     > .dropdown-toggle:nth-last-child(n + 3) {
-      @include border-end-radius($border-radius-md);
+      @include border-end-radius(inherit);
     }
   }
 
   &.has-validation {
     > :nth-last-child(n + 3):not(.dropdown-toggle):not(.dropdown-menu),
     > .dropdown-toggle:nth-last-child(n + 4) {
-      @include border-end-radius($border-radius-md);
+      @include border-end-radius(inherit);
     }
   }
 
@@ -82,7 +82,7 @@
         top: $form-label-top-focused;
       }
       label {
-        color: $primary;
+        color: $success;
       }
       &.is-valid{
         label{
@@ -204,16 +204,16 @@
     &.is-focused,
     &.is-filled {
       .form-label + .form-control {
-        border-color: $primary !important;
+        border-color: $success !important;
         border-top-color: transparent !important;
-        box-shadow: inset 1px 0 $primary, inset -1px 0 $primary, inset 0 -1px $primary;
+        box-shadow: inset 1px 0 $success, inset -1px 0 $success, inset 0 -1px $success;
       }
 
       .form-label {
         width: 100%;
         height: 100%;
         font-size: $form-label-font-size-focused !important;
-        color: $primary;
+        color: $success;
         display: flex;
         line-height: $line-height-sm !important;
 
@@ -224,8 +224,8 @@
 
         &:before,
         &:after {
-          border-top-color: $primary;
-          box-shadow: inset 0 1px $primary;
+          border-top-color: $success;
+          box-shadow: inset 0 1px $success;
         }
       }
     }

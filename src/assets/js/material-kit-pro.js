@@ -1,7 +1,7 @@
 /*!
 
 =========================================================
-* Material Kit 2 PRO - v3.0.4
+* Material Kit 2 PRO - v3.0.2
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/soft-ui-design-system

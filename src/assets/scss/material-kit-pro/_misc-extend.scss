@@ -13,6 +13,16 @@
   box-shadow: $device-wrapper-box-shadow;
 }
 
+// sidebar caret RTL
+.rotate-caret {
+  .collapse {
+    .nav-link:after {
+      margin-right: auto;
+      margin-left: 0;
+    }
+  }
+}
+
 .z-index2 {
   z-index: $z-index2;
 }
@@ -231,35 +241,4 @@ round-slider.scaling:hover {
 // Coming Soon Page
 .transform-rotate {
   transform: $coming-rotate-transform;
-}
-
-// validation
-
-.input-group {
-  small {
-    position: absolute;
-    bottom: -1.5rem;
-    left: 5px;
-    visibility: hidden;
-  }
-
-  &.is-valid {
-    input {
-      border-color: $success;
-    }
-    small {
-      color: $success;
-      visibility: visible;
-    }
-  }
-
-  &.is-invalid {
-    input {
-      border-color: $danger;    
-    }
-    small {
-      color: $danger;
-      visibility: visible;
-    }
-  }
 }

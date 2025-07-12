@@ -4,57 +4,546 @@ import { inject } from "vue";
 import { useUserStore } from '@/store/modules/user'
 
 
+function fetch_data(response)
+{
+    if(response.data.code == 0)
+    {
+        return response.data.data
+    }
+    else
+    {
+        return false
+    }
+}
 
-var _api=axios.create({
+var Api=axios.create({
     timeout:5000,
     //headers:{
-     //   //'Content-Type':'application/json',
-    //},
+        //   //'Content-Type':'application/json',
+        //},
 })
 
 
-_api.interceptors.request.use(config=>{
+Api.interceptors.request.use(config=>{
 
     const userStore = useUserStore()
     var token=userStore.user.token;
 
-    //config.headers["token"]=token;
+
     config.headers['Authentication'] = token;
 
     return config;
 });
 
+Api.interceptors.response.use(response=>{
+  if(response.data.code == 20000)
+  {
+    const userStore = useUserStore()
+    //userStore.user.token="";
 
-_api.interceptors.response.use(response=>{
-    return response.data;
+    /*
+    if (window.location.pathname != "/signin")
+    {
+        window.location.href="/signin"
+    }
+        */
+  }
+  else if(response.data.code != 0)
+    {
+        Api.$alert("WARNING",response.data.message)
+    }
+
+    return response
 })
 
+Api.postForm=function(url,params) {
+        var config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        };
 
-var Api = {
-  // 发起GET请求
-  get:function(url,params) {
-    return _api.get(url, { params: params });
-  },
-
-  // 发起POST请求,
-  post:function(url,params) {
-    var config = {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    };
-
-    return _api.post(url, params,config);
-  },
-
-
-  // 发起POST JSON 请求
-   postJson:function(url,params) 
-  {
-
-    return _api.post(url, params);
-  }
-
+        return this.post(url, params,config);
 }
 
-export default Api;
+
+Api.admin_login_login = async function (params) {
+    var response = await this.post("/api/admin/login/login", params);
+    return fetch_data(response)
+}
+
+Api.admin_login_logout=async function(params)
+{
+    var response = await this.post("/api/admin/login/logout", params);
+    return fetch_data(response)
+}
+
+Api.admin_login_register=async function(params)
+{
+    var response=await this.post("/api/admin/login/register",params);
+    return fetch_data(response)
+}
+
+Api.admin_login_forgot_password=async function(params)
+{
+    var response = await this.post("/api/admin/login/forgot_password", params);
+    return fetch_data(response)
+}
+
+Api.admin_login_forgot_password_send_email=async function(params)
+{
+    var response = await this.post("/api/admin/login/forgot_password_send_email", params);
+    return fetch_data(response)
+}
+
+Api.admin_me_info=async function(params)
+{
+    var response = await this.post("/api/admin/me/info", params);
+    return fetch_data(response)
+}
+
+Api.admin_me_update_username=async function(params)
+{
+    var response = await this.post("/api/admin/me/update_username", params);
+    return fetch_data(response)
+}
+
+Api.admin_me_update_password=async function(params)
+{
+    var response = await this.post("/api/admin/me/update_password", params);
+    return fetch_data(response)
+}
+
+Api.admin_me_update_email=async function(params)
+{
+    var response = await this.post("/api/admin/me/update_email", params);
+    return fetch_data(response)
+}
+
+Api.admin_admin_list=async function(params)
+{
+    var response=await this.post("/api/admin/user/list",params);
+    return fetch_data(response)
+}
+
+Api.admin_domain_list=async function(params)
+{
+    var response=await this.post("/api/admin/domain/list",params);
+    return fetch_data(response)
+}
+
+Api.admin_domain_create=async function(params)
+{
+    var response=await this.post("/api/admin/domain/create",params);
+    return fetch_data(response)
+}
+
+Api.admin_domain_update=async function(params)
+{
+    var response = await this.post("/api/admin/domain/update", params);
+    return fetch_data(response)
+}
+
+Api.admin_domain_delete=async function(params)
+{
+    var response = await this.post("/api/admin/domain/delete", params);
+    return fetch_data(response)
+}
+
+Api.admin_domain_get=async function(id)
+{
+    var response = await this.get("/api/admin/domain/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.admin_email_list=async function(params)
+{
+    var response = await this.post("/api/admin/email/list", params);
+    return fetch_data(response)
+}
+
+Api.admin_email_create=async function(params)
+{
+    var response = await this.post("/api/admin/email/create", params);
+    return fetch_data(response)
+}
+
+Api.admin_email_update=async function(params)
+{
+    var response=await this.post("/api/admin/email/update",params);
+    return fetch_data(response)
+}
+
+Api.admin_email_delete=async function(params)
+{
+    var response= await this.post("/api/admin/email/delete",params);
+    return fetch_data(response)
+}
+
+Api.admin_email_get=async function(id)
+{
+    var response = await this.get("/api/admin/email/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+
+
+Api.admin_user_list=async function(params)
+{
+    var response = await this.post("/api/admin/user/list", params);
+    return fetch_data(response)
+}
+
+Api.admin_user_create=async function(params)
+{
+    var response = await this.post("/api/admin/user/create", params);
+    return fetch_data(response)
+}
+
+Api.admin_user_update=async function(params)
+{
+    var response=await this.post("/api/admin/user/update",params);
+    return fetch_data(response)
+}
+
+Api.admin_user_delete=async function(params)
+{
+    var response= await this.post("/api/admin/user/delete",params);
+    return fetch_data(response)
+}
+Api.admin_user_get=async function(id)
+{
+    var response = await this.get("/api/admin/user/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+
+Api.admin_storage_list=async function(params)
+{
+    var response = await this.post("/api/admin/storage/list", params);
+    return fetch_data(response)
+}
+
+Api.admin_storage_create=async function(params)
+{
+    var response = await this.post("/api/admin/storage/create", params);
+    return fetch_data(response)
+}
+
+Api.admin_storage_update=async function(params)
+{
+    var response=await this.post("/api/admin/storage/update",params);
+    return fetch_data(response)
+}
+
+Api.admin_storage_delete=async function(params)
+{
+    var response= await this.post("/api/admin/storage/delete",params);
+    return fetch_data(response)
+}
+
+Api.admin_storage_get=async function(id)
+{
+    var response = await this.get("/api/admin/storage/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.admin_ticket_list=async function(params)
+{
+    var response = await this.post("/api/admin/ticket/list", params);
+    return fetch_data(response)
+}
+
+Api.admin_ticket_create=async function(params)
+{
+    var response = await this.post("/api/admin/ticket/create", params);
+    return fetch_data(response)
+}
+
+Api.admin_ticket_update=async function(params)
+{
+    var response=await this.post("/api/admin/ticket/update",params);
+    return fetch_data(response)
+}
+
+Api.admin_ticket_delete=async function(params)
+{
+    var response= await this.post("/api/admin/ticket/delete",params);
+    return fetch_data(response)
+}
+
+Api.admin_ticket_get=async function(id)
+{
+    var response = await this.get("/api/admin/ticket/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_login_login = async function (params) {
+    var response = await this.post("/api/manage/login/login", params);
+    return fetch_data(response)
+}
+
+Api.manage_login_logout=async function(params)
+{
+    var response = await this.post("/api/manage/login/logout", params);
+    return fetch_data(response)
+}
+
+
+Api.manage_admin_list=async function(params)
+{
+    var response = await this.post("/api/manage/admin/list", params);
+    return fetch_data(response)
+}
+
+Api.manage_admin_create=async function(params)
+{
+    var response = await this.post("/api/manage/admin/create", params);
+    return fetch_data(response)
+}
+
+Api.manage_admin_update=async function(params)
+{
+    var response=await this.post("/api/manage/admin/update",params);
+    return fetch_data(response)
+}
+
+Api.manage_admin_delete=async function(params)
+{
+    var response= await this.post("/api/manage/admin/delete",params);
+    return fetch_data(response)
+}
+
+Api.manage_admin_get=async function(id)
+{
+    var response = await this.get("/api/manage/admin/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+
+Api.manage_user_list=async function(params)
+{
+    var response = await this.post("/api/manage/user/list", params);
+    return fetch_data(response)
+}
+
+Api.manage_user_create=async function(params)
+{
+    var response = await this.post("/api/manage/user/create", params);
+    return fetch_data(response)
+}
+
+Api.manage_user_update=async function(params)
+{
+    var response=await this.post("/api/manage/user/update",params);
+    return fetch_data(response)
+}
+
+Api.manage_user_delete=async function(params)
+{
+    var response= await this.post("/api/manage/user/delete",params);
+    return fetch_data(response)
+}
+
+Api.manage_user_get=async function(id)
+{
+    var response = await this.get("/api/manage/user/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+
+
+Api.manage_domain_list=async function(params)
+{
+    var response = await this.post("/api/manage/domain/list", params);
+    return fetch_data(response)
+}
+
+Api.manage_domain_create=async function(params)
+{
+    var response = await this.post("/api/manage/domain/create", params);
+    return fetch_data(response)
+}
+
+Api.manage_domain_update=async function(params)
+{
+    var response=await this.post("/api/manage/domain/update",params);
+    return fetch_data(response)
+}
+
+Api.manage_domain_delete=async function(params)
+{
+    var response= await this.post("/api/manage/domain/delete",params);
+    return fetch_data(response)
+}
+
+
+Api.manage_domain_get=async function(id)
+{
+    var response = await this.get("/api/manage/domain/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+
+Api.manage_email_list=async function(params)
+{
+    var response = await this.post("/api/manage/email/list", params);
+    return fetch_data(response)
+}
+
+Api.manage_email_create=async function(params)
+{
+    var response = await this.post("/api/manage/email/create", params);
+    return fetch_data(response)
+}
+
+Api.manage_email_update=async function(params)
+{
+    var response=await this.post("/api/manage/email/update",params);
+    return fetch_data(response)
+}
+
+Api.manage_email_delete=async function(params)
+{
+    var response= await this.post("/api/manage/email/delete",params);
+    return fetch_data(response)
+}
+
+Api.manage_email_get=async function(id)
+{
+    var response = await this.get("/api/manage/email/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+
+Api.manage_ticket__list=async function(params)
+{
+    var response = await this.post("/api/manage/ticket/list", params);
+    return fetch_data(response)
+}
+
+Api.manage_ticket_create=async function(params)
+{
+    var response = await this.post("/api/manage/ticket/create", params);
+    return fetch_data(response)
+}
+
+Api.manage_ticket_update=async function(params)
+{
+    var response=await this.post("/api/manage/ticket/update",params);
+    return fetch_data(response)
+}
+
+Api.manage_ticket_delete=async function(params)
+{
+    var response= await this.post("/api/manage/ticket/delete",params);
+    return fetch_data(response)
+}
+
+Api.manage_ticket_get=async function(id)
+{
+    var response = await this.get("/api/manage/ticket/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+
+Api.manage_storage_list=async function(params)
+{
+    var response = await this.post("/api/manage/storage/list", params);
+    return fetch_data(response)
+}
+
+Api.manage_storage_create=async function(params)
+{
+    var response = await this.post("/api/manage/storage/create", params);
+    return fetch_data(response)
+}
+
+Api.manage_storage_update=async function(params)
+{
+    var response=await this.post("/api/manage/storage/update",params);
+    return fetch_data(response)
+}
+
+Api.manage_storage_delete=async function(params)
+{
+    var response= await this.post("/api/manage/storage/delete",params);
+    return fetch_data(response)
+}
+
+Api.manage_storage_get=async function(id)
+{
+    var response = await this.get("/api/manage/storage/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_ticket_list=async function(params)
+{
+    var response = await this.post("/api/manage/ticket/list", params);
+    return fetch_data(response)
+}
+
+Api.manage_ticket_create=async function(params)
+{
+    var response = await this.post("/api/manage/ticket/create", params);
+    return fetch_data(response)
+}
+
+Api.manage_ticket_update=async function(params)
+{
+    var response=await this.post("/api/manage/ticket/update",params);
+    return fetch_data(response)
+}
+
+Api.manage_ticket_delete=async function(params)
+{
+    var response= await this.post("/api/manage/ticket/delete",params);
+    return fetch_data(response)
+}
+
+Api.manage_log_get=async function(id)
+{
+    var response = await this.get("/api/manage/log/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+
+Api.manage_log_list=async function(params)
+{
+    var response = await this.post("/api/manage/log/list", params);
+    return fetch_data(response)
+}
+
+Api.manage_log_create=async function(params)
+{
+    var response = await this.post("/api/manage/log/create", params);
+    return fetch_data(response)
+}
+
+Api.manage_log_update=async function(params)
+{
+    var response=await this.post("/api/manage/log/update",params);
+    return fetch_data(response)
+}
+
+Api.manage_log_delete=async function(params)
+{
+    var response= await this.post("/api/manage/log/delete",params);
+    return fetch_data(response)
+}
+
+Api.manage_log_get=async function(id)
+{
+    var response = await this.get("/api/manage/log/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+export default {
+    install:function(app){
+
+        Api.$alert= app.config.globalProperties.$alert;
+        Api.$router= app.config.globalProperties.$router;
+
+        app.config.globalProperties.$api = Api
+    }
+}

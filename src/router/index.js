@@ -1,4 +1,4 @@
-import {  createWebHashHistory, createRouter } from 'vue-router'
+import {  createWebHistory, createRouter } from 'vue-router'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
@@ -9,11 +9,206 @@ const routes = [
 
     {
         path: '/',
-        component: () => import('@/views/blog/index.vue'),
+        component: () => import('@/layout/frontend/index.vue'),
+        children:[
+            {
+                path: '',
+                component: () => import('@/views/user/index/index.vue'),
+            },
+
+            {
+                path: 'login',
+                component: () => import('@/views/user/login/login.vue'),
+            },
+            {
+                path: 'register',
+                component: () => import('@/views/user/login/register.vue'),
+            },
+            {
+                path: 'forgot_password',
+                component: () => import('@/views/user/login/forgot_password.vue'),
+            },
+            {
+                path: 'login-manage',
+                component: () => import('@/views/manage/login/login.vue'),
+            },
+        ]
     },
     {
-        path: '/view',
-        component: () => import('@/views/blog/view.vue'),
+        path: '/admin',
+        component: () => import('@/layout/admin/index.vue'),
+        children:[
+            {
+                path: 'dashboard',
+                component: () => import('@/views/admin/dashboard/index.vue'),
+            },
+            {
+                path: 'profile',
+                component: () => import('@/views/admin/profile/index.vue'),
+            },
+            {
+                path: 'admin',
+                component: () => import('@/views/admin/admin/index.vue'),
+            },
+            {
+                path: 'domain',
+                component: () => import('@/views/admin/domain/index.vue'),
+            },
+            {
+                path: 'domain/create',
+                component: () => import('@/views/admin/domain/form.vue'),
+            },
+            {
+                path: 'domain/update',
+                component: () => import('@/views/admin/domain/form.vue'),
+            },
+
+            {
+                path: 'email',
+                component: () => import('@/views/admin/email/index.vue'),
+            },
+            {
+                path: 'email/create',
+                component: () => import('@/views/admin/email/form.vue'),
+            },
+            {
+                path: 'email/update',
+                component: () => import('@/views/admin/email/form.vue'),
+            },
+
+            {
+                path: 'storage',
+                component: () => import('@/views/admin/storage/index.vue'),
+            },
+
+
+            {
+                path: 'ticket',
+                component: () => import('@/views/admin/ticket/index.vue'),
+            },
+            {
+                path: 'ticket/create',
+                component: () => import('@/views/admin/ticket/form.vue'),
+            },
+            {
+                path: 'ticket/update',
+                component: () => import('@/views/admin/ticket/form.vue'),
+            },
+
+            {
+                path: 'log',
+                component: () => import('@/views/admin/log/index.vue'),
+            },
+            {
+                path: 'log/create',
+                component: () => import('@/views/admin/log/form.vue'),
+            },
+            {
+                path: 'log/update',
+                component: () => import('@/views/admin/log/form.vue'),
+            },
+	],
+    },
+    {
+        path: '/manage',
+        component: () => import('@/layout/manage/index.vue'),
+        children:[
+            {
+                path: 'dashboard',
+                component: () => import('@/views/manage/dashboard/index.vue'),
+            },
+            {
+                path: 'profile',
+                component: () => import('@/views/manage/profile/index.vue'),
+            },
+            {
+                path: 'admin',
+                component: () => import('@/views/manage/admin/index.vue'),
+            },
+            {
+                path: 'admin/create',
+                component: () => import('@/views/manage/admin/form.vue'),
+            },
+            {
+                path: 'admin/update',
+                component: () => import('@/views/manage/admin/form.vue'),
+            },
+
+            {
+                path: 'user',
+                component: () => import('@/views/manage/user/index.vue'),
+            },
+            {
+                path: 'user/create',
+                component: () => import('@/views/manage/user/form.vue'),
+            },
+            {
+                path: 'user/update',
+                component: () => import('@/views/manage/user/form.vue'),
+            },
+
+            {
+                path: 'domain',
+                component: () => import('@/views/manage/domain/index.vue'),
+            },
+            {
+                path: 'domain/create',
+                component: () => import('@/views/manage/domain/form.vue'),
+            },
+            {
+                path: 'domain/update',
+                component: () => import('@/views/manage/domain/form.vue'),
+            },
+
+            {
+                path: 'email',
+                component: () => import('@/views/manage/email/index.vue'),
+            },
+            {
+                path: 'email/create',
+                component: () => import('@/views/manage/email/form.vue'),
+            },
+            {
+                path: 'email/update',
+                component: () => import('@/views/manage/email/form.vue'),
+            },
+
+
+            {
+                path: 'storage',
+                component: () => import('@/views/manage/storage/index.vue'),
+            },
+            {
+                path: 'storage/create',
+                component: () => import('@/views/manage/storage/form.vue'),
+            },
+            {
+                path: 'storage/update',
+                component: () => import('@/views/manage/storage/form.vue'),
+            },
+
+            {
+                path: 'ticket',
+                component: () => import('@/views/manage/ticket/index.vue'),
+            },
+            {
+                path: 'storage/create',
+                component: () => import('@/views/manage/ticket/form.vue'),
+            },
+            {
+                path: 'storage/update',
+                component: () => import('@/views/manage/ticket/form.vue'),
+            },
+
+            {
+                path: 'log',
+                component: () => import('@/views/manage/log/index.vue'),
+            },
+            {
+                path: 'log/view',
+                component: () => import('@/views/manage/log/view.vue'),
+            },
+	],
     },
     {
         path: '/404',
@@ -26,8 +221,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  //history: createMemoryHistory(), //这样会无法识别路径的，总是  /
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes:routes,
 })
 
