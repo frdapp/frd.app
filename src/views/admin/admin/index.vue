@@ -21,23 +21,24 @@
                 <Column prop="username" label="Username" > </Column>
                 <Column prop="id" label="免费容量" width="100"> 
                         <template #default="scope">
-                            1G
+                            {{scope.item.storage_free}} G
                         </template>
                 </Column>
                 <Column prop="id" label="当前容量" width="100"> 
                         <template #default="scope">
-                            10G
+                            {{scope.item.storage_current}} G
                         </template>
                 </Column>
                 <Column prop="id" label="最大容量" width="100"> 
                         <template #default="scope">
-                            100G
+                            {{scope.item.storage_max}} G
                         </template>
                 </Column>
                 <Column prop="created_at" label="创建时间" width="200"> </Column> 
+                <Column prop="updated_at" label="修改时间" width="200"> </Column> 
                 <Column  label="操作" style=""> 
                     <template #default="scope">
-                        <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >设置最大容量</a>
+                        <a style="margin-left:10px" class="link-primary" @click="setStorageMax(scope.item.id,scope.item.storage_max)" >设置最大容量</a>
                     </template>
                 </Column> 
             </Table>
@@ -104,13 +105,11 @@ export default {
             this.items = response.items;
             this.pagination = response.pagination;
         },
-        toUrl: function (path, params) {
-            if (params) {
-                this.$router.push({ path: path, query: params })
-            }
-            else {
-                this.$router.push({ path: path })
-            }
+        setStorageMax: async function (id,storage_max) {
+            var value=await this.$prompt("Storage Max",storage_max)
+
+            await this.$api.admin_me_update_storage_max({"value":value})
+            this.search()
         },
 
     },

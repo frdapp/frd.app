@@ -8,11 +8,6 @@
 </script>
 
 <template>
-    <!--
-    domain
-    description
-    aliases
-    -->
 
         <table class="layout-table" style="">
             <tr>

@@ -10,7 +10,7 @@ import { useRoute } from 'vue-router'
     <div class="sidebar">
         <div style="height:100px;display:flex;align-items: center;justify-content: start;">
             <!-- LOGO -->
-                木石科技 {{ current_path }}
+                木石科技 
         </div>
         <MenuItem path="/admin/dashboard" :current_path="current_path">
             Dashboard

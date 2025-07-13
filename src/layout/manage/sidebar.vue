@@ -1,5 +1,6 @@
 <script setup>
 import MenuItem from "@/components/MenuItem.vue"
+import { useUserStore } from '@/store/modules/user'
 import { useRoute } from 'vue-router'
 
 </script>
@@ -53,7 +54,7 @@ export default {
         var response=await this.$api.admin_login_logout();
 
         const userStore = useUserStore()
-        userStore.clear()
+        userStore.adminClear()
 
         this.$router.push({ path: "/", query: {  }} ) ;
 

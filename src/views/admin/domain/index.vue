@@ -23,7 +23,6 @@
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.domain" 
                         type="text" 
-                        placeholder="标题/ID" 
                         style="width:300px;"
                         />
 
@@ -44,13 +43,17 @@
                                 {{scope.item.id}}
                         </template>
                 </Column>
-                <Column prop="domain" label="Domain" > </Column>
-                <Column prop="description" sortable="custom" label="Description" width="100"> </Column>
+                <Column prop="domain" label="Domain" width="200"> </Column>
+                <Column prop="description" sortable="custom" label="Description" width=""> </Column>
+                <Column  prop="email_count" label="Emails" style="width:100px"> 
+                </Column> 
+
                 <Column prop="created_at" label="创建时间" width="200"> </Column> 
-                <Column  label="操作" style=""> 
+                <Column prop="updated_at" label="修改时间" width="200"> </Column> 
+                <Column  label="操作" style="width:300px"> 
                     <template #default="scope">
                 
-                        <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
+                        <a style="margin-left:0px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
                         <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
                         </template>
                 </Column> 
@@ -129,10 +132,6 @@ export default {
                 this.query.order="desc";
             }
 
-            console.log(event.order)
-            console.log(event.prop)
-
-
             this.search()
         },
 
@@ -146,17 +145,6 @@ export default {
             this.items=response.items;
             this.pagination=response.pagination;
         },
-        toUrl:function(path,params){
-            if(params)
-            {
-                this.$router.push({ path: path,query:params})
-            }
-            else
-            {
-                this.$router.push({ path: path})
-            }
-        },
-
     },
 }
 </script>

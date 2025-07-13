@@ -43,13 +43,19 @@
                                         {{scope.item.id}}
                                 </template>
                         </Column>
-                        <Column prop="username" label="Username" > </Column>
+                        <Column prop="username" label="Email" > </Column>
+                        <Column prop="storage" label="Storage" width="100">
+                                <template #default="scope">
+                                    10G
+                                </template>
+                        </Column>
                         <Column prop="active" label="Active" width="100"> </Column>
                         <Column prop="created_at" label="创建时间" width="200"> </Column>
+                        <Column prop="updated_at" label="修改时间" width="200"> </Column> 
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">
 
-                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
+                                <a style="margin-left:0px" class="link-primary" @click="updatePassword(scope.item.id)" >编辑密码</a>
                                 <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
                                 </template>
                         </Column>
@@ -90,16 +96,17 @@ export default {
             this.searchPage(1);
     },
     methods:{
-    openEditDialog:function(item_id){
-            this.$router.push({ path: "/admin/email/update", query: {  "id":item_id}} ) ;
+        updatePassword: async function (id) {
+            var value=await this.$prompt("New Password","")
+            await this.$api.admin_email_update_password({"id":id,"password":value})
+            this.search()
+        },
 
-            return ;
-    },
     openDeleteDialog:async function(id,title){
             var result = await this.$confirm("Delete It ?")
             if(result)
             {
-                var response=await this.$api.admin_post_delete({"id":id})
+                var response=await this.$api.admin_email_delete({"id":id})
                 if(response != false)
                 {
                     this.search()
@@ -107,12 +114,12 @@ export default {
             }
     },
 
-    openAddDialog:function(){
-       this.$router.push({
-           path: "/admin/email/create",
-           query: {  }
-       }) ;
-       return ;
+    openAddDialog: function () {
+        this.$router.push({
+            path: "/admin/email/create",
+            query: {}
+        });
+        return;
     },
 
 
@@ -146,17 +153,6 @@ export default {
             this.items=response.items;
             this.pagination=response.pagination;
         },
-        toUrl:function(path,params){
-            if(params)
-            {
-                this.$router.push({ path: path,query:params})
-            }
-            else
-            {
-                this.$router.push({ path: path})
-            }
-        },
-
     },
 }
 </script>

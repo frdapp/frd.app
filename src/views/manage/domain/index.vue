@@ -11,11 +11,13 @@
 
 <template>
     <VBox style="width:100%">
+        <!--
         <div>
             <Button style="margin-right:50px" class="btn-success"  @click="openAddDialog()" >
                 新增
             </Button>
         </div>
+        -->
 
         <form name="search" v-on:submit="searchPage(1)">
         <HBox  style="  margin-top:10px;padding:0px;">
@@ -23,7 +25,6 @@
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.title"
                         type="text"
-                        placeholder="Domain/ID"
                         style="width:300px;"
                         />
 
@@ -42,26 +43,22 @@
                             >
                         <Column prop="id" label="ID" sortable="custom" width="100">
                                 <template #default="scope">
-                                <router-link target="_blank" :to="'/article/view?id='+scope.item.id" style="color:#606266">
                                         {{scope.item.id}}
-                                </router-link>
                                 </template>
                         </Column>
-                        <Column prop="username" label="Username" > 
-                            <template #default="scope">
-                                Username
-
-                            </template>
+                        <Column prop="username" label="Email" > 
                         </Column>
                         <Column prop="domain" label="Domain" > </Column>
-                        <Column prop="description" sortable="custom" label="Description" width="100"> </Column>
-                        <Column prop="alias" sortable="custom" label="Description" width="100"> </Column>
+                        <Column prop="description"  label="Description" width="100"> </Column>
                         <Column prop="created_at" label="创建时间" width="200"> </Column>
+                        <Column prop="updated_at" label="更新时间" width="200"> </Column>
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">
 
+                                <!--
                                 <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >查看</a>
-                                </template>
+                                -->
+                            </template>
                         </Column>
                     </Table>
 

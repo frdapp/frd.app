@@ -11,11 +11,13 @@
 
 <template>
     <VBox style="width:100%">
+        <!--
         <div>
             <Button style="margin-right:50px" class="btn-success"  @click="openAddDialog()" >
                 新增
             </Button>
         </div>
+        -->
 
         <form name="search" v-on:submit="searchPage(1)">
         <HBox  style="  margin-top:10px;padding:0px;">
@@ -23,11 +25,8 @@
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.title"
                         type="text"
-                        placeholder="标题/ID"
                         style="width:300px;"
                         />
-
-
 
                     <Button
                         style="margin-left:10px"
@@ -47,13 +46,17 @@
                                 </template>
                         </Column>
                         <Column prop="username" label="Username" > </Column>
-                        <Column prop="description" sortable="custom" label="Description" width="100"> </Column>
+                        <Column prop="storage_free"  label="Storage Free" width="100"> </Column>
+                        <Column prop="storage_max"  label="Storage Max" width="100"> </Column>
+                        <Column prop="storage_current"  label="Storage Current" width="100"> </Column>
                         <Column prop="created_at" label="创建时间" width="200"> </Column>
+                        <Column prop="updated_at" label="更新时间" width="200"> </Column>
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">
-
+                                <!--
                                 <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >查看</a>
-                                </template>
+                                -->
+                            </template>
                         </Column>
                     </Table>
 

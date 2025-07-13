@@ -11,11 +11,11 @@ import HBox from "@/components/HBox.vue"
 
 
 
-    <Sidebar />
+    <Sidebar style="position:fixed;top:0;bottom:0;" />
 
-    <VBox>
-
-             <router-view />
+    <VBox style="justify-content: flex-start;margin-left:250px;width:100%;background-color2:#e7eaee">
+          <Hbox style="height:60px;width:100%;background-color:white;" class="border-bottom">  Header  </Hbox>
+          <router-view style="margin-top:20px;margin-left:10px;"/>
     </VBox>
 
 

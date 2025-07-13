@@ -23,7 +23,6 @@
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.title"
                         type="text"
-                        placeholder="标题/ID"
                         style="width:300px;"
                         />
 
@@ -51,10 +50,11 @@
                         <Column prop="username" label="Username" > </Column>
                         <Column prop="title" label="Title" > </Column>
                         <Column prop="description" label="description" > </Column>
-                        <Column prop="size" label="size" > </Column>
+                        <Column prop="size" label="Size(GB)" > </Column>
                         <Column prop="start_at" label="start_at" > </Column>
                         <Column prop="expired_at" label="expired_at" > </Column>
                         <Column prop="created_at" label="创建时间" width="200"> </Column>
+                        <Column prop="updated_at" label="更新时间" width="200"> </Column>
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">
 

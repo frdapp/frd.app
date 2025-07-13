@@ -133,6 +133,12 @@ Api.admin_me_update_email=async function(params)
     return fetch_data(response)
 }
 
+Api.admin_me_update_storage_max=async function(params)
+{
+    var response = await this.post("/api/admin/me/update_storage_max", params);
+    return fetch_data(response)
+}
+
 Api.admin_domain_list=async function(params)
 {
     var response=await this.post("/api/admin/domain/list",params);
@@ -175,9 +181,9 @@ Api.admin_email_create=async function(params)
     return fetch_data(response)
 }
 
-Api.admin_email_update=async function(params)
+Api.admin_email_update_password=async function(params)
 {
-    var response=await this.post("/api/admin/email/update",params);
+    var response=await this.post("/api/admin/email/update_password",params);
     return fetch_data(response)
 }
 

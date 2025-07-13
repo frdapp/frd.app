@@ -11,12 +11,12 @@
         <table class="layout-table" style="">
             <tr>
                 <td>
-                <label class="form-control-label">Username</label>
+                <label class="form-control-label">name</label>
                 </td>
-                <td>
+                <td style="width:300px;">
                     <HBox>
-                        <Input  v-model="form.username"   /> 
-                        <Select v-model="form.domain" :options="domains">
+                        <Input  v-model="form.name"  max-length=30 style="width:100%" /> 
+                        <Select v-model="form.domain" :options="domains" style="width:100px">
                         </Select>
                     </HBox>
                 </td>
@@ -26,7 +26,7 @@
                 <label class="form-control-label">Password</label>
                 </td>
                 <td>
-                <Input name="password" type="password" v-model="form.password" />
+                <Input name="password" type="password" v-model="form.password" style="width:100%"/>
                 </td>
             </tr>
 
@@ -62,7 +62,7 @@
                 ],
                 form:{
                     id:0,
-                    username:"",
+                    name:"",
                     domain:"",
                     password:'',
                 },
@@ -78,10 +78,12 @@
                     "label":domain,
                     "value":domain,
                 })
+
+                if(this.form.domain == "") 
+                {
+                    this.form.domain=domain;
+                }
             }
-
-            console.log(this.domains)
-
         },
         methods:{
             submit:async function(back){

@@ -23,7 +23,6 @@
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.title"
                         type="text"
-                        placeholder="标题/ID"
                         style="width:300px;"
                         />
 
@@ -43,16 +42,14 @@
                             >
                         <Column prop="id" label="ID" sortable="custom" width="100">
                                 <template #default="scope">
-                                <router-link target="_blank" :to="'/article/view?id='+scope.item.id" style="color:#606266">
                                         {{scope.item.id}}
-                                </router-link>
                                 </template>
                         </Column>
                         <Column prop="username" label="Username" > </Column>
                         <Column prop="email" label="Email" > </Column>
                         <Column prop="active" label="Active" width="100"> </Column>
-                        <Column prop="view_count" sortable="custom" label="查看次数" width="100"> </Column>
                         <Column prop="created_at" label="创建时间" width="200"> </Column>
+                        <Column prop="updated_at" label="更新时间" width="200"> </Column>
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">
 
