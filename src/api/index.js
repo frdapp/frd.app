@@ -285,11 +285,25 @@ Api.admin_ticket_delete=async function(params)
     return fetch_data(response)
 }
 
+Api.admin_ticket_append_message=async function(params)
+{
+    var response= await this.post("/api/admin/ticket/append_message",params);
+    return fetch_data(response)
+}
+
 Api.admin_ticket_get=async function(id)
 {
     var response = await this.get("/api/admin/ticket/get", {"params":{"id":id}});
     return fetch_data(response)
 }
+
+Api.admin_log_list=async function(params)
+{
+    var response = await this.post("/api/admin/log/list", params);
+    return fetch_data(response)
+}
+
+
 
 Api.manage_login_login = async function (params) {
     var response = await this.post("/api/manage/login/login", params);
@@ -459,6 +473,12 @@ Api.manage_ticket_get=async function(id)
     return fetch_data(response)
 }
 
+Api.manage_ticket_append_message=async function(params)
+{
+    var response= await this.post("/api/manage/ticket/append_message",params);
+    return fetch_data(response)
+}
+
 
 Api.manage_storage_list=async function(params)
 {
@@ -514,11 +534,6 @@ Api.manage_ticket_delete=async function(params)
     return fetch_data(response)
 }
 
-Api.manage_log_get=async function(id)
-{
-    var response = await this.get("/api/manage/log/get", {"params":{"id":id}});
-    return fetch_data(response)
-}
 
 
 Api.manage_log_list=async function(params)
@@ -527,23 +542,6 @@ Api.manage_log_list=async function(params)
     return fetch_data(response)
 }
 
-Api.manage_log_create=async function(params)
-{
-    var response = await this.post("/api/manage/log/create", params);
-    return fetch_data(response)
-}
-
-Api.manage_log_update=async function(params)
-{
-    var response=await this.post("/api/manage/log/update",params);
-    return fetch_data(response)
-}
-
-Api.manage_log_delete=async function(params)
-{
-    var response= await this.post("/api/manage/log/delete",params);
-    return fetch_data(response)
-}
 
 Api.manage_log_get=async function(id)
 {

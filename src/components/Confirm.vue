@@ -1,9 +1,9 @@
 <template>
     <transition name="alert-fade">
         <div  class="custom-alert-overlay">
-            <div  class="card fade custom-alert show" role="alert">
-                <div class="card-header">
-                    <strong style="font-size:16px" class="text-info">{{ title }}</strong>
+            <div class="card fade custom-alert show"  :style="style">
+                <div class="card-header alert" :class="title_class">
+                        {{ title }}
                 </div>
                 <div class="card-body">
                     <p class="" styel="color:#dc8427">
@@ -11,10 +11,10 @@
                     </p>
                 </div>
                 <div class="card-footer justify-content-end">
-                    <a class="link-primary" aria-label="ok" @click="ok">
+                    <a href="#" class="decoration_none link-primary" aria-label="ok" @click="ok">
                         OK
                     </a>
-                    <a class="link-secondary" aria-label="cancel" @click="cancel" style="padding-left:10px">
+                    <a href="#" class="decoration_none link-secondary" aria-label="cancel" @click="cancel" style="padding-left:10px">
                         Cancel
                     </a>
                 </div>
@@ -27,19 +27,21 @@
 <script>
 export default {
     props: {
-        title:{
-            default:"INFO",
-        },
+        title:"INFO", //info,warning,success,error
         message:"Are you sure ?",
+        style:"",
         handleClose:null
     },
     data:function(){
         return {
             resolver:null,
+            title_class:"",
         }
 
     },
-
+    created:function(){
+        this.title_class="alert-"+this.title.toLowerCase()
+    },
     methods:{
         show:function($event) {
             return new Promise((resolve) => {

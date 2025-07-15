@@ -14816,3 +14816,8 @@ a:not([href]):not([tabindex]):focus
 .card-footer {
   text-align:right;
 }
+
+
+a.decoration_none {
+  text-decoration: none;
+}

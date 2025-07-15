@@ -23,7 +23,6 @@
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.title"
                         type="text"
-                        placeholder="标题/ID"
                         style="width:300px;"
                         />
 
@@ -43,9 +42,7 @@
                             >
                         <Column prop="id" label="ID" sortable="custom" width="100">
                                 <template #default="scope">
-                                <router-link target="_blank" :to="'/article/view?id='+scope.item.id" style="color:#606266">
                                         {{scope.item.id}}
-                                </router-link>
                                 </template>
                         </Column>
                         <Column prop="username" label="Username" > </Column>
@@ -55,8 +52,9 @@
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">
 
-                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
-                                <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
+                                    <RouterLink :to="'/manage/ticket/view?id='+scope.item.id" target="_blank">
+                                            查看
+                                    </RouterLink>
                                 </template>
                         </Column>
                     </Table>

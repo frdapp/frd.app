@@ -9,11 +9,12 @@ Confirm.install = app => {
   let container = null
 
   //必须通过handleClose 清理掉旧的实例后，新的才能打开
-  const loadConfirm = async function(message) {
+  const loadConfirm = async function(title,message) {
     if (container) return
 
 
     let options={
+      "title":title,
       "message":message,
       handleClose : function()  {
         document.body.removeChild(container)

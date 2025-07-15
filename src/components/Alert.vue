@@ -2,16 +2,22 @@
     <transition name="alert-fade">
         <div class="custom-alert-overlay">
             <div class="card fade custom-alert show"  :style="style">
+                <!--
                 <div class="card-header">
                     <strong style="font-size:16px" :class="title_class">{{ title }}</strong>
                 </div>
+                -->
+                <div class="card-header alert" :class="title_class">
+                        {{ title }}
+                </div>
+
                 <div class="card-body">
                     <p class="" styel="color:#dc8427">
                         {{ message }}
                     </p>
                 </div>
                 <div class="card-footer justify-content-end">
-                    <a class="link-primary" aria-label="ok" @click="ok">
+                    <a href="#" class="decoration_none link-primary" aria-label="ok" @click="ok">
                         OK
                     </a>
                 </div>
@@ -24,7 +30,7 @@
 <script>
 export default {
     props: {
-        title:"INFO",
+        title:"INFO", //info,warning,success,error
         message:"Message",
         style:"",
         handleClose:null
@@ -37,7 +43,7 @@ export default {
 
     },
     created:function(){
-        this.title_class="text-"+this.title.toLowerCase()
+        this.title_class="alert-"+this.title.toLowerCase()
     },
     methods:{
         show:function() {

@@ -87,6 +87,10 @@ const routes = [
                 component: () => import('@/views/admin/ticket/index.vue'),
             },
             {
+                path: 'ticket/view',
+                component: () => import('@/views/admin/ticket/view.vue'),
+            },
+            {
                 path: 'ticket/create',
                 component: () => import('@/views/admin/ticket/form.vue'),
             },
@@ -190,6 +194,10 @@ const routes = [
             {
                 path: 'ticket',
                 component: () => import('@/views/manage/ticket/index.vue'),
+            },
+            {
+                path: 'ticket/view',
+                component: () => import('@/views/manage/ticket/view.vue'),
             },
             {
                 path: 'storage/create',

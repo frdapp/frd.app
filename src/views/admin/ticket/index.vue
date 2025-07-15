@@ -23,7 +23,6 @@
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.title"
                         type="text"
-                        placeholder="标题/ID"
                         style="width:300px;"
                         />
 
@@ -42,23 +41,20 @@
                             >
                         <Column prop="id" label="ID" sortable="custom" width="100">
                                 <template #default="scope">
-                                <router-link target="_blank" :to="'/article/view?id='+scope.item.id" style="color:#606266">
                                         {{scope.item.id}}
-                                </router-link>
                                 </template>
                         </Column>
                         <Column prop="title" label="标题" > </Column>
                         <Column prop="description" label="description" > </Column>
                         <Column prop="created_at" label="创建时间" width="200"> </Column>
+                        <Column prop="updated_at" label="更新时间" width="200"> </Column>
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">
 
-                                    <RouterLink :to="'/admin/post/view?id='+scope.item.id" target="_blank">
+                                    <RouterLink :to="'/admin/ticket/view?id='+scope.item.id" target="_blank">
                                             查看
                                     </RouterLink>
-
-                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
-                                </template>
+                            </template>
                         </Column>
                     </Table>
 

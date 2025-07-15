@@ -23,7 +23,7 @@
         <label class="form-control-label">描述</label>
       </td>
       <td>
-        <Textarea class="right_column" v-model="form.content" :rows=25 cols=60 style="" />
+        <Textarea class="right_column" v-model="form.description" :rows=25 cols=60 style="" />
       </td>
     </tr>
 
@@ -32,8 +32,7 @@
         <label class="form-control-label"></label>
       </td>
       <td>
-        <Button type="primary" @click="submit(true)">保存</Button>
-        <Button v-if="mode='update'" type="primary" @click="submit(false)">仅保存</Button>
+        <Button type="button" @click="submit(true)">保存</Button>
         <Button @click="cancel">取消</Button>
       </td>
     </tr>
@@ -42,90 +41,35 @@
 
 <script>
   export default {
-    mounted:function(){
-
-      var url="/api/admin/post/get"
-
-
+    mounted:async function(){
       var item_id=this.$route.query.id;
-      var self=this;
-
       if(item_id)
       {
         this.mode="update"
-        this.$api.get(url,{params:{"id":item_id}}).then(function(r){
-          self.form=r.data
-          self.form.tag_string=self.form.tags.join(",")
-        });
+        var response=await this.$api.admin_ticket_get({"id":item_id});
+          this.form=response;
       }
     },
     data: function(){
       return {
-        permissions:[
-          {
-            value: 'PRIVATE',
-            label: '私有',
-          },
-          {
-            value: 'PUBLIC',
-            label: '公开',
-          },
-          {
-            value: 'SHARE',
-            label: '分享',
-          }
-        ],
         mode:"create",
-        editor_options: {
-          // lineNumbers: true,
-          // styleActiveLine: true,
-          // styleSelectedText: true,
-          // lineWrapping: true,
-          // indentWithTabs: true,
-          // tabSize: 2,
-          // indentUnit: 2
-        },
         form:{
           id:0,
-          permission:"PRIVATE",
-          tags:[],
-          tag_string:"",
-          //title:this.$func.today(),
           title:"",
-          content:'',
+          description:'',
         },
       }
     },
 
     methods:{
       submit:async function(back){
-        if(!this.form.tag_string)
-        {
-          this.form.tags=[];
-        }
-        else
-        {
-          this.form.tags=[]
-
-          var arr=this.form.tag_string.split(",")
-          console.log(arr)
-          for(var k in arr)
-          {
-            let tag=arr[k].trim()
-            if(tag)
-            {
-              this.form.tags.push(tag)
-            }
-          }
-        }
-
         if(this.form.id)
         {
-          var response=await this.$api.admin_post_update(this.form);
+          var response=await this.$api.admin_ticket_update(this.form);
         }
         else
         {
-          var response=await this.$api.admin_post_create(this.form);
+          var response=await this.$api.admin_ticket_create(this.form);
         }
 
         if(response != false)
@@ -144,9 +88,7 @@
       },
       reset:function(path){
         this.form.title=""
-        this.form.permission="PRIVATER"
-        //this.form.tags=""
-        this.form.content=""
+        this.form.description=""
       },
       cancel:function(path){
         this.$emit("dialog_cancel")
