@@ -9,11 +9,12 @@ Dialog.install = app => {
   let container = null
 
   //必须通过handleClose 清理掉旧的实例后，新的才能打开
-  const loadDialog = function(component) {
+  const loadDialog = function(component,params) {
     if (container) return
 
     let options={
       "component":component,
+      "params":params ? params : {},
       "handleClose":function () {
         document.body.removeChild(container)
         instance.unmount()

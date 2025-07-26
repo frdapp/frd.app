@@ -44,14 +44,14 @@ import PaginationItem from "@/components/PaginationItem.vue";
 export default {
     props:{
         page: {
-            type: [ Number],
+            type: [ Number,String],
             required: true,
             default:1
         },
         page_total:{
-            type: [ Number],
+            type: [ Number,String],
             required: true,
-            default:10
+            default:1
         },
         color: {
             type: String,
@@ -61,27 +61,35 @@ export default {
             type: String,
             default: "",
         },
+        page_offset_max: {
+            type: [Number,String],
+            default: 3,
+        },
+    },
+    computed:{
+        "pages":function(){
+          let page = parseInt(this.page)
+          let page_total = parseInt(this.page_total)
+          let page_offset_max=parseInt(this.page_offset_max)
+
+          let start_page = this.max(1, page - page_offset_max);
+          let end_page = this.min(page_total, page + page_offset_max);
+
+          var pages = [];
+
+          for (var _page = start_page; _page <= end_page; _page++) {
+            pages.push(parseInt(_page));
+          }
+
+          return pages
+        },
+
     },
     methods:{
         max:function(a,b) {  if (a > b ) return a ;  return b },
         min:function(a,b) {  if (a < b ) return a ;  return b },
         to_page:function(page){
             this.$emit("to_page",page)
-        },
-        render:function(){
-          let page = parseInt(this.page)
-          let page_total = parseInt(this.page_total)
-
-          let start_page = this.max(1, page - 3);
-          let end_page = this.min(page_total, page + 3);
-
-          this.pages = [];
-
-
-          for (var _page = start_page; _page <= end_page; _page++) {
-            this.pages.push(parseInt(_page));
-          }
-
         },
         handleSizeChange(val) {
         },
@@ -91,7 +99,6 @@ export default {
 
           this.$emit('jump',val);
         },
-
         getClasses: function (color, size) {
             let colorValue, sizeValue;
 
@@ -103,12 +110,11 @@ export default {
     },
     data:function(){
         return {
-            "page":parseInt(this.page),
-            "page_total":parseInt(this.page_total),
             "pages":[],
         };
     },
     watch: {
+        /*
         'page': function (val) {
             this.page= val.page;
             this.render()
@@ -117,10 +123,11 @@ export default {
             this.page_total= val.page_total;
             this.render()
         },
+        */
     },
     mounted:function(){
-      this.render()
-      console.log(this.pages);
+      //this.render()
+      //console.log(this.pages);
     }
 
 }

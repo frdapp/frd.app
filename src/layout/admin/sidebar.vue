@@ -8,21 +8,32 @@ import { useRoute } from 'vue-router'
 </script>
 <template>
     <div class="sidebar">
-        <div style="height:100px;display:flex;align-items: center;justify-content: start;">
-            <!-- LOGO -->
-                木石科技 
+        <div style="height:60px;display:flex;align-items: center;justify-content: start;border-bottom:solid 1px rgb(102, 100, 97)">
+            <!--
+             <img src="@/assets/logo.png" style="width:100px;"> </img>
+
+             f4ece1
+        -->
+             <img src="@/assets/logo_bg.png" style="width:100px;"> </img>
         </div>
+        <div style="height:30px;width:100%">
+        </div>
+        <!--
         <MenuItem path="/admin/dashboard" :current_path="current_path">
             Dashboard
         </MenuItem>
         <MenuItem class="menu-item" path="/admin/admin"  :current_path="current_path">
             Admin
         </MenuItem>
+        -->
         <MenuItem class="menu-item" path="/admin/domain"  :current_path="current_path">
             Domain
         </MenuItem>
         <MenuItem class="menu-item" path="/admin/email" :current_path="current_path">
             Email
+        </MenuItem>
+        <MenuItem class="menu-item" path="/admin/order" :current_path="current_path">
+            Order
         </MenuItem>
         <MenuItem class="menu-item" path="/admin/storage" :current_path="current_path">
             Storage
@@ -30,9 +41,11 @@ import { useRoute } from 'vue-router'
         <MenuItem class="menu-item" path="/admin/ticket" :current_path="current_path">
             Tickets
         </MenuItem>
+        <!--
         <MenuItem class="menu-item" path="/admin/log" :current_path="current_path">
             Log
         </MenuItem>
+        -->
         <a class="menu-item"  @click="logout()" style="color:#ff0000">
                 Logout
         </a>

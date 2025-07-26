@@ -20,18 +20,24 @@
         -->
 
         <form name="search" v-on:submit="searchPage(1)">
-        <HBox  style="  margin-top:10px;padding:0px;">
+        <HBox  style="margin-top:10px;padding:0px;">
+            <Select v-model="query.user_id" @change="search()">
+                <option  value="0"  :label="$t('All Users')" />
+                <option v-for="user in users" :value="user.id"  :label="user.email" />
+            </Select>
+
                     <Input
                         @keyup.enter.native="searchPage(1)"
-                        v-model="query.title"
+                        v-model="query.query"
                         type="text"
-                        style="width:300px;"
+                        :placeholder="$t('domain name')"
+                        style="width:300px;margin-left:10px"
                         />
 
                     <Button
                         style="margin-left:10px"
                         class="btn-primary"
-                        @click="searchPage(1)" > 搜索 </Button>
+                        @click="searchPage(1)" > {{$t("Search")}} </Button>
         </HBox>
             </form>
 
@@ -41,18 +47,17 @@
                             @sort-change="searchSort"
                             style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}"
                             >
-                        <Column prop="id" label="ID" sortable="custom" width="100">
+                        <Column prop="id" :label="$t('ID')" sortable="custom" width="100">
                                 <template #default="scope">
                                         {{scope.item.id}}
                                 </template>
                         </Column>
-                        <Column prop="username" label="Email" > 
-                        </Column>
-                        <Column prop="domain" label="Domain" > </Column>
-                        <Column prop="description"  label="Description" width="100"> </Column>
-                        <Column prop="created_at" label="创建时间" width="200"> </Column>
-                        <Column prop="updated_at" label="更新时间" width="200"> </Column>
-                        <Column align="center" label="操作" width="300">
+                        <Column prop="user_email" :label="$t('User Email')" > </Column>
+                        <Column prop="domain" :label="$t('Domain')" > </Column>
+                        <Column prop="description"  :label="$t('Description')" width="100"> </Column>
+                        <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
+                        <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column>
+                        <Column align="center" :label="$t('Operate')" width="300">
                             <template #default="scope">
 
                                 <!--
@@ -76,25 +81,27 @@
 export default {
     data: function(){
         return {
-            form_data:{
-                title:'',
-            },
+            users:[],
             query:{
+                user_id:0,
                 page:1,
-                page_count:10,
-                title:'',
+                page_size:10,
+                query:'',
                 order:"desc",
                 order_by:"id",
             },
             pagination:{
-                item_total:3,
+                item_total:0,
             },
 
             items:[],
         }
     },
 
-    mounted:function(){
+    created:async function(){
+            var response=await this.$api.manage_user_list({"page_size":999})
+            this.users=response.items;
+
             this.searchPage(1);
     },
     methods:{
@@ -105,7 +112,7 @@ export default {
             return ;
     },
     openDeleteDialog:async function(id,title){
-            var result = await this.$confirm("Delete It ?")
+            var result = await this.$confirm("Danger","Delete It ?")
             if(result)
             {
                 var response=await this.$api.admin_domain_delete({"id":id})

@@ -17,9 +17,9 @@
                     </p>
                 </div>
                 <div class="card-footer justify-content-end">
-                    <a href="#" class="decoration_none link-primary" aria-label="ok" @click="ok">
+                    <button class="btn btn-primary"  aria-label="ok" @click="ok">
                         OK
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

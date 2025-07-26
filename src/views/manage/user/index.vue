@@ -23,7 +23,7 @@
         <HBox  style="  margin-top:10px;padding:0px;">
                     <Input
                         @keyup.enter.native="searchPage(1)"
-                        v-model="query.title"
+                        v-model="query.email"
                         type="text"
                         style="width:300px;"
                         />
@@ -31,7 +31,7 @@
                     <Button
                         style="margin-left:10px"
                         class="btn-primary"
-                        @click="searchPage(1)" > 搜索 </Button>
+                        @click="searchPage(1)" > {{ $t('Search') }} </Button>
         </HBox>
             </form>
 
@@ -40,22 +40,19 @@
                             @sort-change="searchSort"
                             style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}"
                             >
-                        <Column prop="id" label="ID" sortable="custom" width="100">
+                        <Column prop="id" :label="$t('ID')" sortable="custom" width="100">
                                 <template #default="scope">
                                         {{scope.item.id}}
                                 </template>
                         </Column>
-                        <Column prop="username" label="Username" > </Column>
-                        <Column prop="storage_free"  label="Storage Free" width="100"> </Column>
-                        <Column prop="storage_max"  label="Storage Max" width="100"> </Column>
-                        <Column prop="storage_current"  label="Storage Current" width="100"> </Column>
-                        <Column prop="created_at" label="创建时间" width="200"> </Column>
-                        <Column prop="updated_at" label="更新时间" width="200"> </Column>
-                        <Column align="center" label="操作" width="300">
+                        <Column prop="email" :label="$t('Username')" > </Column>
+                        <Column prop="points" :label="$t('Points')" > </Column>
+                        <Column prop="storage_current"  :label="$t('Storage Current')" width="100"> </Column>
+                        <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
+                        <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column>
+                        <Column align="center" :label="$t('Operate')" width="300">
                             <template #default="scope">
-                                <!--
-                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >查看</a>
-                                -->
+                                <a href="#" style="margin-left:10px" class="link-primary decoration_none" @click="add_points(scope.item.id)" >{{$t('Give Points')}}</a>
                             </template>
                         </Column>
                     </Table>
@@ -77,8 +74,8 @@ export default {
             },
             query:{
                 page:1,
-                page_count:10,
-                title:'',
+                page_size:10,
+                email:'',
                 order:"desc",
                 order_by:"id",
             },
@@ -95,11 +92,22 @@ export default {
     },
     methods:{
 
-    openEditDialog:function(item_id){
-            this.$router.push({ path: "/manage/user/update", query: {  "id":item_id}} ) ;
+        add_points: async function (user_id) {
+            var value = await this.$prompt("Give Point")
+            if(value == false) return false;
 
-            return ;
-    },
+            var params = {
+                "id":user_id,
+                "points":value
+            }
+
+            var response = await this.$api.manage_user_add_points(params)
+            if (response == false) return false
+
+            this.search()
+
+            return;
+        },
     openDeleteDialog:async function(id,title){
             var result = await this.$confirm("Delete It ?")
             if(result)

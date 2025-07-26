@@ -11,14 +11,13 @@
 
 <template>
     <VBox style="width:100%">
-        <div>
-            <Button style="margin-right:50px" class="btn-success"  @click="openAddDialog()" >
-                新增
-            </Button>
-        </div>
-
         <form name="search" v-on:submit="searchPage(1)">
         <HBox  style="  margin-top:10px;padding:0px;">
+            <Select v-model="query.user_id" @change="search()">
+                <option  value="0"  :label="$t('All Users')" />
+                <option v-for="user in users" :value="user.id"  :label="user.email" />
+            </Select>
+
                     <Input
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.title"
@@ -30,7 +29,7 @@
                     <Button
                         style="margin-left:10px"
                         class="btn-primary"
-                        @click="searchPage(1)" > 搜索 </Button>
+                        @click="searchPage(1)" > {{$t("Search")}} </Button>
         </HBox>
             </form>
 
@@ -40,27 +39,22 @@
                             @sort-change="searchSort"
                             style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}"
                             >
-                        <Column prop="id" label="ID" sortable="custom" width="100">
+                        <Column prop="id" :label="$t('ID')" sortable="custom" width="100">
                                 <template #default="scope">
-                                <router-link target="_blank" :to="'/article/view?id='+scope.item.id" style="color:#606266">
                                         {{scope.item.id}}
-                                </router-link>
                                 </template>
                         </Column>
-                        <Column prop="username" label="Username" > </Column>
-                        <Column prop="title" label="Title" > </Column>
-                        <Column prop="description" label="description" > </Column>
-                        <Column prop="size" label="Size(GB)" > </Column>
-                        <Column prop="start_at" label="start_at" > </Column>
-                        <Column prop="expired_at" label="expired_at" > </Column>
-                        <Column prop="created_at" label="创建时间" width="200"> </Column>
-                        <Column prop="updated_at" label="更新时间" width="200"> </Column>
-                        <Column align="center" label="操作" width="300">
+                        <Column prop="user_email" :label="$t('User Email')" > </Column>
+                        <Column prop="title" :label="$t('Title')" > </Column>
+                        <Column prop="description" :label="$t('Description')" > </Column>
+                        <Column prop="size" :label="$t('Size')+'(GB)'" > </Column>
+                        <Column prop="start_at" :label="$t('Start At')" > </Column>
+                        <Column prop="expired_at" :label="$t('Expired At')" > </Column>
+                        <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
+                        <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column>
+                        <Column align="center" :label="$t('Operate')" width="300">
                             <template #default="scope">
-
-                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
-                                <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
-                                </template>
+                            </template>
                         </Column>
                     </Table>
 
@@ -77,15 +71,13 @@
 export default {
     data: function(){
         return {
+            users:[],
 
-
-            form_data:{
-                title:'',
-            },
             query:{
+                user_id:0,
                 page:1,
-                page_count:10,
-                title:'',
+                page_size:10,
+                query:'',
                 order:"desc",
                 order_by:"id",
             },
@@ -97,16 +89,15 @@ export default {
         }
     },
 
-    mounted:function(){
+    created:async function(){
+            var response=await this.$api.manage_user_list({"page_size":999})
+            this.users=response.items;
+
             this.searchPage(1);
     },
     methods:{
 
-    openEditDialog:function(item_id){
-            this.$router.push({ path: "/manage/storage/update", query: {  "id":item_id}} ) ;
 
-            return ;
-    },
     openDeleteDialog:async function(id,title){
             var result = await this.$confirm("Delete It ?")
             if(result)

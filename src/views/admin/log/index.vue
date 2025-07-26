@@ -41,8 +41,8 @@
                         </router-link>
                         </template>
                 </Column>
-                <Column prop="username" label="username" > </Column>
-                <Column prop="active" label="active" width="100"> </Column>
+                <Column prop="category" label="Category" > </Column>
+                <Column prop="message" label="Message" width="100"> </Column>
                 <Column prop="created_at" label="创建时间" width="200"> </Column>
                 <Column align="center" label="操作" width="300">
                     <template #default="scope">

@@ -305,6 +305,43 @@ Api.admin_log_list=async function(params)
 
 
 
+Api.admin_product_get=async function(id)
+{
+    var response = await this.get("/api/admin/product/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.admin_product_list=async function(params)
+{
+    var response = await this.post("/api/admin/product/list", params);
+    return fetch_data(response)
+}
+
+Api.admin_product_buy=async function(params)
+{
+    var response = await this.post("/api/admin/product/buy", params);
+    return fetch_data(response)
+}
+
+
+Api.admin_order_list=async function(params)
+{
+    var response = await this.post("/api/admin/order/list", params);
+    return fetch_data(response)
+}
+
+
+Api.admin_order_get=async function(id)
+{
+    var response = await this.get("/api/admin/order/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_index_stat = async function (params) {
+    var response = await this.post("/api/manage/index/stat", params);
+    return fetch_data(response)
+}
+
 Api.manage_login_login = async function (params) {
     var response = await this.post("/api/manage/login/login", params);
     return fetch_data(response)
@@ -375,6 +412,12 @@ Api.manage_user_delete=async function(params)
 Api.manage_user_get=async function(id)
 {
     var response = await this.get("/api/manage/user/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_user_add_points=async function(params)
+{
+    var response = await this.post("/api/manage/user/add_points", params)
     return fetch_data(response)
 }
 
@@ -548,6 +591,32 @@ Api.manage_log_get=async function(id)
     var response = await this.get("/api/manage/log/get", {"params":{"id":id}});
     return fetch_data(response)
 }
+
+Api.manage_product_get=async function(id)
+{
+    var response = await this.get("/api/manage/product/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_product_list=async function(params)
+{
+    var response = await this.post("/api/manage/product/list", params);
+    return fetch_data(response)
+}
+
+Api.manage_product_create=async function(params)
+{
+    var response = await this.post("/api/manage/product/create", params);
+    return fetch_data(response)
+}
+
+
+Api.manage_product_update=async function(params)
+{
+    var response= await this.post("/api/manage/product/update",params);
+    return fetch_data(response)
+}
+
 
 export default {
     install:function(app){

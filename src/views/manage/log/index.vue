@@ -38,13 +38,12 @@
                             >
                         <Column prop="id" label="ID" sortable="custom" width="100">
                                 <template #default="scope">
-                                <router-link target="_blank" :to="'/article/view?id='+scope.item.id" style="color:#606266">
                                         {{scope.item.id}}
-                                </router-link>
                                 </template>
                         </Column>
-                        <Column prop="domain" label="Domain" > </Column>
-                        <Column prop="description" sortable="custom" label="Description" width="100"> </Column>
+                        <Column prop="category" label="Category" > </Column>
+                        <Column prop="message"  label="Message" width="300"> </Column>
+                        <Column prop="params"  label="Params" width="300"> </Column>
                         <Column prop="created_at" label="创建时间" width="200"> </Column>
                         <Column align="center" label="操作" width="300">
                             <template #default="scope">

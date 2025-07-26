@@ -63,7 +63,7 @@ import { useUserStore } from '@/store/modules/user'
                         if(response == false ) return false;
 
                         userStore.adminSet(response)
-                        this.$router.push({"path":"/manage/dashboard"});
+                        this.$router.push({"path":"/manage/domain"});
 
                     }
                 }

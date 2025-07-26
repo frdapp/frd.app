@@ -19,10 +19,10 @@ const userStore = useUserStore()
 
 
         <div>
-              <label class="form-control-label" for="username">Username</label>
+              <label class="form-control-label" for="email">Email</label>
         </div>
         <div>
-              <Input v-model="form.username" type="text" class="form-control" style="width:100%" required autocomplete="off"/>
+              <Input v-model="form.email" type="text" class="form-control" style="width:100%" required autocomplete="off"/>
         </div>
         <div>
               <label class="form-control-label" for="password">Password</label>
@@ -41,12 +41,13 @@ const userStore = useUserStore()
         </div>
         <div>
           <HBox>
-		              <input id="password-field" v-model="form.confirm_password" type="password" class="form-control" style="width:100%" required>
+		              <Input id="password-field" v-model="form.confirm_password" type="password" class="form-control" style="width:100%" required />
                   <!--
                   <i class="material-icons" style="position:relative;right:30px;top:5px"> visibility</i>
                   -->
           </HBox>
         </div>
+
         <div style="margin-top:10px">
               <Button  @click="register" class="btn-primary btn-block">Register</Button>
         </div>

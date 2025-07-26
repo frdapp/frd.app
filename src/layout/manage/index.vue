@@ -1,6 +1,5 @@
 <script setup>
 import Input from "@/components/Input.vue";
-import Breadcrumbs from "@/layout/manage/breadcrumbs.vue";
 import Sidebar from "@/layout/manage/sidebar.vue";
 import VBox from "@/components/VBox.vue"
 import HBox from "@/components/HBox.vue"
@@ -14,8 +13,16 @@ import HBox from "@/components/HBox.vue"
     <Sidebar style="position:fixed;top:0;bottom:0;" />
 
     <VBox style="justify-content: flex-start;margin-left:250px;width:100%;background-color2:#e7eaee">
-          <Hbox style="height:60px;width:100%;background-color:white;" class="border-bottom">  Header  </Hbox>
-          <router-view style="margin-top:20px;margin-left:10px;"/>
+          <HBox style="height:60px;width:90%;background-color:white;align-items:center" class="border-bottom">  
+            <div style="margin-left:24px">
+              {{ now }}
+            </div>
+          </HBox>
+          <VBox style="width:90%">
+            <div style="margin-left:24px;margin-top:24px;width:100%">
+              <router-view />
+            </div>
+          </VBox>
     </VBox>
 
 
@@ -34,28 +41,15 @@ import HBox from "@/components/HBox.vue"
 
 <script>
 export default {
-  props: {
-    minNav: {
-      type: Function,
-      default: () => {},
-    },
-    color: {
-      type: String,
-      default: "text-body",
-    },
-  },
   data() {
     return {
-      showMenu: false,
+      "now":this.$func.today(),
     };
   },
   computed: {
   },
 
   methods: {
-    toggleSidebar() {
-      this.navbarMinimize();
-    },
   },
 };
 </script>

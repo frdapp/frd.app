@@ -8,12 +8,6 @@
 </script>
 
 <template>
-    <!--
-    domain
-    description
-    aliases
-    -->
-
         <table class="layout-table" style="">
             <tr>
                 <td>
@@ -25,13 +19,12 @@
             </tr>
             <tr>
                 <td>
-                <label class="form-control-label">Password</label>
+                <label class="form-control-label">{{ $t("Password")}} </label>
                 </td>
                 <td>
-                <Input class="right_column" v-model="form.password" style="" />
+                    <Input type="password" v-model="form.password" />
                 </td>
             </tr>
-
             <tr>
                 <td>
                 <label class="form-control-label"></label>
@@ -46,30 +39,20 @@
 
 <script>
     export default {
-        mounted:function(){
-
-            var url="/api/admin/domain/get"
-
-
+        created:async function(){
             var item_id=this.$route.query.id;
-            var self=this;
-
             if(item_id)
             {
-                this.mode="update"
-                this.$api.get(url,{params:{"id":item_id}}).then(function(r){
-                    self.form=r.data
-                    self.form.tag_string=self.form.tags.join(",")
-                });
+                var response=await this.$api.manage_admin_get(item_id)
+                this.form=response
             }
         },
         data: function(){
             return {
-                mode:"create",
                 form:{
                     id:0,
-                    domain:"",
-                    description:'',
+                    username:"",
+                    password:"",
                 },
             }
         },
@@ -78,11 +61,11 @@
             submit:async function(back){
                         if(this.form.id)
                         {
-                            var response=await this.$api.admin_domain_update(this.form);
+                            var response=await this.$api.manage_admin_update(this.form);
                         }
                         else
                         {
-                            var response=await this.$api.admin_domain_create(this.form);
+                            var response=await this.$api.manage_admin_create(this.form);
                         }
 
                         if(response != false)
@@ -99,10 +82,7 @@
 
 
             },
-            reset:function(path){
-                this.form.domain=""
-                this.form.description=""
-            },
+
             cancel:function(path){
                 this.$emit("dialog_cancel")
                 this.$router.back();

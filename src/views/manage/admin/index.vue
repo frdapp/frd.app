@@ -13,7 +13,7 @@
     <VBox style="width:100%">
         <div>
             <Button style="margin-right:50px" class="btn-success"  @click="openAddDialog()" >
-                新增
+                {{ $t("Create")}}
             </Button>
         </div>
 
@@ -21,16 +21,16 @@
         <HBox  style="  margin-top:10px;padding:0px;">
                     <Input
                         @keyup.enter.native="searchPage(1)"
-                        v-model="query.title"
+                        v-model="query.username"
                         type="text"
-                        placeholder="标题/ID"
+                        placeholder=""
                         style="width:300px;"
                         />
 
                        <Button
                         style="margin-left:10px"
                         class="btn-primary"
-                        @click="searchPage(1)" > 搜索 </Button>
+                        @click="searchPage(1)" > {{$t("Search")}}</Button>
         </HBox>
             </form>
 
@@ -40,20 +40,18 @@
                             @sort-change="searchSort"
                             style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}"
                             >
-                        <Column prop="id" label="ID" sortable="custom" width="100">
+                        <Column prop="id" :label="$t('ID')" sortable="custom" width="100">
                                 <template #default="scope">
-                                <router-link target="_blank" :to="'/article/view?id='+scope.item.id" style="color:#606266">
                                         {{scope.item.id}}
-                                </router-link>
                                 </template>
                         </Column>
-                        <Column prop="username" label="Username" > </Column>
-                        <Column prop="created_at" label="创建时间" width="200"> </Column>
-                        <Column align="center" label="操作" width="300">
+                        <Column prop="username" :label="$t('Username')" > </Column>
+                        <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
+                        <Column align="center" :label="$t('Operate')" width="300">
                             <template #default="scope">
 
-                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
-                                <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
+                                <a :href="'/manage/admin/update?id='+scope.item.id" style="margin-left:10px" class="link-primary decoration_none" >{{$t("Edit")}}</a>
+                                <a href="#" style="margin-left:10px" class="link-danger decoration_none" @click="openDeleteDialog(scope.item.id,scope.item.title)" >{{$t("Delete")}}</a>
                                 </template>
                         </Column>
                     </Table>
@@ -76,8 +74,8 @@ export default {
             },
             query:{
                 page:1,
-                page_count:10,
-                title:'',
+                page_size:10,
+                username:'',
                 order:"desc",
                 order_by:"id",
 
@@ -100,10 +98,10 @@ export default {
             return ;
     },
     openDeleteDialog:async function(id,title){
-            var result = await this.$confirm("Delete It ?")
+            var result = await this.$confirm("DANGER","delete record ?")
             if(result)
             {
-                var response=await this.$api.admin_admin_delete({"id":id})
+                var response=await this.$api.manage_admin_delete({"id":id})
                 if(response != false)
                 {
                     this.search()
@@ -149,16 +147,7 @@ export default {
             this.items=response.items;
             this.pagination=response.pagination;
         },
-        toUrl:function(path,params){
-            if(params)
-            {
-                this.$router.push({ path: path,query:params})
-            }
-            else
-            {
-                this.$router.push({ path: path})
-            }
-        },
+
 
     },
 }

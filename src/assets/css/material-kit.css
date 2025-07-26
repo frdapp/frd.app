@@ -1600,29 +1600,33 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
       margin-bottom: 0; } }
 
 .btn {
-
   display: inline-block;
   font-weight: 400;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   border: 1px solid transparent;
   padding: 0.46875rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-  .btn:hover, .btn:focus {
-    text-decoration: none; }
-  .btn:focus, .btn.focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25); }
+.btn:hover,
+.btn:focus {
+  text-decoration: none;
+}
+
+.btn:focus, .btn.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25); 
+}
+
   .btn.disabled, .btn:disabled {
     opacity: 0.65;
     box-shadow: none; }
@@ -1642,7 +1646,8 @@ fieldset:disabled a.btn {
   color: #ffffff;
   background-color: #2196f3;
   border-color: #2196f3;
-  box-shadow: none; }
+  box-shadow: none; 
+}
   .btn-primary:hover {
     color: #ffffff;
     background-color: #0c83e2;
@@ -3145,11 +3150,16 @@ tbody.collapse.show {
 .alert-info {
   color: #00626e;
   background-color: #ccf2f6;
-  border-color: #b8ecf3; }
-  .alert-info hr {
-    border-top-color: #a2e6ef; }
-  .alert-info .alert-link {
-    color: #00353b; }
+  border-color: #b8ecf3; 
+}
+
+.alert-info hr {
+    border-top-color: #a2e6ef; 
+}
+
+.alert-info .alert-link {
+    color: #00353b; 
+}
 
 .alert-warning {
   color: #857a1f;
@@ -5971,6 +5981,7 @@ button:focus {
     outline: 0;
     box-shadow: none !important; }
   .btn.btn-primary {
+
     color: #fff;
     background-color: #9c27b0;
     border-color: #9c27b0;
@@ -8020,7 +8031,7 @@ form {
   padding: 0.4375rem 0;
   font-size: 1rem;
   line-height: 1.5;
-  color: #495057;
+  color: #2c3035;
 }
 
 
@@ -9806,76 +9817,7 @@ footer {
 .badge-rose[href]:focus {
   background-color: #d81558; }
 
-.alert {
-  border: 0;
-  border-radius: 0;
-  padding: 20px 15px;
-  line-height: 20px; }
-  .alert b {
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 12px; }
-  .alert, .alert.alert-default {
-    background-color: white;
-    color: #555; }
-    .alert a, .alert .alert-link, .alert.alert-default a, .alert.alert-default .alert-link {
-      color: #555; }
-  .alert.alert-inverse {
-    background-color: #292929;
-    color: #fff; }
-    .alert.alert-inverse a, .alert.alert-inverse .alert-link {
-      color: #fff; }
-  .alert.alert-primary {
-    background-color: #a72abd;
-    color: #ffffff; }
-    .alert.alert-primary a, .alert.alert-primary .alert-link {
-      color: #ffffff; }
-  .alert.alert-success {
-    background-color: #55b559;
-    color: #ffffff; }
-    .alert.alert-success a, .alert.alert-success .alert-link {
-      color: #ffffff; }
-  .alert.alert-info {
-    background-color: #00cae3;
-    color: #ffffff; }
-    .alert.alert-info a, .alert.alert-info .alert-link {
-      color: #ffffff; }
-  .alert.alert-warning {
-    background-color: #ff9e0f;
-    color: #ffffff; }
-    .alert.alert-warning a, .alert.alert-warning .alert-link {
-      color: #ffffff; }
-  .alert.alert-danger {
-    background-color: #f55145;
-    color: #ffffff; }
-    .alert.alert-danger a, .alert.alert-danger .alert-link {
-      color: #ffffff; }
-  .alert.alert-rose {
-    background-color: #ea2c6d;
-    color: #ffffff; }
-    .alert.alert-rose a, .alert.alert-rose .alert-link {
-      color: #ffffff; }
-  .alert-info, .alert-danger, .alert-warning, .alert-success {
-    color: #ffffff; }
-  .alert-default a, .alert-default .alert-link {
-    color: rgba(0,0,0, 0.87); }
-  .alert .alert-icon {
-    display: block;
-    float: left;
-    margin-right: 1.071rem; }
-    .alert .alert-icon i {
-      margin-top: -7px;
-      top: 5px;
-      position: relative; }
-  .alert .close {
-    color: #fff;
-    text-shadow: none;
-    opacity: .9; }
-    .alert .close i {
-      font-size: 20px; }
-    .alert .close:hover, .alert .close:focus {
-      opacity: 1; }
-
+   
 .pagination > .page-item > .page-link,
 .pagination > .page-item > span {
   border: 0;
@@ -10992,67 +10934,19 @@ h2.title {
   .progress.progress-line-danger {
     background: rgba(244, 67, 54, 0.2); }
 
-.togglebutton {
-  vertical-align: middle; }
-  .togglebutton, .togglebutton label, .togglebutton input, .togglebutton .toggle {
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none; }
-  .togglebutton label {
-    cursor: pointer;
-    color: rgba(0,0,0, 0.26); }
-    .form-group.is-focused .togglebutton label {
-      color: rgba(0,0,0, 0.26); }
-      .form-group.is-focused .togglebutton label:hover, .form-group.is-focused .togglebutton label:focus {
-        color: rgba(0,0,0, .54); }
-      fieldset[disabled] .form-group.is-focused .togglebutton label {
-        color: rgba(0,0,0, 0.26); }
-    .togglebutton label input[type=checkbox] {
-      opacity: 0;
-      width: 0;
-      height: 0; }
-    .togglebutton label .toggle {
-      text-align: left;
-      margin-left: 5px; }
-    .togglebutton label .toggle,
-    .togglebutton label input[type=checkbox][disabled] + .toggle {
-      content: "";
-      display: inline-block;
-      width: 30px;
-      height: 15px;
-      background-color: rgba(80, 80, 80, 0.7);
-      border-radius: 15px;
-      margin-right: 15px;
-      transition: background 0.3s ease;
-      vertical-align: middle; }
-    .togglebutton label .toggle:after {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      background-color: #FFFFFF;
-      border-radius: 20px;
-      position: relative;
-      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
-      left: -5px;
-      top: -2.5px;
-      border: 1px solid rgba(0,0,0, .54);
-      transition: left 0.3s ease, background 0.3s ease, box-shadow 0.1s ease; }
-    .togglebutton label input[type=checkbox][disabled] + .toggle:after,
-    .togglebutton label input[type=checkbox][disabled]:checked + .toggle:after {
-      background-color: #BDBDBD; }
-    .togglebutton label input[type=checkbox] + .toggle:active:after,
-    .togglebutton label input[type=checkbox][disabled] + .toggle:active:after {
-      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(0, 0, 0, 0.1); }
-    .togglebutton label input[type=checkbox]:checked + .toggle:after {
-      left: 15px; }
-    .togglebutton label input[type=checkbox]:checked + .toggle {
-      background-color: rgba(156, 39, 176, 0.7); }
-    .togglebutton label input[type=checkbox]:checked + .toggle:after {
-      border-color: #9c27b0; }
-    .togglebutton label input[type=checkbox]:checked + .toggle:active:after {
-      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(156, 39, 176, 0.1); }
+
+        .form-group.is-focused .togglebutton label {
+          color: rgba(0, 0, 0, 0.26);
+        }
+    
+        .form-group.is-focused .togglebutton label:hover,
+        .form-group.is-focused .togglebutton label:focus {
+          color: rgba(0, 0, 0, .54);
+        }
+fieldset[disabled] .form-group.is-focused .togglebutton label {
+  color: rgba(0, 0, 0, 0.26);
+}
+
 
 .ripple {
   position: relative; }
@@ -14820,4 +14714,12 @@ a:not([href]):not([tabindex]):focus
 
 a.decoration_none {
   text-decoration: none;
+}
+
+
+th.sorted-asc::after {
+  content: "↑";
+}
+th.sorted-desc::after {
+  content: "↓";
 }

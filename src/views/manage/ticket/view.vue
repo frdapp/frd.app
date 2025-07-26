@@ -23,7 +23,9 @@
         <label class="form-control-label"></label>
       </td>
       <td>
+        <p>
         {{ ticket.description }}
+        </p>
       </td>
     </tr>
 
@@ -32,12 +34,16 @@
         <label class="form-control-label"></label>
       </td>
       <td>
-        <div v-for="message in ticket.messages">
+        <ul v-for="message in ticket.messages" class="list-group">
+          <li class="list-group-item">
           {{ message.user_id }}
+            {{ message.created_at }}
+          <p>
           {{ message.message }}
-          {{ message.created_at }}
+          </p>
 
-        </div>
+          </li>
+        </ul>
       </td>
     </tr>
 
@@ -56,7 +62,6 @@
       </td>
       <td>
         <Button type="button" @click="append_message(true)">保存</Button>
-        <Button @click="cancel">取消</Button>
       </td>
     </tr>
   </table>
@@ -97,6 +102,10 @@
 
         this.$router.back(-1);
       },
+      cancel:function(){
+        this.$router.back()
+
+      }
     },
   }
 </script>

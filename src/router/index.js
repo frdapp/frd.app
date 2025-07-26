@@ -80,6 +80,20 @@ const routes = [
                 path: 'storage',
                 component: () => import('@/views/admin/storage/index.vue'),
             },
+            {
+                path: 'storage/buy',
+                component: () => import('@/views/admin/storage/buy.vue'),
+            },
+
+            {
+                path: 'order',
+                component: () => import('@/views/admin/order/index.vue'),
+            },
+            {
+                path: 'order/view',
+                component: () => import('@/views/admin/order/view.vue'),
+            },
+  
 
 
             {
@@ -136,6 +150,19 @@ const routes = [
             {
                 path: 'admin/update',
                 component: () => import('@/views/manage/admin/form.vue'),
+            },
+
+            {
+                path: 'product',
+                component: () => import('@/views/manage/product/index.vue'),
+            },
+            {
+                path: 'product/create',
+                component: () => import('@/views/manage/product/form.vue'),
+            },
+            {
+                path: 'product/update',
+                component: () => import('@/views/manage/product/form.vue'),
             },
 
             {

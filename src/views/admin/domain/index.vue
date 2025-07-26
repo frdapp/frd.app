@@ -13,7 +13,7 @@
     <VBox style="width:100%">
         <div>
             <Button style="margin-right:50px" class="btn-success"  @click="openAddDialog()" > 
-                新增 
+                {{$t("Create")}}
             </Button>
         </div>
 
@@ -29,7 +29,9 @@
                     <Button 
                         style="margin-left:10px"
                         class="btn-primary" 
-                        @click="searchPage(1)" > 搜索 </Button>
+                        @click="searchPage(1)" > 
+                        {{$t("Search")}}
+                </Button>
         </HBox>
             </form>
 
@@ -38,23 +40,18 @@
                     @sort-change="searchSort"
                     style="width: 100%;min-width:800px"
                     >
-                <Column prop="id" label="ID" sortable="custom" width="100"> 
-                        <template #default="scope">
-                                {{scope.item.id}}
-                        </template>
-                </Column>
-                <Column prop="domain" label="Domain" width="200"> </Column>
-                <Column prop="description" sortable="custom" label="Description" width=""> </Column>
-                <Column  prop="email_count" label="Emails" style="width:100px"> 
+                <Column prop="domain" :label="$t('Domain')" width="200"> </Column>
+                <Column prop="description" sortable="custom" :label="$t('Description')" width=""> </Column>
+                <Column  prop="email_count" :label="$t('Emails')" style="width:100px"> 
                 </Column> 
 
-                <Column prop="created_at" label="创建时间" width="200"> </Column> 
-                <Column prop="updated_at" label="修改时间" width="200"> </Column> 
+                <Column prop="created_at" :label="$t('Created At')" width="200"> </Column> 
+                <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column> 
                 <Column  label="操作" style="width:300px"> 
                     <template #default="scope">
                 
-                        <a style="margin-left:0px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
-                        <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
+                        <a :href="'/admin/domain/update?id='+scope.item.id"  style="margin-left:0px" class="link-primary decoration_none" >编辑</a>
+                        <a href="#" style="margin-left:10px" class="link-danger decoration_none" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
                         </template>
                 </Column> 
             </Table>
@@ -94,13 +91,8 @@ export default {
     },
     methods:{
 
-    openEditDialog:function(item_id){
-            this.$router.push({ path: "/admin/domain/update", query: {  "id":item_id}} ) ;
-
-            return ;
-    },
     openDeleteDialog:async function(id,title){
-            var result = await this.$confirm("Delete It ?")
+            var result = await this.$confirm("Danger","Delete It ?")
             if(result)
             {
                 var response=await this.$api.admin_domain_delete({"id":id})

@@ -17,19 +17,10 @@ import Prompt from './components/prompt.js'
 import Dialog from './components/dialog.js'
 
 import "./assets/css/bootstrap.css";
-import "./assets/css/material-kit.css";
-import "./assets/css/custom.css";
-
-
-
-
-//import './assets/css/nucleo-icons.css'
-//import './assets/css/nucleo-svg.css'
-//import materialKit from "./material-kit";
-
-//index page style,should rename 
-//import "./assets/css/styles.css";
 //import "./assets/css/custom.css";
+
+
+
 
 import  func  from './functions.js'
 //import 'boxicons'

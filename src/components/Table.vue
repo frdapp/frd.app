@@ -1,71 +1,91 @@
 <template>
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="table-head" v-for="column in columns" :key="column.prop">
+  <table class="table">
+    <thead>
+      <tr>
 
-                  <!-- 检查是否有插槽函数 -->
-                  <template v-if="column.label">
-                    {{ column.label }}
-                  </template>
-                  <template v-else>
-                    {{ column.prop }}
-                  </template>
+        <th class="table-head" v-for="column in columns" :key="column.prop" @click="on_column_click(column.prop,sorts[column.prop])">
+            <!-- 检查是否有插槽函数 -->
+            <template v-if="column.label">
+              {{ column.label }}
+            </template>
+            <template v-else>
+              {{ column.prop }}
+            </template>
 
-            </th>
-          </tr>
-        </thead>
+            <span v-if="column.prop in sorts && sorts[column.prop] == 'desc'" style="cursor:pointer"> 
+              ↑ 
+               <span style="color:#cccccc">
+               ↓
+               </span>
+            </span>
+            <span v-if="column.prop in sorts && sorts[column.prop] == 'asc'" style="cursor:pointer">
+               <span style="color:#cccccc">
+              ↑ 
+               </span>
+              ↓
+            </span>
+            <span v-if="column.prop in sorts && sorts[column.prop] == ''" style="color:#cccccc;cursor:pointer">
+              ↑
+               ↓
+            </span>
 
-        <tbody>
-          <tr v-for="item in items" :key="item.id">
-            <td v-for="column in columns" :key="column.prop" :style="column.style">
-                <!-- 检查是否有插槽函数 -->
-                <template v-if="column.slots">
-                  <!-- 调用插槽函数并传递作用域参数 -->
-                  <component :is="column.slots" :item="item" />
-                </template>
-                <template v-else>
-                  {{ item[column.prop] }}
-                </template>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            <!--
+            {{ item[column.prop] }}
+            &nbsp;
+            <span v-if="column.sort == 'asc'" style="right:8px">▲</span>
+            <span v-if="column.sort == 'desc'" style="right:8px">▼</span>
+            -->
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr v-for="item in items" :key="item.id">
+        <td v-for="column in columns" :key="column.prop" :style="column.style">
+          <!-- 检查是否有插槽函数 -->
+          <template v-if="column.slots">
+            <!-- 调用插槽函数并传递作用域参数 -->
+            <component :is="column.slots" :item="item" />
+          </template>
+          <template v-else>
+            {{ item[column.prop] }}
+          </template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
 export default {
   props: {
-    items: [],
+    items: Array,
+    sorts: {
+      type:Object,
+      default:{},
+
+    },
   },
   data() {
     return {
-      headers: [],
-      columns: []
+      headers: new Array(),
+      columns: new Array(),
     }
   },
   created() {
+    console.log("sorts",this.sorts)
   },
   mounted() {
-    //console.log("default",this.$slots.default().length)
     var r = this.$slots.default()
-    //console.log("length",r.length)
-    //console.log(r[0].props.prop) //id , domain 等
-
-    //slotNodes.map(vnode => vnode.text || vnode.children || '').join('');
-
-    //console.log(this.$slots.default)
-    //console.log(r[1].children.default)
-    //return
-
 
     for (let i in r) {
       let node = {
         prop: r[i].props.prop,
         label: r[i].props.label,
-        //width: r[i].props.width ?? '',
-        //align: r[i].props.align ??'left',
         style: r[i].props.style ??'',
+        //sortable: r[i].props.sortable ??false,
+        //sortorder: r[i].props.order ?? '',
+        sort_changed: r[i].props._changedsort ?? null,
         slots: null,
       }
 
@@ -77,13 +97,29 @@ export default {
 
       this.columns.push(node)
     }
-
-    //console.log("columns",this.columns.length)
-
   },
   methods: {
     get_style:function(){
 
+    },
+    on_column_click:function(field,order){
+      var sorts = this.sorts
+
+      for (var key in sorts) {
+        sorts[key] = ""
+      }
+
+      if (order == "") {
+        sorts[field] = "asc"
+      }
+      else if (order == "asc") {
+        sorts[field] = "desc"
+      }
+      else if (order == "desc") {
+        sorts[field] = "asc"
+      }
+
+      this.$emit("sort_change", sorts)
     }
   }
 }

@@ -6,15 +6,19 @@ import { useRoute } from 'vue-router'
 </script>
 <template>
     <div class="sidebar">
-        <div style="height:100px;display:flex;align-items: center;justify-content: start;">
-            <!-- LOGO -->
-                木石科技 管理后台
+        <div style="height:60px;display:flex;align-items: center;justify-content: start;border-bottom:solid 1px rgb(102, 100, 97)">
+             <img src="@/assets/logo_manage.png" style="width:100px;"> </img>
+        </div>
+        <div style="height:30px;width:100%">
         </div>
         <MenuItem path="/manage/dashboard" :current_path="current_path">
             Dashboard
         </MenuItem>
         <MenuItem class="menu-item" path="/manage/admin" :current_path="current_path">
             Admin
+        </MenuItem>
+        <MenuItem class="menu-item" path="/manage/product" :current_path="current_path">
+            Product
         </MenuItem>
         <MenuItem class="menu-item" path="/manage/user" :current_path="current_path">
             User

@@ -3,7 +3,7 @@
     <transition name="alert-fade">
         <div class="custom-alert-overlay">
             <div class="card fade custom-alert show" >
-                    <component v-if="component" :is="component" @finished="finished" />
+                <component v-if="component" :is="component" @finished="finished" v-bind="params"/>
             </div>
         </div>
     </transition>
@@ -19,6 +19,7 @@ export default {
     },
     props: {
         component:null,
+        params: {},
         handleClose:null
     },
     data:function(){

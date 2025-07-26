@@ -18,7 +18,9 @@
                                     {{scope.item.id}}
                         </template>
                 </Column>
-                <Column prop="username" label="Username" > </Column>
+                <Column prop="email" label="Email" > </Column>
+                <Column prop="amount" label="余额" > </Column>
+                <Column prop="points" label="积分" > </Column>
                 <Column prop="id" label="免费容量" width="100"> 
                         <template #default="scope">
                             {{scope.item.storage_free}} G

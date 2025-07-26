@@ -11,12 +11,20 @@
                     </p>
                 </div>
                 <div class="card-footer justify-content-end">
+                    <button class="btn btn-primary" aria-label="ok" @click="ok">
+                        OK
+                    </button>
+                    <button  class="btn btn-secondary" aria-label="cancel" @click="cancel" style="margin-left:1em">
+                        Cancel
+                    </button>
+                    <!--
                     <a href="#" class="decoration_none link-primary" aria-label="ok" @click="ok">
                         OK
                     </a>
                     <a href="#" class="decoration_none link-secondary" aria-label="cancel" @click="cancel" style="padding-left:10px">
                         Cancel
                     </a>
+                    -->
                 </div>
             </div>
         </div>

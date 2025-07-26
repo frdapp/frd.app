@@ -11,8 +11,12 @@
                     <Input ref="myInput" v-model="localValue" style="width:100%" />
                 </div>
                 <div class="card-footer justify-content-end">
+                    <button  class="btn btn-primary" @click="ok">Ok</button>
+                    <button  class="btn btn-secondary" @click="cancel" style="margin-left:1em">Cancel</button>
+                    <!--
                     <a href="#" class="decoration_none link-primary" @click="ok">Ok</a>
                     <a href="#" class="decoration_none link-secondary" @click="cancel" style="padding-left:10px">Cancel</a>
+                    -->
                 </div>
             </div>
         </div>

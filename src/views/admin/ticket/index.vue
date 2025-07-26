@@ -13,7 +13,7 @@
     <VBox style="width:100%">
         <div>
             <Button style="margin-right:50px" class="btn-success"  @click="openAddDialog()" >
-                新增
+                {{ $t('Create')}}
             </Button>
         </div>
 
@@ -30,29 +30,23 @@
                     <Button
                         style="margin-left:10px"
                         class="btn-primary"
-                        @click="searchPage(1)" > 搜索 </Button>
+                        @click="searchPage(1)" > {{ $t('Search')}}</Button>
         </HBox>
             </form>
 
             <!-- data -->
                     <Table :items="items"
                             @sort-change="searchSort"
-                            style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}"
                             >
-                        <Column prop="id" label="ID" sortable="custom" width="100">
-                                <template #default="scope">
-                                        {{scope.item.id}}
-                                </template>
-                        </Column>
-                        <Column prop="title" label="标题" > </Column>
-                        <Column prop="description" label="description" > </Column>
-                        <Column prop="created_at" label="创建时间" width="200"> </Column>
-                        <Column prop="updated_at" label="更新时间" width="200"> </Column>
-                        <Column align="center" label="操作" width="300">
+                        <Column prop="title" :label="$t('Title')" > </Column>
+                        <Column prop="description" :label="$t('Description')" > </Column>
+                        <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
+                        <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column>
+                        <Column align="center" :label="$t('Operate')" width="300">
                             <template #default="scope">
 
-                                    <RouterLink :to="'/admin/ticket/view?id='+scope.item.id" target="_blank">
-                                            查看
+                                    <RouterLink :to="'/admin/ticket/view?id='+scope.item.id" class="decoration_none" target="_blank">
+                                        {{$t('View')}}
                                     </RouterLink>
                             </template>
                         </Column>
@@ -70,10 +64,6 @@
 export default {
     data: function(){
         return {
-
-            form_data:{
-                title:'',
-            },
             query:{
                 page:1,
                 page_count:10,
@@ -82,14 +72,14 @@ export default {
                 order_by:"id",
             },
             pagination:{
-                item_total:3,
+                item_total:0,
             },
 
             items:[],
         }
     },
 
-    mounted:function(){
+    created:function(){
             this.searchPage(1);
     },
     methods:{

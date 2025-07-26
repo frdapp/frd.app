@@ -27,10 +27,15 @@
                 default:"false",
             }
         },
+        computed:{
+            "localActive":function(){
+                return this.current_path == this.path  ?  true : false
+            }
+        },
         data:function(){
             return {
+                //localActive: this.current_path == this.path  ?  true : false,
                 //change string to  boolean
-                localActive: this.current_path == this.path  ?  true : false
             }
         },
         created:function(){

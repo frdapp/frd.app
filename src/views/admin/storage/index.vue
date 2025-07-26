@@ -25,6 +25,10 @@
                         style="margin-left:10px"
                         class="btn-primary"
                         @click="searchPage(1)" > 搜索 </Button>
+
+                        <a href="/admin/storage/buy">Buy Storage</a>
+
+                        当前容量  {{ storage_current }} GB
         </HBox>
             </form>
 
@@ -33,11 +37,7 @@
                             @sort-change="searchSort"
                             style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}"
                             >
-                        <Column prop="id" label="ID" sortable="custom" width="100">
-                                <template #default="scope">
-                                        {{scope.item.id}}
-                                </template>
-                        </Column>
+
                         <Column prop="title" label="title" > </Column>
                         <Column prop="description" label="description" width="100"> </Column>
                         <Column prop="size" label="size" > </Column>
@@ -71,8 +71,8 @@ export default {
             pagination:{
                 item_total:0,
             },
-
             items:[],
+            storage_current:0,
         }
     },
 
@@ -108,6 +108,7 @@ export default {
             var response=await this.$api.admin_storage_list(this.query)
             this.items=response.items;
             this.pagination=response.pagination;
+            this.storage_current=response.storage_current;
         },
     },
 }

@@ -8,16 +8,10 @@
 </script>
 
 <template>
-    <!--
-    domain
-    description
-    aliases
-    -->
-
         <table class="layout-table" style="">
             <tr>
                 <td>
-                <label class="form-control-label">Domain</label>
+                <label class="form-control-label">{{$t('Domain')}}</label>
                 </td>
                 <td>
                 <Input class="right_column" ref="title" v-model="form.domain" />
@@ -25,7 +19,7 @@
             </tr>
             <tr>
                 <td>
-                <label class="form-control-label">描述</label>
+                <label class="form-control-label">{{$t("Description")}}</label>
                 </td>
                 <td>
                 <Textarea class="right_column" v-model="form.description" :rows=5 cols=60 style="" />
@@ -37,8 +31,8 @@
                 <label class="form-control-label"></label>
                 </td>
                 <td>
-                <Button type="primary" @click="submit(true)">保存</Button>
-                <Button @click="cancel">取消</Button>
+                <Button type="primary" @click="submit(true)">{{$t("Save")}}</Button>
+                <Button @click="cancel">{{$t("Cancel")}}</Button>
                 </td>
             </tr>
         </table>
@@ -47,23 +41,15 @@
 <script>
     export default {
         mounted:async function(){
-
-            var url="/api/admin/domain/get"
-
-
             var item_id=this.$route.query.id;
-            var self=this;
-
             if(item_id)
             {
-                this.mode="update"
                 var response=await this.$api.admin_domain_get(item_id);
                 this.form=response
             }
         },
         data: function(){
             return {
-                mode:"create",
                 form:{
                     id:0,
                     domain:"",
@@ -85,39 +71,19 @@
 
                         if(response != false)
                         {
-                            if(back)
-                            {
-                                this.$router.back(-1);
-                            }
-                            else
-                            {
-                                this.$alert("SUCCESS","保存成功!" );
-                            }
+                           this.$router.back();
                         }
 
 
             },
-            reset:function(path){
-                this.form.domain=""
-                this.form.description=""
-            },
+
             cancel:function(path){
-                this.$emit("dialog_cancel")
                 this.$router.back();
             }
         },
-        components: {
-        },
+
     }
 </script>
 
 <style scoped>
-                .form-control-label{
-                    width:100px;
-                }
-
-                .right_column{
-                    flex:1;
-                    max-width:700px;
-                }
 </style>
