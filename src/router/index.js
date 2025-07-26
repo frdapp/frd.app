@@ -226,6 +226,16 @@ const routes = [
                 path: 'ticket/view',
                 component: () => import('@/views/manage/ticket/view.vue'),
             },
+
+            {
+                path: 'order',
+                component: () => import('@/views/manage/order/index.vue'),
+            },
+            {
+                path: 'order/view',
+                component: () => import('@/views/manage/order/view.vue'),
+            },
+  
             {
                 path: 'storage/create',
                 component: () => import('@/views/manage/ticket/form.vue'),

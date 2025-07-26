@@ -23,6 +23,9 @@ import { useRoute } from 'vue-router'
         <MenuItem class="menu-item" path="/manage/user" :current_path="current_path">
             User
         </MenuItem>
+        <MenuItem class="menu-item" path="/manage/order" :current_path="current_path">
+            Order
+        </MenuItem>
         <MenuItem class="menu-item" path="/manage/domain" :current_path="current_path">
             Domain
         </MenuItem>

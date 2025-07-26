@@ -66,7 +66,7 @@ export default {
 
       const userStore = useUserStore()
       userStore.set(response)
-      this.$router.push({ "path": "/admin/dashboard" });
+      this.$router.push({ "path": "/admin/domain" });
 
     }
   }

@@ -41,18 +41,17 @@
                         </router-link>
                         </template>
                 </Column>
-                <Column prop="category" label="Category" > </Column>
-                <Column prop="message" label="Message" width="100"> </Column>
-                <Column prop="created_at" label="创建时间" width="200"> </Column>
-                <Column align="center" label="操作" width="300">
+                <Column prop="user_email" :label="$t('User Email')" > </Column>
+                <Column prop="category" :label="$t('Category')" > </Column>
+                <Column prop="message" :label="$t('Message')" width="100"> </Column>
+                <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
+                <Column align="center" :label="$t('Updated At')" width="300">
                     <template #default="scope">
 
                             <RouterLink :to="'/admin/post/view?id='+scope.item.id" target="_blank">
-                                    查看
+                                {{ $t('View')}}
                             </RouterLink>
 
-                        <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
-                        <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
                         </template>
                 </Column>
             </Table>

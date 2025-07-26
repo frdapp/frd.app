@@ -14,19 +14,24 @@
 
         <form name="search" v-on:submit="searchPage(1)">
         <HBox  style="  margin-top:10px;padding:0px;">
+            <Select v-model="query.user_id" @change="search()">
+                <option  value="0"  :label="$t('All Users')" />
+                <option v-for="user in users" :value="user.id"  :label="user.email" />
+            </Select>
+
                     <Input
                         @keyup.enter.native="searchPage(1)"
-                        v-model="query.title"
+                        v-model="query.query"
                         type="text"
-                        placeholder="标题/ID"
-                        style="width:300px;"
+                        placeholder=""
+                        style="width:300px;margin-left:10px"
                         />
 
 
                     <Button
                         style="margin-left:10px"
                         class="btn-primary"
-                        @click="searchPage(1)" > 搜索 </Button>
+                        @click="searchPage(1)" > {{ $t("Search") }}</Button>
         </HBox>
             </form>
 
@@ -36,22 +41,16 @@
                             @sort-change="searchSort"
                             style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}"
                             >
-                        <Column prop="id" label="ID" sortable="custom" width="100">
+                        <Column prop="id" :label="$t('ID')" sortable="custom" width="100">
                                 <template #default="scope">
                                         {{scope.item.id}}
                                 </template>
                         </Column>
-                        <Column prop="category" label="Category" > </Column>
-                        <Column prop="message"  label="Message" width="300"> </Column>
-                        <Column prop="params"  label="Params" width="300"> </Column>
-                        <Column prop="created_at" label="创建时间" width="200"> </Column>
-                        <Column align="center" label="操作" width="300">
-                            <template #default="scope">
-
-                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
-                                <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
-                                </template>
-                        </Column>
+                        <Column prop="user_email" :label="$t('User Email')" > </Column>
+                        <Column prop="category" :label="$t('Category')" > </Column>
+                        <Column prop="message"  :label="$t('Message')" width="300"> </Column>
+                        <Column prop="params"  :label="$t('Params')" width="300"> </Column>
+                        <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
                     </Table>
 
             <Pagination style="position:absolute; right:200px" :page="pagination.page" :page_total="pagination.page_total" v-on:jump="searchPage($event)" />
@@ -68,25 +67,27 @@
 export default {
     data: function(){
         return {
-            form_data:{
-                title:'',
-            },
+            users:[],
             query:{
+                user_id:0,
                 page:1,
-                page_count:10,
-                title:'',
+                page_size:10,
+                query:'',
                 order:"desc",
                 order_by:"id",
             },
             pagination:{
-                item_total:3,
+                item_total:0,
             },
 
             items:[],
         }
     },
 
-    mounted:function(){
+    created:async function(){
+            var response=await this.$api.manage_user_list({"page_size":999})
+            this.users=response.items;
+
             this.searchPage(1);
     },
     methods:{

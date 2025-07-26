@@ -50,6 +50,7 @@
                         <Column prop="size" :label="$t('Size')+'(GB)'" > </Column>
                         <Column prop="start_at" :label="$t('Start At')" > </Column>
                         <Column prop="expired_at" :label="$t('Expired At')" > </Column>
+                        <Column prop="state" :label="$t('State')" > </Column>
                         <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
                         <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column>
                         <Column align="center" :label="$t('Operate')" width="300">

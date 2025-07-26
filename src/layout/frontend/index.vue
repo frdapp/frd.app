@@ -13,7 +13,9 @@ const userStore = useUserStore()
                     <!--
                     <img src="@/assets/img/navbar-logo.svg" alt="..." /></a>
                     -->
-                    木石科技
+                    <img src="@/assets/logo_bg.png" alt="木石科技" style="width:100px"/>
+
+                    <a/>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -25,14 +27,24 @@ const userStore = useUserStore()
                         <li class="nav-item"><a class="nav-link" href="/admin/dashboard">Admin</a></li>
                     </ul>
                     <ul v-else class="navbar-nav text-uppercase ms-auto">
-                        <li v-if="userStore.isLogin() == false" class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li v-if="userStore.isLogin() == false" class="nav-item">
+                            <a class="nav-link" href="/login">
+                                <span style="color: #e19d6c; font-size: 20px; font-weight: 600;" >
+                                    {{ $t('Login')  }}
+                                </span>
+                            </a>
+                        </li>
+                        <!--
                         <li v-if="userStore.isLogin() == false" class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                        -->
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <router-view />
+        <div class="container" style="min-height:600px">
+            <router-view />
+       </div>
 
         <!-- Footer-->
         <footer class="footer">

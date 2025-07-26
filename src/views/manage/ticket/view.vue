@@ -8,35 +8,19 @@
 </script>
 
 <template>
-  <table class="layout-table" style="">
-    <tr>
-      <td>
-        <label class="form-control-label"></label>
-      </td>
-      <td>
-        {{ ticket.title }}
-      </td>
-    </tr>
+  <VBox style="width:600px">
 
-    <tr>
-      <td>
-        <label class="form-control-label"></label>
-      </td>
-      <td>
+  
+        <strong>{{ ticket.title }}</strong>
+
+
+   
         <p>
         {{ ticket.description }}
         </p>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label class="form-control-label"></label>
-      </td>
-      <td>
-        <ul v-for="message in ticket.messages" class="list-group">
-          <li class="list-group-item">
-          {{ message.user_id }}
+        <ul class="list-group" style="height:300px;overflow:scroll">
+          <li v-for="message in ticket.messages" class="list-group-item">
+          {{ message.name }}
             {{ message.created_at }}
           <p>
           {{ message.message }}
@@ -44,27 +28,15 @@
 
           </li>
         </ul>
-      </td>
-    </tr>
 
-    <tr>
-      <td>
-        <label class="form-control-label"></label>
-      </td>
-      <td>
-        <Textarea class="" v-model="form.message" :rows=10 cols=60 style="" />
-      </td>
-    </tr>
 
-    <tr>
-      <td>
-        <label class="form-control-label"></label>
-      </td>
-      <td>
+ 
+        <Textarea class="" v-model="form.message" :rows=10 cols=60 style="margin-top:10px" />
+
+
         <Button type="button" @click="append_message(true)">保存</Button>
-      </td>
-    </tr>
-  </table>
+
+  </VBox>
 </template>
 
 <script>
@@ -100,12 +72,9 @@
         var response = await this.$api.manage_ticket_append_message(params);
         if(response == false) return false;
 
-        this.$router.back(-1);
-      },
-      cancel:function(){
-        this.$router.back()
+        window.location.reload()
 
-      }
+      },
     },
   }
 </script>

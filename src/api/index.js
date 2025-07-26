@@ -617,6 +617,18 @@ Api.manage_product_update=async function(params)
     return fetch_data(response)
 }
 
+Api.manage_order_list=async function(params)
+{
+    var response = await this.post("/api/manage/order/list", params);
+    return fetch_data(response)
+}
+
+
+Api.manage_order_get=async function(id)
+{
+    var response = await this.get("/api/manage/order/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
 
 export default {
     install:function(app){
