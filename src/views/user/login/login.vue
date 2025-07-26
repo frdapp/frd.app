@@ -31,7 +31,7 @@ const userStore = useUserStore()
             required />
         </div>
         <div style="margin-top:10px;">
-          <Button @click="login" class="btn-primary btn-block">Login</Button>
+          <Button @click="login" class="form-control btn-primary btn-block">Login</Button>
         </div>
         <div>
           <p class="text-center">Not a member? <a data-toggle="tab" href="/register">Register</a></p>

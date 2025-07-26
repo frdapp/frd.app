@@ -12,6 +12,8 @@
 <template>
     <VBox style="width:100%">
         <form name="search" v-on:submit="searchPage(1)">
+                        <a href="/admin/storage/buy">{{ $t("Buy Storage") }}</a>
+                        当前容量  {{ storage_current }} GB
         <HBox  style="  margin-top:10px;padding:0px;">
                     <Input
                         @keyup.enter.native="searchPage(1)"
@@ -24,11 +26,8 @@
                     <Button
                         style="margin-left:10px"
                         class="btn-primary"
-                        @click="searchPage(1)" > 搜索 </Button>
+                        @click="searchPage(1)" > {{$t("Search")}} </Button>
 
-                        <a href="/admin/storage/buy">Buy Storage</a>
-
-                        当前容量  {{ storage_current }} GB
         </HBox>
             </form>
 
@@ -38,14 +37,14 @@
                             style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}"
                             >
 
-                        <Column prop="title" label="title" > </Column>
-                        <Column prop="description" label="description" width="100"> </Column>
-                        <Column prop="size" label="size" > </Column>
-                        <Column prop="start_at" labe="start_at"> </Column>
-                        <Column prop="expired_at" labe="expired_at"> </Column>
-                        <Column prop="state" labe="State"> </Column>
-                        <Column prop="created_at" label="创建时间" width="200"> </Column>
-                        <Column prop="updated_at" label="修改时间" width="200"> </Column> 
+                        <Column prop="title" :label="$t('Title')" > </Column>
+                        <Column prop="description" :label="$t('Description')" width="100"> </Column>
+                        <Column prop="size" :label="$t('Size')" > </Column>
+                        <Column prop="start_at" :label="$t('Start At')"> </Column>
+                        <Column prop="expired_at" :label="$t('Expired At')"> </Column>
+                        <Column prop="state" :label="$t('State')"> </Column>
+                        <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
+                        <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column> 
 
                     </Table>
 

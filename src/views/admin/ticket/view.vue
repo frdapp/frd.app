@@ -14,7 +14,7 @@
         <label class="form-control-label"></label>
       </td>
       <td>
-        {{ ticket.title }}
+        <strong>{{ ticket.title }}</strong>
       </td>
     </tr>
 
@@ -24,6 +24,7 @@
       </td>
       <td>
         {{ ticket.description }}
+        <hr/>
       </td>
     </tr>
 
@@ -33,9 +34,10 @@
       </td>
       <td>
         <div v-for="message in ticket.messages">
-          {{ message.user_id }}
+          <span>{{ message.name }} {{ message.created_at }} </span>
+          <p>
           {{ message.message }}
-          {{ message.created_at }}
+          </p>
 
         </div>
       </td>
@@ -55,8 +57,7 @@
         <label class="form-control-label"></label>
       </td>
       <td>
-        <Button type="button" @click="append_message(true)">保存</Button>
-        <Button @click="cancel">取消</Button>
+        <Button type="button" @click="append_message(true)">{{ $t("Save")}}</Button>
       </td>
     </tr>
   </table>
@@ -96,7 +97,7 @@
         var response = await this.$api.admin_ticket_append_message(params);
         if(response == false) return false;
 
-        this.$router.back(-1);
+         window.location.reload()
       },
     },
   }
