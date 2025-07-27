@@ -337,6 +337,68 @@ Api.admin_order_get=async function(id)
     return fetch_data(response)
 }
 
+Api.admin_alias_domain_list=async function(params)
+{
+    var response = await this.get("/api/admin/alias_domain/list", {"params":params});
+    return fetch_data(response)
+}
+
+Api.admin_alias_domain_get=async function(id)
+{
+    var response = await this.get("/api/admin/alias_domain/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.admin_alias_domain_create=async function(params)
+{
+    var response = await this.post("/api/admin/alias_domain/create", params);
+    return fetch_data(response)
+}
+
+Api.admin_alias_domain_update=async function(params)
+{
+    var response = await this.post("/api/admin/alias_domain/update", params);
+    return fetch_data(response)
+}
+
+Api.admin_alias_domain_delete=async function(params)
+{
+    var response = await this.post("/api/admin/alias_domain/delete", params);
+    return fetch_data(response)
+}
+
+Api.admin_alias_list=async function(params)
+{
+    var response = await this.get("/api/admin/alias/list", {"params":params});
+    return fetch_data(response)
+}
+
+Api.admin_alias_get=async function(id)
+{
+    var response = await this.get("/api/admin/alias/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.admin_alias_create=async function(params)
+{
+    var response = await this.post("/api/admin/alias/create", params);
+    return fetch_data(response)
+}
+
+Api.admin_alias_update=async function(params)
+{
+    var response = await this.post("/api/admin/alias/update", params);
+    return fetch_data(response)
+}
+
+Api.admin_alias_delete=async function(params)
+{
+    var response = await this.post("/api/admin/alias/delete", params);
+    return fetch_data(response)
+}
+
+//manage
+
 Api.manage_index_stat = async function (params) {
     var response = await this.post("/api/manage/index/stat", params);
     return fetch_data(response)
@@ -627,6 +689,30 @@ Api.manage_order_list=async function(params)
 Api.manage_order_get=async function(id)
 {
     var response = await this.get("/api/manage/order/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_alias_domain_list=async function(params)
+{
+    var response = await this.get("/api/manage/alias_domain/list", {"params":params});
+    return fetch_data(response)
+}
+
+Api.manage_alias_domain_get=async function(id)
+{
+    var response = await this.get("/api/manage/alias_domain/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_alias_list=async function(params)
+{
+    var response = await this.get("/api/manage/alias/list", {"params":params});
+    return fetch_data(response)
+}
+
+Api.manage_alias_get=async function(id)
+{
+    var response = await this.get("/api/manage/alias/get", {"params":{"id":id}});
     return fetch_data(response)
 }
 

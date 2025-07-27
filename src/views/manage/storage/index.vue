@@ -22,7 +22,7 @@
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.title"
                         type="text"
-                        style="width:300px;"
+                        style="width:300px;margin-left:12px"
                         />
 
 

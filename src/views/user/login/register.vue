@@ -14,18 +14,18 @@ const userStore = useUserStore()
     <div class="card" style="width:400px">
       <div class="card-body">
         <div class="card-title">
-               <h2>Register</h2>
+               <h2>{{$t('Register')}}</h2>
         </div>
 
 
         <div>
-              <label class="form-control-label" for="email">Email</label>
+              <label class="form-control-label" for="email">{{ $t('Email') }}</label>
         </div>
         <div>
               <Input v-model="form.email" type="text" class="form-control" style="width:100%" required autocomplete="off"/>
         </div>
         <div>
-              <label class="form-control-label" for="password">Password</label>
+              <label class="form-control-label" for="password">{{ $t('Password') }} </label>
         </div>
         <div>
           <HBox>
@@ -37,7 +37,7 @@ const userStore = useUserStore()
 
         </div>
         <div>
-		              <label class="form-control-label" for="password">Confirm Password</label>
+		              <label class="form-control-label" for="password">{{ $t('Confirm Password')}}</label>
         </div>
         <div>
           <HBox>
@@ -49,11 +49,11 @@ const userStore = useUserStore()
         </div>
 
         <div style="margin-top:10px">
-              <Button  @click="register" class="btn-primary btn-block">Register</Button>
+              <Button  @click="register" class="form-control btn-primary btn-block">{{ $t('Register') }}</Button>
         </div>
         <div>
-		          <p class="text-center">Already have account ? <a data-toggle="tab" href="/login">login</a></p>
-		          <p class="text-center">Forgot password? <a href="/forgot_password">Forgot Password</a> </p>
+		          <p class="text-center">Already have account ? <a data-toggle="tab" href="/login">{{ $t('login') }}</a></p>
+		          <p class="text-center">Forgot password? <a href="/forgot_password">{{ $t('Forgot Password') }}</a> </p>
         </div>
       </div>
     </div>

@@ -64,6 +64,32 @@ const routes = [
             },
 
             {
+                path: 'alias_domain',
+                component: () => import('@/views/admin/alias_domain/index.vue'),
+            },
+            {
+                path: 'alias_domain/create',
+                component: () => import('@/views/admin/alias_domain/form.vue'),
+            },
+            {
+                path: 'alias_domain/update',
+                component: () => import('@/views/admin/alias_domain/form.vue'),
+            },
+
+            {
+                path: 'alias',
+                component: () => import('@/views/admin/alias/index.vue'),
+            },
+            {
+                path: 'alias/create',
+                component: () => import('@/views/admin/alias/form.vue'),
+            },
+            {
+                path: 'alias/update',
+                component: () => import('@/views/admin/alias/form.vue'),
+            },
+
+            {
                 path: 'email',
                 component: () => import('@/views/admin/email/index.vue'),
             },
@@ -93,10 +119,7 @@ const routes = [
                 path: 'order/view',
                 component: () => import('@/views/admin/order/view.vue'),
             },
-  
-
-
-            {
+              {
                 path: 'ticket',
                 component: () => import('@/views/admin/ticket/index.vue'),
             },
@@ -204,6 +227,32 @@ const routes = [
                 component: () => import('@/views/manage/email/form.vue'),
             },
 
+            {
+                path: 'alias_domain',
+                component: () => import('@/views/manage/alias_domain/index.vue'),
+            },
+            {
+                path: 'alias_domain/create',
+                component: () => import('@/views/manage/alias_domain/form.vue'),
+            },
+            {
+                path: 'alias_domain/update',
+                component: () => import('@/views/manage/alias_domain/form.vue'),
+            },
+
+            {
+                path: 'alias',
+                component: () => import('@/views/manage/alias/index.vue'),
+            },
+            {
+                path: 'alias/create',
+                component: () => import('@/views/manage/alias/form.vue'),
+            },
+            {
+                path: 'alias/update',
+                component: () => import('@/views/manage/alias/form.vue'),
+            },
+
 
             {
                 path: 'storage',
@@ -278,6 +327,13 @@ router.beforeEach(async(to, from, next) => {
 
     const userStore = useUserStore()
     const token=userStore.user.token;
+
+    /*
+    if(to.path.startsWith("/admin"))
+    {
+        const is_verified=userStore.user.token;
+    }
+    */
 
     if (whiteList.indexOf(to.path) !== -1) {
         // in the free login whitelist, go directly

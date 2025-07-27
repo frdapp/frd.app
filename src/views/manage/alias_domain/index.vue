@@ -11,19 +11,19 @@
 
 <template>
     <VBox style="width:100%">
-        <div>
-            <Button style="margin-right:50px" class="btn-success"  @click="openAddDialog()" > 
-                {{$t("Create")}}
-            </Button>
-        </div>
 
         <form name="search" v-on:submit="searchPage(1)">
         <HBox  style="  margin-top:10px;padding:0px;">
+            <Select v-model="query.user_id" @change="search()">
+                <option  value="0"  :label="$t('All Users')" />
+                <option v-for="user in users" :value="user.id"  :label="user.email" />
+            </Select>
+
                     <Input 
                         @keyup.enter.native="searchPage(1)"
-                        v-model="query.domain" 
+                        v-model="query.query" 
                         type="text" 
-                        style="width:300px;"
+                        style="width:300px;margin-left:12px"
                         />
 
                     <Button 
@@ -40,20 +40,13 @@
                     @sort-change="searchSort"
                     style="width: 100%;min-width:800px"
                     >
-                <Column prop="domain" :label="$t('Domain')" width="200"> </Column>
-                <Column prop="description" sortable="custom" :label="$t('Description')" width=""> </Column>
-                <Column  prop="email_count" :label="$t('Emails')" style="width:100px"> 
-                </Column> 
+                <Column prop="user_email" :label="$t('User Email')" width="200"> </Column>
+                <Column prop="alias_domain" :label="$t('Alias Domain')" width="200"> </Column>
+                <Column prop="target_domain" sortable="custom" :label="$t('Target Domain')" width=""> </Column>
 
                 <Column prop="created_at" :label="$t('Created At')" width="200"> </Column> 
                 <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column> 
-                <Column  :label="$t('Operate')" style="width:300px"> 
-                    <template #default="scope">
-                
-                        <a :href="'/admin/domain/update?id='+scope.item.id"  style="margin-left:0px" class="link-primary decoration_none" >{{ $t("Edit") }}</a>
-                        <a href="#" style="margin-left:10px" class="link-danger decoration_none" @click="openDeleteDialog(scope.item.id,scope.item.title)" >{{ $t("Delete") }}删除</a>
-                        </template>
-                </Column> 
+
             </Table>
 
             <Pagination style="align-self: flex-end;" :page="pagination.page" :page_total="pagination.page_total" v-on:jump="searchPage($event)" /> 
@@ -68,13 +61,11 @@
 export default {
     data: function(){
         return {
-            form_data:{
-                title:'',
-            },
+            users:[],
             query:{
                 page:1,
                 page_count:10,
-                domain:'',
+                query:'',
                 order:"desc",
                 order_by:"id",
             },
@@ -86,12 +77,15 @@ export default {
         }
     },
 
-    mounted:function(){
+    created:async function(){
+            var response=await this.$api.manage_user_list({"page_size":999})
+            this.users=response.items;
+
             this.searchPage(1);
     },
     methods:{
 
-    openDeleteDialog:async function(id){
+    openDeleteDialog:async function(id,title){
             var result = await this.$confirm("Danger","Delete It ?")
             if(result)
             {
@@ -105,7 +99,7 @@ export default {
 
     openAddDialog:function(){
        this.$router.push({ 
-           path: "/admin/domain/create", 
+           path: "/admin/alias_domain/create", 
            query: {  }
        }) ;
        return ;
@@ -133,7 +127,7 @@ export default {
         },
 
         search:async function(){
-            var response=await this.$api.admin_domain_list(this.query)
+            var response=await this.$api.manage_alias_domain_list(this.query)
             this.items=response.items;
             this.pagination=response.pagination;
         },

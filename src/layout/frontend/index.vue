@@ -23,8 +23,8 @@ const userStore = useUserStore()
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul v-if="userStore.isLogin() " class="navbar-nav text-uppercase ms-auto">
-                        <li v-if="userStore.isLogin() == true" class="nav-item"><a @click="logout" class="nav-link" href="#">Logout</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/admin/dashboard">Admin</a></li>
+                        <li v-if="userStore.isLogin() == true" class="nav-item"><a @click="logout" class="nav-link" href="#">{{ $t("Logout") }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/admin/domain">{{ $t("Admin") }}</a></li>
                     </ul>
                     <ul v-else class="navbar-nav text-uppercase ms-auto">
                         <li v-if="userStore.isLogin() == false" class="nav-item">

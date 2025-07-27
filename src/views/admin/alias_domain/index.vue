@@ -21,7 +21,7 @@
         <HBox  style="  margin-top:10px;padding:0px;">
                     <Input 
                         @keyup.enter.native="searchPage(1)"
-                        v-model="query.domain" 
+                        v-model="query.query" 
                         type="text" 
                         style="width:300px;"
                         />
@@ -40,18 +40,16 @@
                     @sort-change="searchSort"
                     style="width: 100%;min-width:800px"
                     >
-                <Column prop="domain" :label="$t('Domain')" width="200"> </Column>
-                <Column prop="description" sortable="custom" :label="$t('Description')" width=""> </Column>
-                <Column  prop="email_count" :label="$t('Emails')" style="width:100px"> 
-                </Column> 
+                <Column prop="alias_domain" :label="$t('Alias Domain')" width="200"> </Column>
+                <Column prop="target_domain" sortable="custom" :label="$t('Target Domain')" width=""> </Column>
 
                 <Column prop="created_at" :label="$t('Created At')" width="200"> </Column> 
                 <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column> 
                 <Column  :label="$t('Operate')" style="width:300px"> 
                     <template #default="scope">
                 
-                        <a :href="'/admin/domain/update?id='+scope.item.id"  style="margin-left:0px" class="link-primary decoration_none" >{{ $t("Edit") }}</a>
-                        <a href="#" style="margin-left:10px" class="link-danger decoration_none" @click="openDeleteDialog(scope.item.id,scope.item.title)" >{{ $t("Delete") }}删除</a>
+                        <a :href="'/admin/alias_domain/update?id='+scope.item.id"  style="margin-left:0px" class="link-primary decoration_none" >{{$t("Edit")}}</a>
+                        <a href="#" style="margin-left:10px" class="link-danger decoration_none" @click="openDeleteDialog(scope.item.id,scope.item.title)" >{{$t("Delete")}}</a>
                         </template>
                 </Column> 
             </Table>
@@ -68,13 +66,10 @@
 export default {
     data: function(){
         return {
-            form_data:{
-                title:'',
-            },
             query:{
                 page:1,
                 page_count:10,
-                domain:'',
+                query:'',
                 order:"desc",
                 order_by:"id",
             },
@@ -91,7 +86,7 @@ export default {
     },
     methods:{
 
-    openDeleteDialog:async function(id){
+    openDeleteDialog:async function(id,title){
             var result = await this.$confirm("Danger","Delete It ?")
             if(result)
             {
@@ -105,7 +100,7 @@ export default {
 
     openAddDialog:function(){
        this.$router.push({ 
-           path: "/admin/domain/create", 
+           path: "/admin/alias_domain/create", 
            query: {  }
        }) ;
        return ;
@@ -133,7 +128,7 @@ export default {
         },
 
         search:async function(){
-            var response=await this.$api.admin_domain_list(this.query)
+            var response=await this.$api.admin_alias_domain_list(this.query)
             this.items=response.items;
             this.pagination=response.pagination;
         },
