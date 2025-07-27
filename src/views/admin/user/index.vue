@@ -78,14 +78,9 @@
 export default {
     data: function(){
         return {
-            dialogFormVisible:false,
-            dialogEditFormVisible:false,
-            dialogViewFormVisible:false,
-
-
             query:{
                 page:1,
-                page_count:10,
+                page_size:10,
                 title:'',
                 order:"desc",
                 order_by:"id",

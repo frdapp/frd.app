@@ -79,6 +79,11 @@ Api.postForm=function(url,params) {
         return this.post(url, params,config);
 }
 
+Api.admin_login_verify = async function (params) {
+    var response = await this.post("/api/admin/login/verify", params);
+    return fetch_data(response)
+}
+
 
 Api.admin_login_login = async function (params) {
     var response = await this.post("/api/admin/login/login", params);
@@ -713,6 +718,12 @@ Api.manage_alias_list=async function(params)
 Api.manage_alias_get=async function(id)
 {
     var response = await this.get("/api/manage/alias/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.admin_email_send_verify_code=async function(params)
+{
+    var response = await this.post("/api/admin/email/send_verify_code", params);
     return fetch_data(response)
 }
 

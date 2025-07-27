@@ -32,6 +32,10 @@ const routes = [
                 path: 'login-manage',
                 component: () => import('@/views/manage/login/login.vue'),
             },
+            {
+                path: 'verify',
+                component: () => import('@/views/user/login/verify.vue'),
+            },
         ]
     },
     {

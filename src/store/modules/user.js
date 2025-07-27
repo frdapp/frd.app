@@ -8,12 +8,11 @@ export const useUserStore = defineStore('user', {
 			user:{
 				id:0,
 				email:"",
-				nickname:"",
+				is_verified:0,
 				token:"",
 			},
 			admin:{
 				id:0,
-				username:"",
 				token:"",
 			},
 		}
@@ -27,13 +26,13 @@ export const useUserStore = defineStore('user', {
 		set(user) {
 			this.user.id=user.id
 			this.user.email=user.email
-			this.user.nickname=user.nickname
+			this.user.is_verified=user.is_verified
 			this.user.token=user.token
 		},
 		clear() {
 			this.user.id=0
 			this.user.email=""
-			this.user.nickname=""
+			this.user.is_verified=0
 			this.user.token=""
 		},
 

@@ -56,12 +56,9 @@
 export default {
     data: function () {
         return {
-            form_data: {
-                title: '',
-            },
             query: {
                 page: 1,
-                page_count: 10,
+                page_size: 10,
                 title: '',
                 order: "desc",
                 order_by: "id",

@@ -3,6 +3,7 @@ import  VBox from '@/components/VBox.vue'
 import  HBox from '@/components/HBox.vue'
 import  Input from '@/components/Input.vue'
 import  Button from '@/components/Button.vue'
+import  ButtonColdDown from '@/components/ButtonColdDown.vue'
 
 import { useUserStore } from '@/store/modules/user'
 const userStore = useUserStore()
@@ -14,7 +15,7 @@ const userStore = useUserStore()
     <div class="card" style="width:400px">
       <div class="card-body">
         <div class="card-title">
-               <h2>{{$t('Register')}}</h2>
+               <h2>{{$t('Verify')}}</h2>
         </div>
 
 
@@ -25,35 +26,23 @@ const userStore = useUserStore()
               <Input v-model="form.email" type="text" class="form-control" style="width:100%" required autocomplete="off"/>
         </div>
         <div>
-              <label class="form-control-label" for="password">{{ $t('Password') }} </label>
+              <label class="form-control-label" >{{ $t('Verify Code') }} </label>
         </div>
         <div>
           <HBox>
-              <Input id="password-field" v-model="form.password" type="password" class="form-control" style="width:100%" required autocomplete="off"/>
+              <Input v-model="form.code" class="form-control" style="width:100%" required autocomplete="off"/>
                   <!--
               <i class="material-icons" style="position:relative;right:30px;top:5px"> visibility</i>
                   -->
           </HBox>
 
         </div>
-        <div>
-		              <label class="form-control-label" for="password">{{ $t('Confirm Password')}}</label>
-        </div>
-        <div>
-          <HBox>
-		              <Input id="password-field" v-model="form.confirm_password" type="password" class="form-control" style="width:100%" required />
-                  <!--
-                  <i class="material-icons" style="position:relative;right:30px;top:5px"> visibility</i>
-                  -->
-          </HBox>
+        <div style="margin-top:10px">
+              <ButtonColdDown  duration=5 @click="send_verify_code" class="form-control btn-primary btn-block">{{ $t('Send Verify Code') }}</ButtonColdDown>
         </div>
 
         <div style="margin-top:10px">
-              <Button  @click="register" class="form-control btn-primary btn-block">{{ $t('Register') }}</Button>
-        </div>
-        <div>
-		          <p class="text-center">Already have account ? <a data-toggle="tab" href="/login">{{ $t('login') }}</a></p>
-		          <p class="text-center">Forgot password? <a href="/forgot_password">{{ $t('Forgot Password') }}</a> </p>
+              <Button  @click="verify" class="form-control btn-primary btn-block">{{ $t('Verify') }}</Button>
         </div>
       </div>
     </div>
@@ -70,25 +59,32 @@ const userStore = useUserStore()
                     return {
                         form:{
                             "email":"",
-                            "password":"",
-                            "confirm_password":"",
+                            "code":"",
                         }
                     }
                 },
+                created:function(){
+                  this.form.email=this.$route.query.email;
 
+                },
                 methods:{
-                    register:async function(){
-                        if(this.form.password != this.form.confirm_password)
+                    send_verify_code:async function(){
+                        if(! this.form.email )
                         {
-                            this.$alert("WARNING","password and confirm password not the same !");
+                            this.$alert("WARNING","Please fill email");
                             return false;
                         }
 
-
-                        var response=await this.$api.admin_login_register(this.form);
+                        var response=await this.$api.admin_email_send_verify_code(this.form);
                         if(response == false ) return false;
 
-                      this.$router.push({"path":"/verify","query":{"email":this.form.email}})
+                        this.$alert("Success","Send Successful. Please check your email mailbox.")
+                    },
+                    verify:async function(){
+                        var response=await this.$api.admin_login_verify(this.form);
+                        if(response == false ) return false;
+
+                        this.$router.push({"path":"/login"});
                 }
             
             }

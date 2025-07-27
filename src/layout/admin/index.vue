@@ -49,8 +49,17 @@ export default {
       user:{}
     };
   },
-  created: function(){
-    this.get_user_info()
+  created: async function(){
+    var response=await this.get_user_info()
+    if (response == false) {
+      this.$router.push({"path":"/"})
+      return false;
+    }
+
+    if(response.is_verified == false) {
+      this.$router.push({"path":"/verify","query":{"email":response.email}})
+    }
+
   },
 
   methods: {
@@ -60,6 +69,8 @@ export default {
             {
               this.user = response.items[0];
             }
+
+            return this.user
       }
   },
 };

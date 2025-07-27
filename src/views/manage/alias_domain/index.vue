@@ -64,7 +64,7 @@ export default {
             users:[],
             query:{
                 page:1,
-                page_count:10,
+                page_size:10,
                 query:'',
                 order:"desc",
                 order_by:"id",
