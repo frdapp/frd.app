@@ -90,6 +90,11 @@ Api.admin_login_login = async function (params) {
     return fetch_data(response)
 }
 
+Api.admin_login_login_by_verify_code = async function (params) {
+    var response = await this.post("/api/admin/login/login_by_verify_code", params);
+    return fetch_data(response)
+}
+
 Api.admin_login_logout=async function(params)
 {
     var response = await this.post("/api/admin/login/logout", params);

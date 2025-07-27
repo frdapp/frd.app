@@ -28,7 +28,7 @@ export default {
       if (this.isDisabled) return
 
       // 触发外部 click 事件
-      this.$emit('click', event)
+     // this.$emit('click', event)
 
       // 开始倒计时
       this.startCountdown()
