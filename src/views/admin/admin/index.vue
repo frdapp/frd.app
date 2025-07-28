@@ -105,7 +105,7 @@ export default {
             this.pagination = response.pagination;
         },
         setStorageMax: async function (id,storage_max) {
-            var value=await this.$prompt("Storage Max",storage_max)
+            var value=await this.$prompt(this.$t("Storage Max"),storage_max)
 
             await this.$api.admin_me_update_storage_max({"value":value})
             this.search()

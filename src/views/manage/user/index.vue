@@ -149,6 +149,7 @@ export default {
         },
 
         searchPage:function(page){
+            //alert(this.$t("test")) translate in js
             this.query.page=page;
             this.search();
         },

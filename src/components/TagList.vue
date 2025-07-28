@@ -7,11 +7,11 @@
         class="tag badge bg-primary"
       >
         {{ tag }}
-        <button v-if="readonly == false " type="button" class="btn-close btn-close-white ms-1" @click="removeTag(index)" />
+        <button v-if="readonly == false || readonly == 'false'" type="button" class="btn-close btn-close-white ms-1" @click="removeTag(index)" />
       </span>
     </div>
 
-    <div v-show="readonly == false" class="input-group" style="max-width:300px;margin-top:5px">
+    <div v-show="readonly == false || readonly == 'false'" class="input-group" style="max-width:300px;margin-top:5px">
       <input
         v-model="newTag"
         @keyup.enter="addTag"
@@ -31,7 +31,7 @@ import { ref, watch, defineProps, defineEmits } from 'vue'
 
 const props = defineProps({
   readonly:{
-    type:Boolean,
+    type:[Boolean,String],
     default:false,
   },
   modelValue: {

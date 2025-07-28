@@ -87,7 +87,7 @@ export default {
     methods:{
 
     openDeleteDialog:async function(id,title){
-            var result = await this.$confirm("Danger","Delete It ?")
+            var result = await this.$confirm("Danger",this.$t("Delete It ?"))
             if(result)
             {
                 var response=await this.$api.admin_alias_domain_delete({"id":id})

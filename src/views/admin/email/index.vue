@@ -87,7 +87,7 @@ export default {
     },
     methods:{
         updatePassword: async function (id) {
-            var value=await this.$prompt("New Password","")
+            var value=await this.$prompt(this.$t("New Password"),"")
             if(value == false) return false;
 
             await this.$api.admin_email_update_password({"id":id,"password":value})
@@ -95,7 +95,7 @@ export default {
         },
 
     openDeleteDialog:async function(id,title){
-            var result = await this.$confirm("Danger" ,"Delete It ?")
+            var result = await this.$confirm("Danger" ,this.$t("Delete It ?"))
             if(result)
             {
                 var response=await this.$api.admin_email_delete({"id":id})

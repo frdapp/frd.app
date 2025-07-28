@@ -34,7 +34,7 @@ export default {
     for(let i in r) 
     {
       let node = {
-        label: r[i].props.label,
+        label: r[i].props.label ?? "TAB DEFAULT",
         style: r[i].props.style ??'',
         slots: null,
       }

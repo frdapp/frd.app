@@ -80,19 +80,14 @@
           }
           else
           {
-            this.$alert("SUCCESS","保存成功!" );
+            this.$alert("SUCCESS",this.$t("Save Successful") );
           }
         }
 
 
       },
-      reset:function(path){
-        this.form.title=""
-        this.form.description=""
-      },
+
       cancel:function(path){
-        this.$emit("dialog_cancel")
-        this.$router.back();
       }
     },
     components: {
@@ -101,12 +96,4 @@
 </script>
 
 <style scoped>
-.form-control-label{
-  width:100px;
-}
-
-                .right_column{
-                  flex:1;
-                  max-width:700px;
-                }
 </style>

@@ -70,30 +70,6 @@
         },
         data: function(){
             return {
-                permissions:[
-                    {
-                        value: 'PRIVATE',
-                        label: '私有',
-                    },
-                    {
-                        value: 'PUBLIC',
-                        label: '公开',
-                    },
-                    {
-                        value: 'SHARE',
-                        label: '分享',
-                    }
-                ],
-                mode:"create",
-                editor_options: {
-                    // lineNumbers: true,
-                    // styleActiveLine: true,
-                    // styleSelectedText: true,
-                    // lineWrapping: true,
-                    // indentWithTabs: true,
-                    // tabSize: 2,
-                    // indentUnit: 2
-                },
                 form:{
                     id:0,
                     username:"",

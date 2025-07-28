@@ -1,8 +1,12 @@
 <template>
   <div class="togglebutton">
-    <label>
-      <input v-if="modelValue == true"  type="checkbox" checked="" >
-      <input v-else type="checkbox">
+    <label v-if="modelValue == true">
+      <input  type="checkbox" checked="checked"/>
+        <span class="toggle" @click="on_toggle" ></span>
+    </label>
+
+    <label v-else>
+      <input  type="checkbox" />
         <span class="toggle" @click="on_toggle" ></span>
     </label>
 </div>
