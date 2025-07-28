@@ -2,6 +2,7 @@ import axios from 'axios'
 import { inject } from "vue";
 
 import { useUserStore } from '@/store/modules/user'
+import { useI18n } from 'vue-i18n';
 
 
 function fetch_data(response)
@@ -27,16 +28,16 @@ var Api=axios.create({
 Api.interceptors.request.use(config=>{
 
     const userStore = useUserStore()
-    var token=userStore.user.token;
-
-    var admin_token=userStore.admin.token;
-
     //admin and user can not login together
-    if (admin_token) 
+
+    if(config.url.startsWith("/api/manage"))
     {
+        var admin_token = userStore.admin.token;
         config.headers['Authentication'] = admin_token;
     }
-    else if (token) {
+    else if(config.url.startsWith("/api/admin"))
+    {
+        var token=userStore.user.token;
         config.headers['Authentication'] = token;
     }
     else
@@ -61,10 +62,9 @@ Api.interceptors.response.use(response=>{
     }
         */
   }
-  else if(response.data.code != 0)
-    {
-        Api.$alert("WARNING",response.data.message)
-    }
+  else if (response.data.code != 0) {
+      Api.$alert("WARNING", Api.t(response.data.message))
+  }
 
     return response
 })
@@ -732,12 +732,17 @@ Api.admin_email_send_verify_code=async function(params)
     return fetch_data(response)
 }
 
-export default {
-    install:function(app){
+export function createApi(i18n) {
+    return {
+        install: function (app) {
+            const t = i18n.global.t;
 
-        Api.$alert= app.config.globalProperties.$alert;
-        Api.$router= app.config.globalProperties.$router;
 
-        app.config.globalProperties.$api = Api
+            Api.$alert = app.config.globalProperties.$alert;
+            Api.$router = app.config.globalProperties.$router;
+            Api.t = t
+
+            app.config.globalProperties.$api = Api
+        }
     }
 }

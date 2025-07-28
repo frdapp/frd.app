@@ -14,11 +14,6 @@
 
         <form name="search" v-on:submit="searchPage(1)">
         <HBox  style="  margin-top:10px;padding:0px;">
-            <Select v-model="query.user_id" @change="search()">
-                <option  value="0"  :label="$t('All Users')" />
-                <option v-for="user in users" :value="user.id"  :label="user.email" />
-            </Select>
-
                     <Input
                         @keyup.enter.native="searchPage(1)"
                         v-model="query.query"
@@ -46,7 +41,6 @@
                                         {{scope.item.id}}
                                 </template>
                         </Column>
-                        <Column prop="user_email" :label="$t('User Email')" > </Column>
                         <Column prop="category" :label="$t('Category')" > </Column>
                         <Column prop="message"  :label="$t('Message')" width="300"> </Column>
                         <Column prop="params"  :label="$t('Params')" width="300"> </Column>
@@ -68,9 +62,7 @@
 export default {
     data: function(){
         return {
-            users:[],
             query:{
-                user_id:0,
                 page:1,
                 page_size:10,
                 query:'',
@@ -86,9 +78,6 @@ export default {
     },
 
     created:async function(){
-            var response=await this.$api.manage_user_list({"page_size":999})
-            this.users=response.items;
-
             this.searchPage(1);
     },
     methods:{

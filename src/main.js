@@ -7,7 +7,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 import i18n from './i18n'
-import Api from './api'
+import {createApi} from './api'
 import { createApp } from 'vue'
 
 
@@ -28,7 +28,6 @@ import  func  from './functions.js'
 const app=createApp(App)
 app.config.globalProperties.$func=func
 app.use(i18n)
-
 app.use(store)
 app.use(VueAxios, axios)
 app.use(router)
@@ -36,7 +35,6 @@ app.use(Alert)
 app.use(Confirm)
 app.use(Prompt)
 app.use(Dialog)
-
-app.use(Api)
+app.use(createApi(i18n))
 
 app.mount('#app')

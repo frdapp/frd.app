@@ -104,7 +104,7 @@
                             }
                             else
                             {
-                                this.$alert("SUCCESS","保存成功!" );
+                                this.$alert("SUCCESS",this.$t("Save Success") );
                             }
                         }
 

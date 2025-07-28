@@ -145,12 +145,8 @@ const routes = [
                 component: () => import('@/views/admin/log/index.vue'),
             },
             {
-                path: 'log/create',
-                component: () => import('@/views/admin/log/form.vue'),
-            },
-            {
-                path: 'log/update',
-                component: () => import('@/views/admin/log/form.vue'),
+                path: 'log/view',
+                component: () => import('@/views/admin/log/view.vue'),
             },
 	],
     },

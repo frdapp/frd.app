@@ -14,24 +14,19 @@
 
         <form name="search" v-on:submit="searchPage(1)">
         <HBox  style="  margin-top:10px;padding:0px;">
-            <Select v-model="query.user_id" @change="search()">
-                <option  value="0"  :label="$t('All Users')" />
-                <option v-for="user in users" :value="user.id"  :label="user.email" />
-            </Select>
-
                     <Input
                         @keyup.enter.native="searchPage(1)"
-                        v-model="query.query"
+                        v-model="query.title"
                         type="text"
-                        placeholder=""
-                        style="width:300px;margin-left:10px"
+                        placeholder="标题/ID"
+                        style="width:300px;"
                         />
 
 
                     <Button
                         style="margin-left:10px"
                         class="btn-primary"
-                        @click="searchPage(1)" > {{ $t("Search") }}</Button>
+                        @click="searchPage(1)" > 搜索 </Button>
         </HBox>
             </form>
 
@@ -41,17 +36,23 @@
                             @sort-change="searchSort"
                             style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}"
                             >
-                        <Column prop="id" :label="$t('ID')" sortable="custom" width="100">
+                        <Column prop="id" label="ID" sortable="custom" width="100">
                                 <template #default="scope">
+                                <router-link target="_blank" :to="'/article/view?id='+scope.item.id" style="color:#606266">
                                         {{scope.item.id}}
+                                </router-link>
                                 </template>
                         </Column>
-                        <Column prop="user_email" :label="$t('User Email')" > </Column>
-                        <Column prop="category" :label="$t('Category')" > </Column>
-                        <Column prop="message"  :label="$t('Message')" width="300"> </Column>
-                        <Column prop="params"  :label="$t('Params')" width="300"> </Column>
-                        <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
-                        <Column prop="created_at" :label="$t('Updated At')" width="200"> </Column>
+                        <Column prop="domain" label="Domain" > </Column>
+                        <Column prop="description" sortable="custom" label="Description" width="100"> </Column>
+                        <Column prop="created_at" label="创建时间" width="200"> </Column>
+                        <Column align="center" label="操作" width="300">
+                            <template #default="scope">
+
+                                <a style="margin-left:10px" class="link-primary" @click="openEditDialog(scope.item.id)" >编辑</a>
+                                <a style="margin-left:10px" class="link-danger" @click="openDeleteDialog(scope.item.id,scope.item.title)" >删除</a>
+                                </template>
+                        </Column>
                     </Table>
 
             <Pagination style="position:absolute; right:200px" :page="pagination.page" :page_total="pagination.page_total" v-on:jump="searchPage($event)" />
@@ -68,27 +69,25 @@
 export default {
     data: function(){
         return {
-            users:[],
             query:{
-                user_id:0,
                 page:1,
                 page_size:10,
-                query:'',
+                title:'',
                 order:"desc",
                 order_by:"id",
+                permission:'',
+                tags:[],
+                tag_string:'',
             },
             pagination:{
-                item_total:0,
+                item_total:3,
             },
 
             items:[],
         }
     },
 
-    created:async function(){
-            var response=await this.$api.manage_user_list({"page_size":999})
-            this.users=response.items;
-
+    mounted:function(){
             this.searchPage(1);
     },
     methods:{
@@ -144,7 +143,7 @@ export default {
         },
 
         search:async function(){
-            var response=await this.$api.manage_log_list(this.query)
+            var response=await this.$api.admin_domain_list(this.query)
             this.items=response.items;
             this.pagination=response.pagination;
         },
