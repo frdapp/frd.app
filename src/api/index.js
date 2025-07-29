@@ -695,6 +695,36 @@ Api.manage_order_list=async function(params)
     return fetch_data(response)
 }
 
+Api.manage_activity_get=async function(id)
+{
+    var response = await this.get("/api/manage/activity/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_activity_list=async function(params)
+{
+    var response = await this.post("/api/manage/activity/list", params);
+    return fetch_data(response)
+}
+
+Api.manage_activity_create=async function(params)
+{
+    var response = await this.post("/api/manage/activity/create", params);
+    return fetch_data(response)
+}
+
+
+Api.manage_activity_update=async function(params)
+{
+    var response= await this.post("/api/manage/activity/update",params);
+    return fetch_data(response)
+}
+
+Api.manage_order_list=async function(params)
+{
+    var response = await this.post("/api/manage/order/list", params);
+    return fetch_data(response)
+}
 
 Api.manage_order_get=async function(id)
 {

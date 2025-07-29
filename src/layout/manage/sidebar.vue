@@ -20,6 +20,9 @@ import { useRoute } from 'vue-router'
         <MenuItem class="menu-item" path="/manage/product" :current_path="current_path">
             Product
         </MenuItem>
+        <MenuItem class="menu-item" path="/manage/activity" :current_path="current_path">
+            Activity
+        </MenuItem>
         <MenuItem class="menu-item" path="/manage/user" :current_path="current_path">
             User
         </MenuItem>

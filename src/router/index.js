@@ -189,6 +189,18 @@ const routes = [
             },
 
             {
+                path: 'activity',
+                component: () => import('@/views/manage/activity/index.vue'),
+            },
+            {
+                path: 'activity/create',
+                component: () => import('@/views/manage/activity/form.vue'),
+            },
+            {
+                path: 'activity/update',
+                component: () => import('@/views/manage/activity/form.vue'),
+            },
+            {
                 path: 'user',
                 component: () => import('@/views/manage/user/index.vue'),
             },
