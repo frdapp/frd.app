@@ -51,7 +51,7 @@ export default {
 
     methods: {
         buy: async function (product_id) {
-            var response = await this.$api.admin_product_buy({"product_id":product_id})
+            var response = await this.$api.admin_order_create({"product_id":product_id})
             if (response == false) return false;
 
             this.$router.back()

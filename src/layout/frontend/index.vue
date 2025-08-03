@@ -17,16 +17,28 @@ const userStore = useUserStore()
 
                     <a/>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars ms-1"></i>
-                </button>
+   
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul v-if="userStore.isLogin() " class="navbar-nav text-uppercase ms-auto">
                         <li v-if="userStore.isLogin() == true" class="nav-item"><a @click="logout" class="nav-link" href="#">{{ $t("Logout") }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="/admin/domain">{{ $t("Admin") }}</a></li>
                     </ul>
                     <ul v-else class="navbar-nav text-uppercase ms-auto">
+                        <li class="nav-item">
+                            <a href="#products" class="nav-link" style="">
+                                <span style="color:#534f4a">
+                                        Products 
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#contact" class="nav-link" style="">
+                                <span style="color:#534f4a">
+                                        Connect Us
+                                </span>
+                            </a>
+                        </li>
+
                         <li v-if="userStore.isLogin() == false" class="nav-item">
                             <a class="nav-link" href="/login">
                                 <span style="color: #e19d6c; font-size: 20px; font-weight: 600;" >
@@ -42,13 +54,14 @@ const userStore = useUserStore()
             </div>
         </nav>
 
+
         <div class="container" style="min-height:600px">
             <router-view />
        </div>
 
         <!-- Footer-->
-        <footer class="footer">
-            <VBox style="width:100%;height:100px;align-items: center;background-color:#eaeae4">
+        <footer class="footer border-top" style="margin-top:30px">
+            <VBox style="width:100%;height:100px;align-items: center;">
 
                     <div class="">Copyright &copy; frd.app 2025</div>
             </VBox>
@@ -89,7 +102,7 @@ export default {
         color: var(--bs-navbar-brand-color);
         text-decoration: none;
         white-space: nowrap;
-        background-color:#000000 !important;
+        background-color:#f7f7f7 ;
     }
 
     a{

@@ -314,6 +314,28 @@ const routes = [
                 path: 'log/view',
                 component: () => import('@/views/manage/log/view.vue'),
             },
+
+            {
+                path: 'email_template',
+                component: () => import('@/views/manage/email_template/index.vue'),
+            },
+            {
+                path: 'email_template/create',
+                component: () => import('@/views/manage/email_template/form.vue'),
+            },
+            {
+                path: 'email_template/update',
+                component: () => import('@/views/manage/email_template/form.vue'),
+            },
+            {
+                path: 'email_send_log',
+                component: () => import('@/views/manage/email_send_log/index.vue'),
+            },
+
+            {
+                path: 'guest_message',
+                component: () => import('@/views/manage/guest_message/index.vue'),
+            },
 	],
     },
     {

@@ -47,6 +47,15 @@ import { useRoute } from 'vue-router'
         <MenuItem class="menu-item" path="/manage/ticket" :current_path="current_path">
             Tickets
         </MenuItem>
+        <MenuItem class="menu-item" path="/manage/email_template" :current_path="current_path">
+            Email Template
+        </MenuItem>
+        <MenuItem class="menu-item" path="/manage/guest_message" :current_path="current_path">
+            Guest Message
+        </MenuItem>
+        <MenuItem class="menu-item" path="/manage/email_send_log" :current_path="current_path">
+            Email Send Log
+        </MenuItem>
         <MenuItem class="menu-item" path="/manage/log" :current_path="current_path">
             Log
         </MenuItem>

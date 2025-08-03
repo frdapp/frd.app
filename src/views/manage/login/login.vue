@@ -18,10 +18,10 @@ const userStore = useUserStore()
 
 
         <div>
-              <label class="form-control-label" for="username">Username</label>
+              <label class="form-control-label" >{{ $t("Email") }}</label>
         </div>
         <div>
-              <Input v-model="form.username" type="text" class="form-control" style="width:100%" required />
+              <Input v-model="form.email" type="text" class="form-control" style="width:100%" required />
         </div>
         <div>
               <label class="form-control-label" for="password">Password</label>
@@ -51,7 +51,7 @@ import { useUserStore } from '@/store/modules/user'
                 data:function(){
                     return {
                         form:{
-                            "username":"",
+                            "email":"",
                             "password":"",
                         }
                     }

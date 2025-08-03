@@ -7,8 +7,8 @@ import { useRoute } from 'vue-router'
 
 </script>
 <template>
-    <div class="sidebar">
-        <div style="height:60px;display:flex;align-items: center;justify-content: start;border-bottom:solid 1px rgb(102, 100, 97)">
+    <div class="sidebar border-end">
+        <div style="height:60px;display:flex;align-items: center;justify-content: start;border-bottom:none 1px #cccccc">
             <!--
              <img src="@/assets/logo.png" style="width:100px;"> </img>
 
@@ -91,8 +91,8 @@ export default {
 
 <style scoped>
 .sidebar{
-    background-color:#000000;
-    color:#ffffff;
+    background-color:#ffffff;
+    color:#373535;
     min-height:500px;
     width:250px;
 

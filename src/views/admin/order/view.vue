@@ -15,31 +15,43 @@ import { data } from "autoprefixer"
                 <label class="form-control-label">Order No</label>
                 </td>
                 <td>
-                    {{ order_data.order_no }}
-                    {{ order_data.status }}
-                    {{ order_data.price }}
-                    {{ order_data.points }}
-                    {{ order_data.created_at }}
+                    <pre>
+
+                    Order No: {{ order_data.order_no }}
+                    Status: {{ order_data.status }}
+                    Price: {{ order_data.price }}
+                    Points: {{ order_data.points }}
+                    Created At :{{ order_data.created_at }}
+                    </pre>
 
                     <br/>
 
                     <div v-for="order_product in order_data.order_products">
-                        {{ order_product.title }}
-                        {{ order_product.description }}
-                        {{ order_product.storage }}
-                        {{ order_product.amount }}
+                        <pre>
+                        Title: {{ order_product.title }}
+                        Description: {{ order_product.description }}
+                        Storage: {{ order_product.storage }}
+                        Amount: {{ order_product.amount }}
+                        </pre>
                     </div>
 
                     <div v-if="order_data.order_payment">
-                        {{ order_data.order_payment.pay_way }}
-                        {{ order_data.order_payment.pay_amount }}
-                        {{ order_data.order_payment.pay_points }}
-                        {{ order_data.order_payment.created_at }}
+                        <pre>
+                        Payway:{{ order_data.order_payment.pay_way }}
+                        pay amount:{{ order_data.order_payment.pay_amount }}
+                        pay points:{{ order_data.order_payment.pay_points }}
+                        crated_at:{{ order_data.order_payment.created_at }}
+                        </pre>
 
                     </div>
                 </td>
             </tr>
         </table>
+
+        <div v-if="order_data.status == 'WAIT_PAY'">
+            <Button @click="pay_by_points">Pay By Points</Button>
+            <Button @click="pay_by_price">Pay By Price</Button>
+        </div>
 </template>
 
 <script>
@@ -61,6 +73,15 @@ import { data } from "autoprefixer"
         },
 
         methods:{
+            pay_by_points:function(){
+
+            },
+            pay_by_price:async function(){
+                var response=await this.$api.admin_order_create_payment_checkouturl({"id":this.order_data["id"]})
+                if(response == false) return false;
+
+                window.location.href=response.checkout_url;
+            },
         },
 
     }

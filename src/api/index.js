@@ -327,9 +327,15 @@ Api.admin_product_list=async function(params)
     return fetch_data(response)
 }
 
-Api.admin_product_buy=async function(params)
+Api.admin_order_create_payment_checkouturl=async function(params)
 {
-    var response = await this.post("/api/admin/product/buy", params);
+    var response = await this.post("/api/admin/order/create_payment_checkouturl", params);
+    return fetch_data(response)
+}
+
+Api.admin_order_create=async function(params)
+{
+    var response = await this.post("/api/admin/order/create", params);
     return fetch_data(response)
 }
 
@@ -756,9 +762,92 @@ Api.manage_alias_get=async function(id)
     return fetch_data(response)
 }
 
+
+
+Api.manage_email_template_list=async function(params)
+{
+    var response = await this.get("/api/manage/email_template/list", {"params":params});
+    return fetch_data(response)
+}
+
+Api.manage_email_template_create=async function(params)
+{
+    var response = await this.post("/api/manage/email_template/create", params);
+    return fetch_data(response)
+}
+
+Api.manage_email_template_update=async function(params)
+{
+    var response = await this.post("/api/manage/email_template/update", params);
+    return fetch_data(response)
+}
+
+Api.manage_email_template_delete=async function(params)
+{
+    var response = await this.post("/api/manage/email_template/delete", params);
+    return fetch_data(response)
+}
+
+Api.manage_email_template_get=async function(id)
+{
+    var response = await this.get("/api/manage/email_template/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_guest_message_list=async function(params)
+{
+    var response = await this.get("/api/manage/guest_message/list", {"params":params});
+    return fetch_data(response)
+}
+
+Api.manage_guest_message_get=async function(id)
+{
+    var response = await this.get("/api/manage/guest_message/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_guest_message_delete=async function(params)
+{
+    var response = await this.post("/api/manage/guest_message/delete", params);
+    return fetch_data(response)
+}
+
+
+Api.manage_email_send_log_list=async function(params)
+{
+    var response = await this.get("/api/manage/email_send_log/list", {"params":params});
+    return fetch_data(response)
+}
+
+Api.manage_email_send_log_get=async function(id)
+{
+    var response = await this.get("/api/manage/email_send_log/get", {"params":{"id":id}});
+    return fetch_data(response)
+}
+
+Api.manage_email_send_log_delete=async function(params)
+{
+    var response = await this.post("/api/manage/email_send_log/delete", params);
+    return fetch_data(response)
+}
+
 Api.admin_email_send_verify_code=async function(params)
 {
     var response = await this.post("/api/admin/email/send_verify_code", params);
+    return fetch_data(response)
+}
+
+
+//frontend
+Api.product_list=async function(params)
+{
+    var response = await this.post("/api/product/list", params);
+    return fetch_data(response)
+}
+
+Api.send_message=async function(params)
+{
+    var response = await this.post("/api/message/send", params);
     return fetch_data(response)
 }
 
