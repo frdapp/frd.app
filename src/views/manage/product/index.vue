@@ -37,6 +37,7 @@ import Column from '@/components/Column.vue'
                         {{ scope.item.id }}
                     </template>
                 </Column>
+                <Column prop="product_type" :label="$t('Product Type')"></Column>
                 <Column prop="title" :label="$t('Title')">
                 </Column>
                 <Column prop="description" :label="$t('Description')" width="100"> </Column>

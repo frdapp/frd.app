@@ -22,7 +22,9 @@
                 <label class="form-control-label">{{$t("Identify")}}</label>
                 </td>
                 <td>
-                    <Input class=""  v-model="form.identify" />
+                    <Select class=""  v-model="form.identify" >
+                        <option value="EMAIL_VERIFY_CODE">EMAIL_VERIFY_CODE</option>
+                    </Select>
                 </td>
             </tr>
             <tr>
@@ -68,7 +70,7 @@
                 form:{
                     id:0,
                     title:"",
-                    identify:'',
+                    identify:'EMAIL_VERIFY_CODE',
                     subject:'',
                     content:'',
                 },

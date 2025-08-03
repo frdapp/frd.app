@@ -17,6 +17,17 @@
         <table class="layout-table" style="">
             <tr>
                 <td>
+                <label class="form-control-label">{{$t("Product Type")}}</label>
+                </td>
+                <td>
+                <Select class="" ref="title" v-model="form.product_type" >
+                    <option value="NORMAL">Normal</option>
+                    <option value="ACTIVITY">Activity</option>
+                </Select>
+                </td>
+            </tr>
+            <tr>
+                <td>
                 <label class="form-control-label">{{$t("Title")}}</label>
                 </td>
                 <td>
@@ -98,6 +109,7 @@
             return {
                 form:{
                     id:0,
+                    product_type:"NORMAL",
                     title:"",
                     description:'',
                     storage:1,
