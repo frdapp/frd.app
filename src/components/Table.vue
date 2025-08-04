@@ -1,8 +1,7 @@
 <template>
   <table class="table">
     <thead>
-      <tr>
-
+      <tr :class="head_class">
         <th class="table-head" v-for="column in columns" :key="column.prop" @click="on_column_click(column.prop,sorts[column.prop])">
             <!-- 检查是否有插槽函数 -->
             <template v-if="column.label">
@@ -65,6 +64,8 @@ export default {
       default:{},
 
     },
+
+    head_class:""
   },
   data() {
     return {

@@ -16,7 +16,7 @@
                 <td style="width:300px;">
                     <HBox>
                         <Input  v-model="form.name"  max-length=30 style="width:100%" /> 
-                        <Select v-model="form.domain" :options="domains" style="width:100px">
+                        <Select v-model="form.domain" :options="domains" style="width:300px">
                         </Select>
                     </HBox>
                 </td>

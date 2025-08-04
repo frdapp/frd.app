@@ -12,8 +12,8 @@
 <template>
     <VBox style="width:100%">
         <form name="search" v-on:submit="searchPage(1)">
+                        {{$t("Current Storage") }} {{ storage_current }} GB
                         <a href="/admin/storage/buy">{{ $t("Buy Storage") }}</a>
-                        当前容量  {{ storage_current }} GB
         <HBox  style="  margin-top:10px;padding:0px;">
                     <Input
                         @keyup.enter.native="searchPage(1)"

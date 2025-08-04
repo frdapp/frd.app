@@ -66,6 +66,10 @@ const routes = [
                 path: 'domain/update',
                 component: () => import('@/views/admin/domain/form.vue'),
             },
+            {
+                path: 'domain/view_setting',
+                component: () => import('@/views/admin/domain/view_setting.vue'),
+            },
 
             {
                 path: 'alias_domain',

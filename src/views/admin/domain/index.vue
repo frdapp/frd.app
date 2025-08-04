@@ -40,18 +40,20 @@
                     @sort-change="searchSort"
                     style="width: 100%;min-width:800px"
                     >
-                <Column prop="domain" :label="$t('Domain')" width="200"> </Column>
+                <Column prop="domain" :label="$t('Domain')" style="width:200px"> </Column>
                 <Column prop="description" sortable="custom" :label="$t('Description')" width=""> </Column>
                 <Column  prop="email_count" :label="$t('Emails')" style="width:100px"> 
                 </Column> 
+                        <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
+                        <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column> 
 
-                <Column prop="created_at" :label="$t('Created At')" width="200"> </Column> 
-                <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column> 
-                <Column  :label="$t('Operate')" style="width:300px"> 
+                <Column  :label="$t('Operate')" style="width:400px"> 
                     <template #default="scope">
                 
                         <a :href="'/admin/domain/update?id='+scope.item.id"  style="margin-left:0px" class="link-primary decoration_none" >{{ $t("Edit") }}</a>
-                        <a href="#" style="margin-left:10px" class="link-danger decoration_none" @click="openDeleteDialog(scope.item.id,scope.item.title)" >{{ $t("Delete") }}删除</a>
+                        <a :href="'/admin/domain/view_setting?id='+scope.item.id"  style="margin-left:10px" class="link-primary decoration_none" >{{ $t("View Setting") }}</a>
+                        <a href="#"  style="margin-left:10px" class="link-primary decoration_none" @click="check_setting(scope.item.id)">{{ $t("Check Setting") }}</a>
+                        <a href="#" style="margin-left:10px" class="link-danger decoration_none" @click="openDeleteDialog(scope.item.id,scope.item.title)" >{{ $t("Delete") }}</a>
                         </template>
                 </Column> 
             </Table>
@@ -90,6 +92,8 @@ export default {
             this.searchPage(1);
     },
     methods:{
+    check_setting:async function(id){
+    },
 
     openDeleteDialog:async function(id){
             var result = await this.$confirm("Danger",this.$t("Delete It ?"))
