@@ -333,6 +333,12 @@ Api.admin_order_create_payment_checkouturl=async function(params)
     return fetch_data(response)
 }
 
+Api.admin_order_pay=async function(params)
+{
+    var response = await this.post("/api/admin/order/pay", params);
+    return fetch_data(response)
+}
+
 Api.admin_order_create=async function(params)
 {
     var response = await this.post("/api/admin/order/create", params);

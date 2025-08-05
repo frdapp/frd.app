@@ -11,7 +11,7 @@ import HBox from "@/components/HBox.vue"
 
     <Sidebar style="position:fixed;top:0;bottom:0;" />
 
-    <VBox style="justify-content: flex-start;margin-left:250px;width:100%;background-color2:#e7eaee">
+    <VBox style="justify-content: flex-start;margin-left:250px;width:100%;">
           <HBox style="height:60px;width:90%;background-color:white;align-items:center" class="border-bottom">  
             <div style="margin-left:24px">
               <strong>{{user.email}} </strong>

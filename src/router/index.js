@@ -36,6 +36,10 @@ const routes = [
                 path: 'verify',
                 component: () => import('@/views/user/login/verify.vue'),
             },
+            {
+                path: 'checkout',
+                component: () => import('@/views/user/index/checkout.vue'),
+            },
         ]
     },
     {

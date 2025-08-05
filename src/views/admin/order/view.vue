@@ -47,11 +47,6 @@ import { data } from "autoprefixer"
                 </td>
             </tr>
         </table>
-
-        <div v-if="order_data.status == 'WAIT_PAY'">
-            <Button @click="pay_by_points">Pay By Points</Button>
-            <Button @click="pay_by_price">Pay By Price</Button>
-        </div>
 </template>
 
 <script>
@@ -73,15 +68,7 @@ import { data } from "autoprefixer"
         },
 
         methods:{
-            pay_by_points:function(){
 
-            },
-            pay_by_price:async function(){
-                var response=await this.$api.admin_order_create_payment_checkouturl({"id":this.order_data["id"]})
-                if(response == false) return false;
-
-                window.location.href=response.checkout_url;
-            },
         },
 
     }

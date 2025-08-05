@@ -4,6 +4,8 @@ import VBox from "@/components/VBox.vue"
 import Button from "@/components/Button.vue"
 import Input from "@/components/Input.vue"
 import Textarea from "@/components/Textarea.vue"
+
+import { useUserStore } from '@/store/modules/user'
 </script>
 
 <template>
@@ -47,7 +49,7 @@ import Textarea from "@/components/Textarea.vue"
                     </p>
                 </div>
                 <div class="card-footer">
-                    <Button class="">Buy Now </Button>
+                    <Button class="" @click="buy(product.id)">Buy Now </Button>
                 </div>
             </div>
 
@@ -134,6 +136,18 @@ export default {
 
     },
     methods: {
+        buy:function(product_id){
+            const userStore = useUserStore()
+            if( userStore.isLogin() == false)
+            {
+                this.$router.push({"path":"/login"})
+            }
+            else
+            {
+                this.$router.push({"path":"/checkout","query":{"product_id":product_id}})
+            }
+
+        },
         send_message:async function(){
             var response=await this.$api.send_message(this.contact);
             if(response == false) return false

@@ -9,12 +9,9 @@ import { useRoute } from 'vue-router'
 <template>
     <div class="sidebar border-end">
         <div style="height:60px;display:flex;align-items: center;justify-content: start;border-bottom:none 1px #cccccc">
-            <!--
-             <img src="@/assets/logo.png" style="width:100px;"> </img>
-
-             f4ece1
-        -->
-             <img src="@/assets/logo_bg.png" style="width:100px;"> </img>
+            <a href="/">
+                <img src="@/assets/logo_bg.png" style="width:100px;"> </img>
+            </a>
         </div>
         <div style="height:30px;width:100%">
         </div>

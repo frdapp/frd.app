@@ -32,6 +32,7 @@ import Column from '@/components/Column.vue'
                 <Column align="center" :label="$t('Operate')" width="300">
                     <template #default="scope">
                         <a :href="'/admin/order/view?id=' + scope.item.id" style="margin-left:10px" class="link-primary decoration_none">{{$t('View')}}</a>
+                        <a v-if="scope.item.status == 'WAIT_PAY'" :href="'/checkout?order_no=' + scope.item.order_no" style="margin-left:10px" class="link-primary decoration_none">{{$t('Pay')}}</a>
                     </template>
                 </Column>
             </Table>
