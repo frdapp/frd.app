@@ -48,6 +48,7 @@
                         <Column prop="email" :label="$t('Username')" > </Column>
                         <Column prop="points" :label="$t('Points')" > </Column>
                         <Column prop="storage_current"  :label="$t('Storage Current')" width="100"> </Column>
+                        <Column prop="is_verified"  :label="$t('Is Verified')" width="100"> </Column>
                         <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
                         <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column>
                         <Column align="center" :label="$t('Operate')" width="300">
@@ -140,10 +141,6 @@ export default {
             {
                 this.query.order="desc";
             }
-
-            console.log(event.order)
-            console.log(event.prop)
-
 
             this.search()
         },

@@ -19,7 +19,7 @@ const userStore = useUserStore()
             </a>
 
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul v-if="userStore.isLogin()" class="navbar-nav text-uppercase ms-auto">
+                <ul v-if="userStore.isLogin()" class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a href="#products" class="nav-link" style="">
                             <span style="color:#534f4a">
@@ -48,7 +48,7 @@ const userStore = useUserStore()
                         </a>
                     </li>
                 </ul>
-                <ul v-else class="navbar-nav text-uppercase ms-auto">
+                <ul v-else class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a href="#products" class="nav-link" style="">
                             <span style="color:#534f4a">
