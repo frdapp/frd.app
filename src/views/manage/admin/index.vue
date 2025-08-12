@@ -45,11 +45,13 @@
                                         {{scope.item.id}}
                                 </template>
                         </Column>
-                        <Column prop="username" :label="$t('Username')" > </Column>
+                        <Column prop="email" :label="$t('Email')" > </Column>
+                        <Column prop="api_key" :label="$t('Api Key')" > </Column>
                         <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
                         <Column align="center" :label="$t('Operate')" width="300">
                             <template #default="scope">
 
+                                <a href="#" @click="generate_api_key(scope.item.id)" style="margin-left:10px" class="link-primary decoration_none" >{{$t("Generate Api Key")}}</a>
                                 <a :href="'/manage/admin/update?id='+scope.item.id" style="margin-left:10px" class="link-primary decoration_none" >{{$t("Edit")}}</a>
                                 <a href="#" style="margin-left:10px" class="link-danger decoration_none" @click="openDeleteDialog(scope.item.id,scope.item.title)" >{{$t("Delete")}}</a>
                                 </template>
@@ -107,6 +109,15 @@ export default {
                     this.search()
                 }
             }
+    },
+
+    generate_api_key:async function(item_id){
+        var path="/api/manage/admin/generate_api_key"
+
+        var response=this.$api.api_post(path,{"id":item_id})
+        if(response == false) return false;
+
+        this.search();
     },
 
     openAddDialog:function(){

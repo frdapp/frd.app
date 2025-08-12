@@ -79,6 +79,11 @@ Api.postForm=function(url,params) {
         return this.post(url, params,config);
 }
 
+Api.api_post = async function (path,params) {
+    var response = await this.post(path, params);
+    return fetch_data(response)
+}
+
 Api.admin_login_verify = async function (params) {
     var response = await this.post("/api/admin/login/verify", params);
     return fetch_data(response)
