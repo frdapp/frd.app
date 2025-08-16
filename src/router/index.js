@@ -209,6 +209,18 @@ const routes = [
                 component: () => import('@/views/manage/activity/form.vue'),
             },
             {
+                path: 'order_refund',
+                component: () => import('@/views/manage/order_refund/index.vue'),
+            },
+            {
+                path: 'order_refund/create',
+                component: () => import('@/views/manage/order_refund/form.vue'),
+            },
+            {
+                path: 'order_refund/update',
+                component: () => import('@/views/manage/order_refund/form.vue'),
+            },
+            {
                 path: 'user',
                 component: () => import('@/views/manage/user/index.vue'),
             },
