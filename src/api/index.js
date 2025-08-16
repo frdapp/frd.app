@@ -79,6 +79,11 @@ Api.postForm=function(url,params) {
         return this.post(url, params,config);
 }
 
+Api.api_get = async function (path,params) {
+    var response = await this.get(path, {"params":params});
+    return fetch_data(response)
+}
+
 Api.api_post = async function (path,params) {
     var response = await this.post(path, params);
     return fetch_data(response)

@@ -51,8 +51,12 @@
                     <template #default="scope">
                 
                         <a :href="'/admin/domain/update?id='+scope.item.id"  style="margin-left:0px" class="link-primary decoration_none" >{{ $t("Edit") }}</a>
-                        <a :href="'/admin/domain/view_setting?id='+scope.item.id"  style="margin-left:10px" class="link-primary decoration_none" >{{ $t("View Setting") }}</a>
+
+                        <a :href="'/admin/domain/view_setting?id='+scope.item.id"  style="margin-left:10px" class="link-primary decoration_none" >{{ $t("DNS Setting") }}</a>
+                        <!--
                         <a href="#"  style="margin-left:10px" class="link-primary decoration_none" @click="check_setting(scope.item.id)">{{ $t("Check Setting") }}</a>
+                        -->
+
                         <a href="#" style="margin-left:10px" class="link-danger decoration_none" @click="openDeleteDialog(scope.item.id,scope.item.title)" >{{ $t("Delete") }}</a>
                         </template>
                 </Column> 
