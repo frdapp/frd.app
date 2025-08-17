@@ -332,7 +332,7 @@
                 var response = await this.$api.api_post("/api/admin/domain/check_dns_record_value",params);
                 if(response == false) return false;
 
-                this.$alert(this.$t("your dns setting is correct"));
+                this.$alert(this.$t("SUCCESS"),this.$t("Your dns setting is correct"));
             },
         },
 
