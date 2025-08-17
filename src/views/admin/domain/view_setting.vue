@@ -104,7 +104,7 @@
                     <h5>
                         <label class="form-control-label">{{$t("SPF DNS Setting")}}</label>
                     </h5>
-                    <Button @click="check_dns_record(form.domain,'TXT','v=spf1 a: '+form.smtp_server+'-all')">{{ $t("Check My Domain DNS Setting") }}</Button>
+                    <Button @click="check_dns_record(form.domain,'TXT','v=spf1 a: '+form.smtp_server+' -all')">{{ $t("Check My Domain DNS Setting") }}</Button>
                     <p> </p>
                     <table class="table table-bordered">
                         <tbody>
@@ -128,7 +128,7 @@
                     <h5>
                         <label class="form-control-label">{{$t("DAMRC DNS Setting")}}</label>
                     </h5>
-                    <Button @click="check_dns_record(form.domain,'TXT', 'v=DMARC1; p=quarantine; rua=mailto:'+form.mail_report_email )">{{ $t("Check My Domain DNS Setting") }}</Button>
+                    <Button @click="check_dns_record('_dmarc.'+form.domain,'TXT', 'v=DMARC1; p=quarantine; rua=mailto:'+form.mail_report_email )">{{ $t("Check My Domain DNS Setting") }}</Button>
                     <p> </p>
                     <table class="table table-bordered">
                         <tbody>
@@ -138,7 +138,7 @@
                             </tr>
                             <tr>
                                 <td>{{$t("Name")}}</td>
-                                <td>_damrc</td>
+                                <td>_dmarc</td>
                             </tr>
                             <tr>
                                 <td>{{$t("Value")}}</td>
@@ -152,7 +152,7 @@
                     <h5>
                         <label class="form-control-label">{{$t("DKIM DNS Setting")}}</label>
                     </h5>
-                    <Button @click="check_dns_record(form.domain+'._domainkey','TXT', form.domain_dkim_public_key )">{{ $t("Check My Domain DNS Setting") }}</Button>
+                    <Button @click="check_dns_record(form.domain+'._domainkey.'+form.domain,'TXT', form.domain_dkim_public_key )">{{ $t("Check My Domain DNS Setting") }}</Button>
                     <p> </p>
                     <table class="table table-bordered">
                         <tbody>
