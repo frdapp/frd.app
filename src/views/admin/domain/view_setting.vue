@@ -50,7 +50,7 @@
                         <label class="form-control-label">{{$t('Main Mail DNS Setting')}}</label>
                     </h5>
 
-                    <Button @click="check_dns_record(form.domain,'MX',form.mail2_server)">{{ $t("Check My Domain DNS Setting") }}</Button>
+                    <Button @click="check_dns_record(form.domain,'MX',form.mail1_server)">{{ $t("Check My Domain DNS Setting") }}</Button>
                     <p> </p>
 
                     <table class="table table-bordered">
@@ -61,10 +61,14 @@
                             </tr>
                             <tr>
                                 <td>{{$t("Name")}}</td>
-                                <td>{{ form.mail1_server }}</td>
+                                <td>@</td>
                             </tr>
                             <tr>
                                 <td>{{$t("Value")}}</td>
+                                <td>{{ form.mail1_server }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$t("Priority")}}</td>
                                 <td>20</td>
                             </tr>
                         </tbody>
@@ -83,10 +87,14 @@
                             </tr>
                             <tr>
                                 <td>{{$t("Name")}}</td>
-                                <td>{{ form.mail2_server }}</td>
+                                <td>@</td>
                             </tr>
                             <tr>
                                 <td>{{$t("Value")}}</td>
+                                <td>{{ form.mail2_server }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{$t("Priority")}}</td>
                                 <td>20</td>
                             </tr>
                         </tbody>
