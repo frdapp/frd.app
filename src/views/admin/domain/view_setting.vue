@@ -69,7 +69,7 @@
                             </tr>
                             <tr>
                                 <td>{{$t("Priority")}}</td>
-                                <td>20</td>
+                                <td>10</td>
                             </tr>
                         </tbody>
                     </table>
