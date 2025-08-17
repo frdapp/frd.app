@@ -104,7 +104,7 @@
                     <h5>
                         <label class="form-control-label">{{$t("SPF DNS Setting")}}</label>
                     </h5>
-                    <Button @click="check_dns_record(form.domain,'TXT','v=spf1 a: '+form.smtp_server+' -all')">{{ $t("Check My Domain DNS Setting") }}</Button>
+                    <Button @click="check_dns_record(form.domain,'TXT','v=spf1 a:'+form.smtp_server+' -all')">{{ $t("Check My Domain DNS Setting") }}</Button>
                     <p> </p>
                     <table class="table table-bordered">
                         <tbody>
