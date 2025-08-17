@@ -9,15 +9,18 @@ const userStore = useUserStore()
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
+            <VBox>
+
             <a class="navbar-brand" href="/">
-                <!--
-                    <img src="@/assets/img/navbar-logo.svg" alt="..." /></a>
-                    -->
-                <img src="@/assets/logo_bg.png" alt="木石科技" style="width:100px" />
+                            <img src="@/assets/logo_bg.png" alt="木石科技" style="width:100px" />
 
-                <a />
+
             </a>
+            <span style="font-size:12px;color:rgb(49, 111, 21)">
+                    Tree & Stone Tech
+            </span>
 
+            </VBox>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul v-if="userStore.isLogin()" class="navbar-nav ms-auto">
                     <li class="nav-item">

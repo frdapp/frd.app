@@ -26,15 +26,19 @@ import { useRoute } from 'vue-router'
         <MenuItem class="menu-item" path="/admin/domain"  :current_path="current_path">
             Domain
         </MenuItem>
+        <!--
         <MenuItem class="menu-item" path="/admin/alias_domain"  :current_path="current_path">
             Domain Alias
         </MenuItem>
+        -->
         <MenuItem class="menu-item" path="/admin/email" :current_path="current_path">
             Email
         </MenuItem>
+        <!--
         <MenuItem class="menu-item" path="/admin/alias" :current_path="current_path">
             Email Alias
         </MenuItem>
+        -->
         <MenuItem class="menu-item" path="/admin/order" :current_path="current_path">
             Order
         </MenuItem>

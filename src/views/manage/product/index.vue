@@ -41,9 +41,21 @@ import Column from '@/components/Column.vue'
                 <Column prop="title" :label="$t('Title')">
                 </Column>
                 <Column prop="description" :label="$t('Description')" width="100"> </Column>
-                <Column prop="storage" :label="$t('Storage')" width="100"> </Column>
-                <Column prop="duration" :label="$t('duration')" width="100"> </Column>
-                <Column prop="price" :label="$t('price')" width="100"> </Column>
+                <Column prop="storage" :label="$t('Storage')" width="100"> 
+                    <template #default="scope">
+                        {{ scope.item.storage }} MB
+                    </template>
+                </Column>
+                <Column prop="duration" :label="$t('duration')" width="100"> 
+                    <template #default="scope">
+                        {{ scope.item.duration }} Days
+                    </template>
+                </Column>
+                <Column prop="price" :label="$t('price')" width="100"> 
+                    <template #default="scope">
+                        USD $ {{ scope.item.price }}  
+                    </template>
+                </Column>
                 <Column prop="points" :label="$t('points')" width="100"> </Column>
                 <Column prop="stock" :label="$t('stock')" width="100"> </Column>
                 <Column prop="is_active" :label="$t('is_active')" width="100"> </Column>
@@ -53,9 +65,9 @@ import Column from '@/components/Column.vue'
                     <template #default="scope">
                         <a :href="'/manage/product/update?id=' + scope.item.id" style="margin-left:10px"
                             class="link-primary decoration_none">{{$t("Edit")}}</a>
-                        <a v-if="scope.item.is_active == 1" href="#" style="margin-left:10px" class="link-primary decoration_none"
-                            @click="active_product(scope.item.id)">{{$t("Active")}}</a>
                         <a v-if="scope.item.is_active == 0" href="#" style="margin-left:10px" class="link-primary decoration_none"
+                            @click="active_product(scope.item.id)">{{$t("Active")}}</a>
+                        <a v-if="scope.item.is_active == 1" href="#" style="margin-left:10px" class="link-primary decoration_none"
                             @click="inactive_product(scope.item.id)">{{$t("Inactive")}}</a>
                     </template>
                 </Column>
@@ -102,7 +114,7 @@ export default {
         active_product: async function (id) {
             var result = await this.$confirm("Warning","Active It ?")
             if (result) {
-                var response = await this.$api.manage_product_set_active({ "id": id ,"is_active":1})
+                var response = await this.$api.api_post("/api/manage/product/set_active",{ "id": id ,"is_active":1})
                 if (response != false) {
                     this.search()
                 }
@@ -111,7 +123,7 @@ export default {
         inactive_product: async function (id) {
             var result = await this.$confirm("Warning","Deactive It ?")
             if (result) {
-                var response = await this.$api.manage_product_set_active({ "id": id ,"is_active":0})
+                var response = await this.$api.api_post("/api/manage/product/set_active",{ "id": id ,"is_active":0})
                 if (response != false) {
                     this.search()
                 }

@@ -103,7 +103,7 @@ export default {
             var result = await this.$confirm("Danger",this.$t("Delete It ?"))
             if(result)
             {
-                var response=await this.$api.admin_alias_domain_delete({"id":id})
+                var response=await this.$api.admin_domain_delete({"id":id})
                 if(response != false)
                 {
                     this.search()

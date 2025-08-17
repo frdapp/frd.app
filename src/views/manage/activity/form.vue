@@ -57,7 +57,7 @@
                                     <label>{{ $t('Start AT') }}</label>
                                 </td>
                                 <td>
-                                    <Input class=""  v-model="form.params.start_at" />
+                                    <Input class=""  v-model="form.params.start_at" placeholder="2022-02-02"/>
                                 </td>
                             </tr>
                             <tr>
@@ -65,7 +65,7 @@
                                     <label>{{ $t('End AT') }}</label>
                                 </td>
                                 <td>
-                                    <Input class=""  v-model="form.params.end_at" />
+                                    <Input class=""  v-model="form.params.end_at" placeholder="2022-02-02"/>
                                 </td>
                             </tr>
                             <tr>

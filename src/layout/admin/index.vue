@@ -17,6 +17,7 @@ import HBox from "@/components/HBox.vue"
               <strong>{{user.email}} </strong>
               {{$t("Points")}} <strong>{{user.points}} </strong> | 
               {{$t("Current Storage")}} <strong>{{user.storage_current}} GB</strong>
+                        <a href="/checkout">{{ $t("Buy Storage") }}</a>
             </div>
           </HBox>
           <VBox style="width:90%">

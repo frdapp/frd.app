@@ -12,8 +12,9 @@
 <template>
     <VBox style="width:100%">
         <form name="search" v-on:submit="searchPage(1)">
+            <!--
                         {{$t("Current Storage") }} {{ storage_current }} GB
-                        <a href="/checkout">{{ $t("Buy Storage") }}</a>
+            -->
         <HBox  style="  margin-top:10px;padding:0px;">
                     <Input
                         @keyup.enter.native="searchPage(1)"
@@ -39,10 +40,20 @@
 
                         <Column prop="title" :label="$t('Title')" > </Column>
                         <Column prop="description" :label="$t('Description')" width="100"> </Column>
-                        <Column prop="storage" :label="$t('Storage')" > </Column>
+                        <Column prop="storage" :label="$t('Storage')" > 
+                                <template #default="scope">
+                                    {{ scope.item.storage }} MB
+                                </template>
+                        </Column>
                         <Column prop="start_at" :label="$t('Start At')"> </Column>
                         <Column prop="expired_at" :label="$t('Expired At')"> </Column>
-                        <Column prop="state" :label="$t('State')"> </Column>
+                        <Column prop="state" :label="$t('State')">
+                                <template #default="scope">
+                                    <span class="text-info" v-if="scope.item.state == 'NOT_START'">{{ $t("Not Start") }}</span>
+                                    <span class="text-success" v-if="scope.item.state == 'USING'">{{ $t("Active") }}</span>
+                                    <span v-if="scope.item.state == 'EXPIRED'">{{ $t("Expired") }}</span>
+                                </template>
+                         </Column>
                         <Column prop="created_at" :label="$t('Created At')" width="200"> </Column>
                         <Column prop="updated_at" :label="$t('Updated At')" width="200"> </Column> 
 

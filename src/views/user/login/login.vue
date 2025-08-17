@@ -70,7 +70,6 @@ const userStore = useUserStore()
             </div>
             <div>
               <p class="text-center">Not a member? <a data-toggle="tab" href="/register">Register</a></p>
-              <p class="text-center">Forgot password? <a href="/forgot_password">Forgot Password</a> </p>
             </div>
           </div>
         </div>

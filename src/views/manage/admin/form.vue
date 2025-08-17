@@ -11,10 +11,10 @@
         <table class="layout-table" style="">
             <tr>
                 <td>
-                <label class="form-control-label">Username</label>
+                <label class="form-control-label">Email</label>
                 </td>
                 <td>
-                <Input class="right_column" ref="title" v-model="form.username" />
+                <Input class="right_column" ref="title" v-model="form.email" />
                 </td>
             </tr>
             <tr>
@@ -51,7 +51,7 @@
             return {
                 form:{
                     id:0,
-                    username:"",
+                    email:"",
                     password:"",
                 },
             }

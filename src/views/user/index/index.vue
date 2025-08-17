@@ -42,9 +42,10 @@ import { useUserStore } from '@/store/modules/user'
                         {{ product.description }}
                     </p>
                     <p>
-                        {{ $t("Storage")}} {{ product.storage }} GB  <br/>
-                        {{$t("Price")}} {{ product.price }}  <br/>
+                        {{ $t("Storage")}} {{ product.storage }} MB  <br/>
+                        {{$t("Price")}}(USD) $ {{ product.price }}  <br/>
                         {{$t("Points")}} {{ product.points }}  <br/>
+                        {{$t("Duration")}} {{ product.duration }} {{$t("Days")}}  <br/>
                         {{$t("Stock")}} {{ product.stock }}  <br/>
                     </p>
                 </div>

@@ -56,8 +56,12 @@ import Column from '@/components/Column.vue'
                     <template #default="scope">
                         <a :href="'/manage/activity/update?id=' + scope.item.id" style="margin-left:10px"
                             class="link-primary decoration_none">{{$t("Edit")}}</a>
-                            <!--
+                        <a v-if="scope.item.is_active == 0" href="#" style="margin-left:10px" class="link-primary decoration_none"
+                            @click="active_product(scope.item.id)">{{$t("Active")}}</a>
+                        <a v-if="scope.item.is_active == 1" href="#" style="margin-left:10px" class="link-primary decoration_none"
+                            @click="inactive_product(scope.item.id)">{{$t("Inactive")}}</a>
 
+                    <!--
                         <a href="#" style="margin-left:10px" class="link-primary decoration_none"
                             @click="openDeleteDialog(scope.item.id)">{{$t("Delete")}}</a>
                     -->
@@ -102,6 +106,24 @@ export default {
         this.searchPage(1);
     },
     methods: {
+        active_product: async function (id) {
+            var result = await this.$confirm("Warning","Active It ?")
+            if (result) {
+                var response = await this.$api.api_post("/api/manage/activity/set_active",{ "id": id ,"is_active":1})
+                if (response != false) {
+                    this.search()
+                }
+            }
+        },
+        inactive_product: async function (id) {
+            var result = await this.$confirm("Warning","Deactive It ?")
+            if (result) {
+                var response = await this.$api.api_post("/api/manage/activity/set_active",{ "id": id ,"is_active":0})
+                if (response != false) {
+                    this.search()
+                }
+            }
+        },
 
         openDeleteDialog: async function (id) {
             var result = await this.$confirm("Danger","Delete It ?")

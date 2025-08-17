@@ -11,12 +11,6 @@ import Column from '@/components/Column.vue'
 
 <template>
     <VBox style="width:100%">
-        <div>
-            <Button style="margin-right:50px" class="btn-success" @click="openAddDialog()">
-                {{$t("Create")}}
-            </Button>
-        </div>
-
         <!-- data -->
         <div style="margin-top:10px;padding:0px;width:100%">
             <Table :items="items" @sort-change="searchSort" style="width: 100%"

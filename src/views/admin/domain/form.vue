@@ -14,7 +14,8 @@
                 <label class="form-control-label">{{$t('Domain')}}</label>
                 </td>
                 <td>
-                <Input class="right_column" ref="title" v-model="form.domain" />
+                <Input v-if="form.id == 0" class="right_column" ref="title" v-model="form.domain" />
+                <span v-else>{{ form.domain }}</span>
                 </td>
             </tr>
             <tr>

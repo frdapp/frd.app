@@ -133,7 +133,7 @@ export default {
         },
 
         search:async function(){
-            var response=await this.$api.manage_log_list(this.query)
+            var response=await this.$api.api_get("/api/admin/log/list",this.query)
             this.items=response.items;
             this.pagination=response.pagination;
         },

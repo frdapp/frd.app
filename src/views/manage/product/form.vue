@@ -47,7 +47,7 @@
                 <label class="form-control-label">{{$t("Storage")}}</label>
                 </td>
                 <td>
-                    <Input class=""  v-model="form.storage" /> GB
+                    <Input class=""  v-model="form.storage" /> MB
                 </td>
             </tr>
             <tr>

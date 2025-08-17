@@ -53,7 +53,6 @@ const userStore = useUserStore()
         </div>
         <div>
 		          <p class="text-center">Already have account ? <a data-toggle="tab" href="/login">{{ $t('login') }}</a></p>
-		          <p class="text-center">Forgot password? <a href="/forgot_password">{{ $t('Forgot Password') }}</a> </p>
         </div>
       </div>
     </div>
