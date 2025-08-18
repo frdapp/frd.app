@@ -55,7 +55,7 @@
                 <label class="form-control-label">{{$t("Duration")}}</label>
                 </td>
                 <td>
-                    <Input class=""  v-model="form.duration" /> Month
+                    <Input class=""  v-model="form.duration" />  {{$t("Days")}}
                 </td>
             </tr>
             <tr>

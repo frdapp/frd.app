@@ -37,10 +37,7 @@ const userStore = useUserStore()
               <Button @click="login_by_password" class="form-control btn-primary btn-block">{{$t("Login")}}</Button>
             </div>
             <div>
-              <p class="text-center">Not a member? <a data-toggle="tab" href="/register">{{ $t("Register") }}</a></p>
-              <!--
-              <p class="text-center">Forgot password? <a href="/forgot_password">Forgot Password</a> </p>
-              -->
+              <p class="text-center">{{$t("Not a member?")}} <a data-toggle="tab" href="#" @click="to_register">{{$t("Register")}}</a></p>
             </div>
           </div>
         </div>
@@ -69,7 +66,7 @@ const userStore = useUserStore()
               <Button @click="login_by_veriy_code" class="form-control btn-primary btn-block">{{$t("Login")}}</Button>
             </div>
             <div>
-              <p class="text-center">Not a member? <a data-toggle="tab" href="/register">Register</a></p>
+              <p class="text-center">{{$t("Not a member?")}} <a data-toggle="tab" href="#" @click="to_register">{{$t("Register")}}</a></p>
             </div>
           </div>
         </div>
@@ -100,13 +97,27 @@ export default {
   },
 
   methods: {
+    to_register:function(){
+        this.$router.push({
+          path: '/register',
+          query: this.$route.query
+        });
+    },
     login_by_password: async function () {
       var response = await this.$api.admin_login_login(this.form_password);
       if (response == false) return false;
 
       const userStore = useUserStore()
       userStore.set(response)
-      this.$router.push({ "path": "/admin/domain" });
+
+      if(this.$route.query.to_checkout)
+      {
+          this.$router.push({"path":"/checkout", query: this.$route.query });
+      }
+      else
+      {
+          this.$router.push({"path":"/admin/domain"});
+      }
     },
     login_by_veriy_code: async function () {
       var response = await this.$api.admin_login_login_by_verify_code(this.form_verify_code);
@@ -114,7 +125,14 @@ export default {
 
       const userStore = useUserStore()
       userStore.set(response)
-      this.$router.push({ "path": "/admin/domain" });
+      if(this.$route.query.to_checkout)
+      {
+          this.$router.push({"path":"/checkout", query: this.$route.query });
+      }
+      else
+      {
+          this.$router.push({"path":"/admin/domain"});
+      }
     },
     send_verify_code: async function () {
       if (!this.form_verify_code.email) {

@@ -65,26 +65,38 @@ const userStore = useUserStore()
                 },
                 created:function(){
                   this.form.email=this.$route.query.email;
-
+                },
+                mounted:function(){
+                  //this.send_verify_code();
                 },
                 methods:{
                     send_verify_code:async function(){
                         if(! this.form.email )
                         {
-                            this.$alert("WARNING","Please fill email");
+                            this.$alert("WARNING",this.$t("Please fill email"));
                             return false;
                         }
 
                         var response=await this.$api.admin_email_send_verify_code(this.form);
                         if(response == false ) return false;
 
-                        this.$alert("Success","Send Successful. Please check your email mailbox.")
+                        this.$alert("Success",this.$t("Send Successful. Please check your email mailbox."))
                     },
                     verify:async function(){
                         var response=await this.$api.admin_login_verify(this.form);
                         if(response == false ) return false;
 
-                        this.$router.push({"path":"/login"});
+                        const userStore = useUserStore()
+                        userStore.set(response)
+
+                        if(this.$route.query.to_checkout)
+                        {
+                            this.$router.push({"path":"/checkout", query: this.$route.query });
+                        }
+                        else
+                        {
+                            this.$router.push({"path":"/admin/domain"});
+                        }
                 }
             
             }

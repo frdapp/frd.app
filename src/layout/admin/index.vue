@@ -16,8 +16,10 @@ import HBox from "@/components/HBox.vue"
             <div style="margin-left:24px">
               <strong>{{user.email}} </strong>
               {{$t("Points")}} <strong>{{user.points}} </strong> | 
-              {{$t("Current Storage")}} <strong>{{user.storage_current}} GB</strong>
-                        <a href="/checkout">{{ $t("Buy Storage") }}</a>
+              {{$t("Storage")}} <strong>{{ user.storage_used }}</strong>/<strong>{{user.storage_current}} MB </strong>
+              {{$t("Network")}} <strong>{{ user.network_used }}</strong>/<strong>{{user.network_current}} MB </strong>
+
+                <a href="/checkout" style="margin-left:10px">{{ $t("Buy Storage ") }}</a>
             </div>
           </HBox>
           <VBox style="width:90%">
@@ -65,13 +67,10 @@ export default {
 
   methods: {
       get_user_info:async function() {
-            var response = await this.$api.admin_user_list()
-            if(response.items.length > 0)
-            {
-              this.user = response.items[0];
-            }
+            var response = await this.$api.api_get("/api/admin/me/stat")
+            if(response == false) return false;
 
-            return this.user
+            this.user = response
       }
   },
 };

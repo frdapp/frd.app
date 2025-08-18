@@ -50,7 +50,7 @@ import { useUserStore } from '@/store/modules/user'
                     </p>
                 </div>
                 <div class="card-footer">
-                    <Button class="" @click="buy(product.id)">Buy Now </Button>
+                    <Button class="" @click="buy(product.id)">{{$t("Buy Now")}} </Button>
                 </div>
             </div>
 
@@ -141,7 +141,7 @@ export default {
             const userStore = useUserStore()
             if( userStore.isLogin() == false)
             {
-                this.$router.push({"path":"/login"})
+                this.$router.push({"path":"/login","query":{"product_id":product_id,"to_checkout":1}})
             }
             else
             {

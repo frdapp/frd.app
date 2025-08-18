@@ -52,7 +52,7 @@ const userStore = useUserStore()
               <Button  @click="register" class="form-control btn-primary btn-block">{{ $t('Register') }}</Button>
         </div>
         <div>
-		          <p class="text-center">Already have account ? <a data-toggle="tab" href="/login">{{ $t('login') }}</a></p>
+		          <p class="text-center">{{$t("Already have account")}} ? <a data-toggle="tab" href="#" @click="to_login">{{ $t('login') }}</a></p>
         </div>
       </div>
     </div>
@@ -76,10 +76,16 @@ const userStore = useUserStore()
                 },
 
                 methods:{
+                    to_login:function(){
+                        this.$router.push({
+                          path: '/login',
+                          query: this.$route.query
+                        });
+                    },
                     register:async function(){
                         if(this.form.password != this.form.confirm_password)
                         {
-                            this.$alert("WARNING","password and confirm password not the same !");
+                            this.$alert("WARNING",this.$t("password and confirm password not the same !"));
                             return false;
                         }
 
@@ -87,7 +93,11 @@ const userStore = useUserStore()
                         var response=await this.$api.admin_login_register(this.form);
                         if(response == false ) return false;
 
-                      this.$router.push({"path":"/verify","query":{"email":this.form.email}})
+                        var query= this.$route.query
+                        query.email=this.form.email
+
+                        //this.$router.push({"path":"/verify","query":{"email":this.form.email}})
+                        this.$router.push({"path":"/verify","query":query})
                 }
             
             }

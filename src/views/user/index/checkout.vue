@@ -14,6 +14,8 @@ import StepperContent from "@/components/StepperContent.vue"
     <div class="" style="margin-top:100px">
         <HBox>
             <VBox>
+                <h3>{{ $t("Product") }}</h3>
+
                 <Select v-model="product_id" @change="on_choose_product">
                     <option v-for="product in products" :value="product.id">{{ product.title }}</option>
                 </Select>
@@ -34,11 +36,13 @@ import StepperContent from "@/components/StepperContent.vue"
                         Price ${{ product.price }} Or  Points {{ product.points }} <br />
 
                     </div>
-                    <div class="card-footer">
-                    </div>
+        
                 </div>
 
-            {{ $t('Billing address') }}
+                <h3>
+                        {{ $t('Billing address') }}
+                </h3>
+
 
                 <table>
                     <tr>
@@ -91,7 +95,9 @@ import StepperContent from "@/components/StepperContent.vue"
 
                 </table>
 
+            <h3>
             {{ $t('Payment') }} 
+            </h3>
                         <Select v-model="cart.pay_way">
                             <option value="MONEY">USD</option>
                             <option value="POINTS">POINTS</option>
@@ -102,10 +108,16 @@ import StepperContent from "@/components/StepperContent.vue"
 
 
             </VBox>
-            <VBox>
+            <VBox style="justify-content: flex-start;margin-left:30px">
                 <h3>Cart</h3>
+                <pre>
+                Procut name     price 
 
-                        <Button  @click="checkout()">{{ $t('Checkout') }}</Button>
+                Payment   USD
+
+                Total          price
+                </pre>
+                <Button  @click="checkout()">{{ $t('Checkout') }}</Button>
             </VBox>
 
         </HBox>
@@ -122,6 +134,8 @@ export default {
 
         this.product_id = this.$route.query.product_id ?? 0;
         this.order_no = this.$route.query.order_no ?? "";
+
+        this.cart.product_id = this.product_id;
         if (this.product_id == false) 
         {
             if (this.products.length > 0) {
