@@ -13,7 +13,7 @@ import { useUserStore } from '@/store/modules/user'
         <HBox style="justify-content: space-between;">
             <VBox style="justify-content: flex-start;">
                 <H2>
-                    Get Your Own Domain Emails 
+                    Get Your Own Domain Emails
                 </H2>
                 <p>
                     Unlimit Domain Email Accounts
@@ -22,96 +22,113 @@ import { useUserStore } from '@/store/modules/user'
                     Cheep Storage Price
                 </p>
                 <p>
-                    All Email Account Share Same Storage . Save your money 
+                    All Email Account Share Same Storage . Save your money
                 </p>
 
             </VBox>
 
-            <img src="/email-4044165_1280.jpg" style="width:600px"/>
+            <img src="/email-4044165_1280.jpg" style="width:600px" />
         </HBox>
 
-        <div style="margin-top:30px">
-            <h3 id="products">Products</h3>
+        <div v-if="activitys.length > 0" style="margin-top:30px">
+            <h3 id="products">{{ $t("Activity") }}</h3>
             <div style="display:grid;grid-auto-flow: row;grid-template-columns: repeat(5, 1fr);gap:10px">
-            <div class="card" v-for="product in products" style="">
-                <div class="card-header">
-                    <strong>{{ product.title }}</strong>
+                <div class="card" v-for="activity in activitys" style="">
+                    <div class="card-header">
+                        <strong>{{ activity.title }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <p v-html="activity.description">
+                        </p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p>
-                        {{ product.description }}
-                    </p>
-                    <p>
-                        {{ $t("Storage")}} {{ product.storage }} MB  <br/>
-                        {{$t("Price")}}(USD) $ {{ product.price }}  <br/>
-                        {{$t("Points")}} {{ product.points }}  <br/>
-                        {{$t("Duration")}} {{ product.duration }} {{$t("Days")}}  <br/>
-                        {{$t("Stock")}} {{ product.stock }}  <br/>
-                    </p>
-                </div>
-                <div class="card-footer">
-                    <Button class="" @click="buy(product.id)">{{$t("Buy Now")}} </Button>
-                </div>
-            </div>
 
+            </div>
         </div>
-       </div>
+
+        <div style="margin-top:30px">
+            <h3 id="products">{{ $t("Products") }}</h3>
+            <div style="display:grid;grid-auto-flow: row;grid-template-columns: repeat(5, 1fr);gap:10px">
+                <div class="card" v-for="product in products" style="">
+                    <div class="card-header">
+                        <strong>{{ product.title }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            {{ product.description }}
+                        </p>
+                        <p>
+                            {{ $t("Storage") }} {{ product.storage }} MB <br />
+                            {{ $t("Price") }}(USD) $ {{ product.price }} <br />
+                            {{ $t("Points") }} {{ product.points }} <br />
+                            {{ $t("Duration") }} {{ product.duration }} {{ $t("Days") }} <br />
+                            {{ $t("Stock") }} {{ product.stock }} <br />
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <Button class="" @click="buy(product.id)">{{ $t("Buy Now") }} </Button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
         <div style="margin-top:30px">
 
-            <h3 id="contact">Contact US</h3>
+            <h3 id="contact">{{$t("Contact US")}}</h3>
             <HBox style="justify-content: space-between;">
-            <div class="card" style="width:500px">
-                <div class="card-body">
-                    <table class="layout-table" style="width:100%">
-                        <tr>
-                            <td style="width:150px">
-                                {{ $t("Your Name") }}
-                            </td>
-                            <td>
-                                <Input v-model="contact.name" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                {{ $t("Your Email") }}
-                            </td>
-                            <td>
-                                <Input v-model="contact.email" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                {{ $t("Subject") }}
-                            </td>
-                            <td>
-                                <Input v-model="contact.subject" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                {{ $t("Message") }}
-                            </td>
-                            <td>
-                                <Textarea v-model="contact.message" rows="5"></Textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                                <Button @click="send_message" class="form-control btn-primary">{{ $t("Send Message") }} </Button>
-                            </td>
-                        </tr>
+                <div class="card" style="width:500px">
+                    <div class="card-body">
+                        <table class="layout-table" style="width:100%">
+                            <tr>
+                                <td style="width:150px">
+                                    {{ $t("Your Name") }}
+                                </td>
+                                <td>
+                                    <Input v-model="contact.name" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ $t("Your Email") }}
+                                </td>
+                                <td>
+                                    <Input v-model="contact.email" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ $t("Subject") }}
+                                </td>
+                                <td>
+                                    <Input v-model="contact.subject" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ $t("Message") }}
+                                </td>
+                                <td>
+                                    <Textarea v-model="contact.message" rows="5"></Textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <Button @click="send_message" class="form-control btn-primary">{{ $t("Send Message")
+                                        }} </Button>
+                                </td>
+                            </tr>
 
-                    </table>
+                        </table>
+
+                    </div>
 
                 </div>
-
-            </div>
-            <img src="/contact_bg.png" style="width:500px"/>
+                <img src="/contact_bg.png" style="width:500px" />
             </HBox>
-       </div>
+        </div>
     </div>
 
 </template>
@@ -127,13 +144,18 @@ export default {
                 "email":"",
                 "subject":"",
                 "message":"",
-            }
+            },
+            activitys:[],
         }
     },
     created:async function(){
         var response=await this.$api.product_list()
         if(response == false) return false;
         this.products=response.items
+
+        var response=await this.$api.api_get("/api/activity/list")
+        if(response == false) return false;
+        this.activitys=response.items
 
     },
     methods: {

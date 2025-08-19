@@ -13,7 +13,7 @@ import StepperContent from "@/components/StepperContent.vue"
 
     <div class="" style="margin-top:100px">
         <HBox>
-            <VBox>
+            <VBox style="gap:10px;">
                 <h3>{{ $t("Product") }}</h3>
 
                 <Select v-model="product_id" @change="on_choose_product">
@@ -105,18 +105,35 @@ import StepperContent from "@/components/StepperContent.vue"
 
 
 
-
-
             </VBox>
             <VBox style="justify-content: flex-start;margin-left:30px">
-                <h3>Cart</h3>
-                <pre>
-                Procut name     price 
+                <h3>{{$t("Cart")}}</h3>
+                <table class="table ">
+                    <tbody>
+                        <tr>
+                            <td>
+                                {{ $t("Product") }}
 
-                Payment   USD
+                            </td>
+                            <td>
+                                {{ product.title }}
+                            </td>
+                        </tr>
+            
+                        <tr>
+                            <td>
+                                {{ $t("Total") }}
 
-                Total          price
-                </pre>
+                            </td>
+                            <td>
+                                <span v-if="cart.pay_way == 'MONEY'"> USD {{ product.price }}</span>
+                                <span v-if="cart.pay_way == 'POINTS'"> {{$t("Points")}} {{ product.points }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
                 <Button  @click="checkout()">{{ $t('Checkout') }}</Button>
             </VBox>
 
@@ -136,18 +153,31 @@ export default {
         this.order_no = this.$route.query.order_no ?? "";
 
         this.cart.product_id = this.product_id;
+
+
         if (this.product_id == false) 
         {
-            if (this.products.length > 0) {
+            if (this.products.length > 0) 
+            {
                 this.cart.product_id = this.products[0].id;
+                this.product_id = this.products[0].id;
             }
         }
 
         this.on_choose_product();
 
-        if(this.order_no != false)
+        var response = await this.$api.api_get("/api/admin/address/get")
+        if(response)
         {
-            this.$refs.stepper.to_next();
+            this.cart.email=response.email
+            this.cart.phone=response.phone
+            this.cart.first_name=response.first_name
+            this.cart.last_name=response.last_name
+            this.cart.country=response.country
+            this.cart.state=response.state
+            this.cart.address=response.address
+            this.cart.address2=response.address2
+            this.cart.zip=response.zip
         }
     },
     data: function () {
