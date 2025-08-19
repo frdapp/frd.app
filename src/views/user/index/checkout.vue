@@ -31,7 +31,7 @@ import StepperContent from "@/components/StepperContent.vue"
                         <br />
                         Storage {{ product.storage }}
                         <br />
-                        Month {{ product.duration }} <br />
+                        {{ product.duration }} {{ $t("Days") }}<br />
                         <br />
                         Price ${{ product.price }} Or  Points {{ product.points }} <br />
 
