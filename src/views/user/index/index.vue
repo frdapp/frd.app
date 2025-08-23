@@ -63,6 +63,10 @@ import { useUserStore } from '@/store/modules/user'
                                 <td style="text-align:right">{{ product.storage }} MB</td>
                             </tr>
                             <tr>
+                                <td>{{ $t("Transfer") }}</td>
+                                <td style="text-align:right">{{ product.storage }} MB</td>
+                            </tr>
+                            <tr>
                                 <td>{{ $t("Duration") }}</td>
                                 <td style="text-align:right">{{ product.duration }} {{ $t("Days") }}</td>
                             </tr>
