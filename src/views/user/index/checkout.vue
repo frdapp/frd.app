@@ -25,7 +25,8 @@ import StepperContent from "@/components/StepperContent.vue"
                         {{ product.title }}
                     </div>
                     <div class="card-body">
-                        <p> {{ product.description }} </p>
+                        <p v-html="product.description">
+                        </p>
 
                         <table style="width:100%">
                             <tr>

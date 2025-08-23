@@ -54,8 +54,7 @@ import { useUserStore } from '@/store/modules/user'
                         <strong>{{ product.title }}</strong>
                     </div>
                     <div class="card-body">
-                        <p>
-                            {{ product.description }}
+                        <p v-html="product.description">
                         </p>
                         <table style="width:100%">
                             <tr>
