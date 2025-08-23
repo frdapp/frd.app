@@ -20,20 +20,35 @@ import StepperContent from "@/components/StepperContent.vue"
                     <option v-for="product in products" :value="product.id">{{ product.title }}</option>
                 </Select>
 
-                <div class="card" >
+                <div class="card"  style="width:100%">
                     <div class="card-header">
                         {{ product.title }}
                     </div>
                     <div class="card-body">
                         <p> {{ product.description }} </p>
-                        <small>Stock:  {{ product.stock }} </small>
-                        <br />
-                        <br />
-                        Storage {{ product.storage }}
-                        <br />
-                        {{ product.duration }} {{ $t("Days") }}<br />
-                        <br />
-                        Price ${{ product.price }} Or  Points {{ product.points }} <br />
+
+                        <table style="width:100%">
+                            <tr>
+                                <td>{{ $t("Storage") }}</td>
+                                <td style="text-align:right">{{ product.storage }} MB</td>
+                            </tr>
+                            <tr>
+                                <td>{{ $t("Duration") }}</td>
+                                <td style="text-align:right">{{ product.duration }} {{ $t("Days") }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ $t("Price") }}</td>
+                                <td style="text-align:right">$ {{ product.price }} </td>
+                            </tr>
+                            <tr>
+                                <td>{{ $t("Points") }}</td>
+                                <td style="text-align:right">{{ product.points }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ $t("Stock") }}</td>
+                                <td style="text-align:right">{{ product.stock }}</td>
+                            </tr>
+                        </table>
 
                     </div>
         
@@ -126,7 +141,7 @@ import StepperContent from "@/components/StepperContent.vue"
 
                             </td>
                             <td>
-                                <span v-if="cart.pay_way == 'MONEY'"> USD {{ product.price }}</span>
+                                <span v-if="cart.pay_way == 'MONEY'"> (USD) $ {{ product.price }}</span>
                                 <span v-if="cart.pay_way == 'POINTS'"> {{$t("Points")}} {{ product.points }}</span>
                             </td>
                         </tr>

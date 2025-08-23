@@ -57,13 +57,28 @@ import { useUserStore } from '@/store/modules/user'
                         <p>
                             {{ product.description }}
                         </p>
-                        <p>
-                            {{ $t("Storage") }} {{ product.storage }} MB <br />
-                            {{ $t("Price") }}(USD) $ {{ product.price }} <br />
-                            {{ $t("Points") }} {{ product.points }} <br />
-                            {{ $t("Duration") }} {{ product.duration }} {{ $t("Days") }} <br />
-                            {{ $t("Stock") }} {{ product.stock }} <br />
-                        </p>
+                        <table style="width:100%">
+                            <tr>
+                                <td>{{ $t("Storage") }}</td>
+                                <td style="text-align:right">{{ product.storage }} MB</td>
+                            </tr>
+                            <tr>
+                                <td>{{ $t("Duration") }}</td>
+                                <td style="text-align:right">{{ product.duration }} {{ $t("Days") }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ $t("Price") }}</td>
+                                <td style="text-align:right">$ {{ product.price }} </td>
+                            </tr>
+                            <tr>
+                                <td>{{ $t("Points") }}</td>
+                                <td style="text-align:right">{{ product.points }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ $t("Stock") }}</td>
+                                <td style="text-align:right">{{ product.stock }}</td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="card-footer">
                         <Button class="" @click="buy(product.id)">{{ $t("Buy Now") }} </Button>
