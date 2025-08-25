@@ -91,7 +91,12 @@ const userStore = useUserStore()
     <footer class="footer border-top" style="margin-top:30px">
         <VBox style="width:100%;height:100px;align-items: center;">
 
-            <div class="">Copyright &copy; frd.app 2025</div>
+            <div class="">Copyright &copy; frd.app 2025
+
+                | <a class="" href="/terms" style="margin-left:1rem;">Pricacy</a> | <a style="margin-left:1rem" href="/terms">Terms</a>
+            </div>
+
+
         </VBox>
     </footer>
 
@@ -133,12 +138,5 @@ export default {
         background-color:#f7f7f7 ;
     }
 
-    a{
-        color:aliceblue !important;
-    }
-
-    a:hover{
-        color:aliceblue !important;
-    }
 
 </style>

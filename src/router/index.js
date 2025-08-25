@@ -40,6 +40,14 @@ const routes = [
                 path: 'checkout',
                 component: () => import('@/views/user/index/checkout.vue'),
             },
+            {
+                path: 'privacy',
+                component: () => import('@/views/user/index/privacy.vue'),
+            },
+            {
+                path: 'terms',
+                component: () => import('@/views/user/index/terms.vue'),
+            },
         ]
     },
     {

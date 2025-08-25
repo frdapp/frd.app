@@ -12,7 +12,7 @@
 <template>
     <VBox style="width:100%">
         <div>
-            <Button style="margin-right:50px" class="btn-success"  @click="openAddDialog()" >
+            <Button style="margin-right:50px" class="btn-primary"  @click="openAddDialog()" >
                 {{ $t('Create')}}
             </Button>
         </div>
