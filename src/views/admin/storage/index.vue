@@ -39,7 +39,11 @@
                             >
 
                         <Column prop="title" :label="$t('Title')" > </Column>
-                        <Column prop="description" :label="$t('Description')" width="100"> </Column>
+                        <Column prop="description" :label="$t('Description')" width="100"> 
+                                <template #default="scope">
+                                    <p v-html="scope.item.description"></p>
+                                </template>
+                        </Column>
                         <Column prop="storage" :label="$t('Storage')" > 
                                 <template #default="scope">
                                     {{ scope.item.storage }} MB

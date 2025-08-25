@@ -17,7 +17,7 @@ import HBox from "@/components/HBox.vue"
               <strong>{{user.email}} </strong>
               {{$t("Points")}} <strong>{{user.points}} </strong> | 
               {{$t("Storage")}} <strong>{{ user.storage_used }}</strong>/<strong>{{user.storage_current}} MB </strong>
-              {{$t("Network")}} <strong>{{ user.network_used }}</strong>/<strong>{{user.network_current}} MB </strong>
+              {{$t("Transfer")}} <strong>{{ user.network_used }}</strong>/<strong>{{user.network_current}} MB </strong>
 
                 <a href="/checkout" style="margin-left:10px">{{ $t("Buy Storage ") }}</a>
             </div>
