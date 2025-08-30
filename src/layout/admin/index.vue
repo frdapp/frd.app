@@ -42,8 +42,7 @@ import HBox from "@/components/HBox.vue"
 </template>
 
 <script>
-//import { useUserStore } from '@/store/modules/user'
-//const userStore = useUserStore()
+import { useUserStore } from '@/store/modules/user'
 
 export default {
   data() {
@@ -55,6 +54,10 @@ export default {
   created: async function(){
     var response=await this.get_user_info()
     if (response == false) {
+
+      const userStore = useUserStore();
+      userStore.clear();
+
       this.$router.push({"path":"/"})
       return false;
     }

@@ -86,7 +86,7 @@ import { data } from "autoprefixer"
                         {{ $t("Storage") }}
                     </td>
                     <td>
-                        {{ order_product.storage }} MB
+                        {{ order_product.product_data.storage }} MB
                     </td>
                 </tr>
                 <tr>
@@ -94,7 +94,7 @@ import { data } from "autoprefixer"
                         {{ $t("Duration") }}
                     </td>
                     <td>
-                        {{ order_product.duration }} {{ $t("Days") }}
+                        {{ order_product.product_data.duration }} {{ $t("Days") }}
                     </td>
                 </tr>
 
@@ -110,7 +110,7 @@ import { data } from "autoprefixer"
             <tbody>
                 <tr>
                     <td>
-                        {{ $t("Payment") }}
+                        {{ $t("Pay Way") }}
                     </td>
                     <td>
                         {{ order_data.order_payment.pay_way }}
@@ -118,15 +118,15 @@ import { data } from "autoprefixer"
                 </tr>
                 <tr>
                     <td>
-                        {{ $t("Pay Amount") }}
+                        {{ $t("Payied Money") }}
                     </td>
                     <td>
-                        USD {{ order_data.order_payment.amount }}
+                        (USD) {{ order_data.order_payment.pay_amount }}
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        {{ $t("Pay Points") }}
+                        {{ $t("Payied Points") }}
                     </td>
                     <td>
                         {{ order_data.order_payment.pay_points }}

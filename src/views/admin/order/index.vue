@@ -33,6 +33,10 @@ import Column from '@/components/Column.vue'
                     <template #default="scope">
                         <a :href="'/admin/order/view?id=' + scope.item.id" style="margin-left:10px" class="link-primary decoration_none">{{$t('View')}}</a>
                         <a v-if="scope.item.status == 'WAIT_PAY'" :href="'/checkout?order_no=' + scope.item.order_no" style="margin-left:10px" class="link-primary decoration_none">{{$t('Pay')}}</a>
+                        <!--
+                        <a v-if="scope.item.status == 'DELIVERY'" href="#" style="margin-left:10px" class="link-primary decoration_none" @click.prevent="download_pdf">{{$t('Download PDF')}}</a>
+                        -->
+                        <a v-if="scope.item.status == 'DELIVERY'" target="_blank" :href="'/api/admin/order/download_pdf?token='+user_token+'&order_no=' + scope.item.order_no" style="margin-left:10px" class="link-primary decoration_none">{{$t('Download PDF')}}</a>
                     </template>
                 </Column>
             </Table>
@@ -49,9 +53,13 @@ import Column from '@/components/Column.vue'
 </template>
 
 <script>
+import { useUserStore } from '@/store/modules/user'
+const userStore = useUserStore()
+
 export default {
     data: function () {
         return {
+            user_token:userStore.user.token,
             form_data: {
                 title: '',
             },
@@ -102,6 +110,12 @@ export default {
             this.items = response.items;
             this.pagination = response.pagination;
         },
+
+        /*
+        download_pdf: function () {
+            alert('download pdf')
+        },
+        */
     },
 }
 </script>
